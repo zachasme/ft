@@ -1,0 +1,19 @@
+<ol>
+  <% @response["value"].each do |poll| %>
+    <li>
+      <h2><%= poll.dig("Sagstrin", "Sag", "titelkort") %></h2>
+      <datetime><%= l poll.dig("Sagstrin", "dato").to_date %></datetime>
+      <p><%= poll.dig("Sagstrin", "Sag", "titel") %></p>
+      <details>
+        <summary style="color:<%= poll["vedtaget"] ? 'green' : 'red' %>">
+          <%= poll["konklusion"] %>
+        </summary>
+        <ul>
+          <% poll["Stemme"].each do |vote| %> 
+            <li><%= vote["Aktør"]["navn"] %> - <%= vote["Stemmetype"]["type"] %></li>
+          <% end %>
+        </ul>
+      </details>
+    </li>
+  <% end %>
+</ol>
