@@ -1,1 +1,20 @@
 /* Application styles */
+
+* {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+body { 
+  padding: 5em;
+  font-family: system-ui;
+}
+
+.flex { display: flex }
+.gap { gap: 1em }
+.justify-space-between { justify-content: space-between }
+.align-center { align-items: center }
+.margin-top { margin-top: 1em }
+.margin-top-double { margin-top: 2em }
+.pad { padding: 1em }

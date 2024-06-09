@@ -1,17 +1,19 @@
 <h1>Afstemninger</h1>
 <ol>
   <% @response["value"].each do |poll| %>
-    <li>
-      <h2><%= poll.dig("Sagstrin", "Sag", "titelkort") %></h2>
-      <datetime><%= l poll.dig("Sagstrin", "dato").to_date %></datetime>
-      <p><%= poll.dig("Sagstrin", "Sag", "titel") %></p>
+    <li class="margin-top-double">
+      <time><%= l poll.dig("Sagstrin", "dato").to_date, format: :short %></time>
       <details>
-        <summary style="color:<%= poll["vedtaget"] ? 'green' : 'red' %>">
-          <%= poll["konklusion"] %>
+        <summary class="flex align-center gap">
+          <%= poll["vedtaget"] ? '✅' : '❌' %>
+          <h2><%= poll.dig("Sagstrin", "Sag", "titelkort") %></h2>
         </summary>
-        <ul>
+        <p class="margin-top"><%= poll.dig("Sagstrin", "Sag", "titel") %></p>
+        <p class="margin-top"><em><%= poll.dig("Sagstrin", "Sag", "resume") %></em></p>
+        <p class="margin-top" style="color:<%= poll["vedtaget"] ? 'green' : 'red' %>"><%= poll["konklusion"] %></p>
+        <ul class="pad">
           <% poll["Stemme"].each do |vote| %> 
-            <li><%= vote["Aktør"]["navn"] %> - <%= vote["Stemmetype"]["type"] %></li>
+            <li><%= vote["Aktør"]["navn"] %> - <span style="color:<%= vote["Stemmetype"]["type"] == "For" ? 'green' : 'red' %>"><%= vote["Stemmetype"]["type"] %></span></li>
           <% end %>
         </ul>
       </details>
