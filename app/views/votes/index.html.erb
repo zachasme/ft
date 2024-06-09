@@ -6,7 +6,7 @@
       <details>
         <summary class="flex align-center gap">
           <%= poll["vedtaget"] ? '✅' : '❌' %>
-          <h2><%= poll.dig("Sagstrin", "Sag", "titelkort") %></h2>
+          <h2><%= poll.dig("Sagstrin", "Sag", "titelkort") %> <%= poll["nummer"] %> / <%= poll["id"] %></h2>
         </summary>
         <p class="margin-top"><%= poll.dig("Sagstrin", "Sag", "titel") %></p>
         <p class="margin-top"><em><%= poll.dig("Sagstrin", "Sag", "resume") %></em></p>
