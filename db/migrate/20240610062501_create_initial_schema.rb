@@ -8,6 +8,24 @@ class CreateInitialSchema < ActiveRecord::Migration[8.0]
       t.timestamps
     end
 
+    create_table :parties do |t|
+      t.integer :ftid, index: { unique: true }
+      t.string :name
+      t.string :abbreviation
+
+      t.timestamps
+    end
+
+    create_table :memberships do |t|
+      t.integer :ftid, index: { unique: true }
+      t.references :person, index: true, foreign_key: true
+      t.references :party, index: true, foreign_key: true
+      t.string :name
+      t.string :abbreviation
+
+      t.timestamps
+    end
+
     create_table :decisions do |t|
       t.integer :ftid, index: { unique: true }
       t.string :name

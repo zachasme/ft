@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "votes#index"
 
+  resources :people
+  resources :parties
   resources :meetings
   resource :browser
 end

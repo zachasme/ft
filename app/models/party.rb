@@ -1,17 +1,16 @@
-class Person < ApplicationRecord
-  has_many :votes
+class Party < ApplicationRecord
   has_many :memberships
 
   def self.refresh
     Odata::Resource.new(
       "Aktør",
       after: maximum(:updated_at),
-      filter: "typeid eq 5"
+      filter: "typeid eq 4"
     ).each do |aktør|
-      Person.upsert({
+      Party.upsert({
         ftid: aktør["id"],
         name: aktør["navn"],
-        biography: aktør["biografi"]
+        abbreviation: aktør["gruppenavnkort"]
       }, unique_by: :ftid)
     end
   end

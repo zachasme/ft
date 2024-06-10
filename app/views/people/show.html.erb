@@ -1,0 +1,7 @@
+<h1><%= @person.name %> </h1>
+
+<ul>
+  <% @person.memberships.each do |membership| %>
+    <li><%= link_to membership.party.name, membership.party %></li>
+  <% end %>
+</ul>
