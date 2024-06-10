@@ -1,8 +1,13 @@
 <h1>Afstemninger</h1>
+<%= form_with url: root_path, method: :get do |form| %>
+  <%= form.search_field :search, value: params[:search] %>
+  <%= form.submit "Søg" %>
+<% end %>
+
 <ol>
   <% @response["value"].each do |poll| %>
     <li class="margin-top-double">
-      <time><%= l poll.dig("Sagstrin", "dato").to_date, format: :short %></time>
+      <time><%= l poll.dig("Sagstrin", "dato").to_date, format: :long %></time>
       <details>
         <summary class="flex align-center gap">
           <%= poll["vedtaget"] ? '✅' : '❌' %>
@@ -20,3 +25,7 @@
     </li>
   <% end %>
 </ol>
+
+<p class="margin-top-double">
+  Side <%= @page %> - <%= link_to "Næste", root_path(search: params[:search], page: @page + 1) %>
+</p>

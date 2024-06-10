@@ -58,7 +58,7 @@ asset_path: /rails/public/assets
 #     host: ssh://app@192.168.0.1
 #
 #   args:
-#     RUBY_VERSION: ruby-3.3.0
+#     RUBY_VERSION: ruby-3.3.1
 #   secrets:
 #     - GITHUB_TOKEN
 #     - RAILS_MASTER_KEY

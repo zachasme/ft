@@ -1,0 +1,12 @@
+<% Decision.all.each do |decision| %>
+  <div>
+    <%= decision.ftid %>
+    <%= decision.name %>
+  </div>
+<% end %>
+
+<pre><%= JSON.pretty_generate(@response) %></pre>
+
+<hr />
+
+<%= link_to "synchronize", edit_browser_path %>
