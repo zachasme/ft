@@ -1,17 +1,10 @@
 class Party < ApplicationRecord
   has_many :memberships
+  has_many :members, through: :memberships, source: :person
 
-  def self.refresh
-    Odata::Resource.new(
-      "Aktør",
-      after: maximum(:updated_at),
-      filter: "typeid eq 4"
-    ).each do |aktør|
-      Party.upsert({
-        ftid: aktør["id"],
-        name: aktør["navn"],
-        abbreviation: aktør["gruppenavnkort"]
-      }, unique_by: :ftid)
-    end
+  scope :chronological, -> { order started_at: :desc }
+
+  def period
+    "#{started_at.year} - #{ended_at.year}"
   end
 end

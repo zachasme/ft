@@ -1,7 +1,15 @@
 <h1><%= @person.name %> </h1>
 
+<h2 class="margin-top">Medlemskaber</h2>
 <ul>
-  <% @person.memberships.each do |membership| %>
-    <li><%= link_to membership.party.name, membership.party %></li>
+  <% @person.parties.each do |party| %>
+    <li><%= link_to party.name, party %> <%= party.period %></li>
+  <% end %>
+</ul>
+
+<h2 class="margin-top">Stemmer</h2>
+<ul>
+  <% @person.votes.each do |vote| %>
+    <li><%= vote.what %> - <%= link_to vote.decision.name, vote.decision %></li>
   <% end %>
 </ul>

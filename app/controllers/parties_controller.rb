@@ -1,9 +1,9 @@
 class PartiesController < ApplicationController
   def index
-    @parties = Party.all
+    @parties = Party.chronological
   end
 
   def show
-    @party = Party.find params[:id]
+    @party = Party.includes(:members).find(params[:id])
   end
 end

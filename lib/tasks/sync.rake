@@ -1,3 +1,3 @@
 task sync: :environment do
-    SynchronizationJob.perform_now
+  SynchronizationJob.perform_now
 end

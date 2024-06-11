@@ -1,0 +1,22 @@
+<h1>Afstemninger</h1>
+
+<%= form_with url: decisions_path, method: :get do |form| %>
+  <%= form.search_field :search, value: params[:search] %>
+  <%= form.submit "Søg" %>
+<% end %>
+
+<p class="margin-top">Side <%= @page.number %> af <%= @page.recordset.page_count %> (<%= @page.recordset.records_count %> i alt):</p>
+
+<ul class="margin-top">
+  <% @page.records.each do |decision| %>
+    <li><%= decision.passed? ? '✓' : '✕' %> <%= link_to decision.name, decision %></li>
+  <% end %>
+</ul>
+
+<div class="margin-top">
+  <% if @page.last? %>
+    No more pages!
+  <% else %>
+    <%= link_to "Næste side", decisions_path(page: @page.next_param, search: params[:search]) %>
+  <% end %>
+</div>

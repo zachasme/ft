@@ -1,0 +1,13 @@
+<h1><%= @decision.name %></h1>
+<p><small>Kommentar: <%= @decision.comment %></small></p>
+<ul>
+  <% @decision.votes.each do |vote| %>
+    <li><%= vote.what %> <%= link_to vote.voter.name, vote.voter %></li>
+  <% end %>
+</ul>
+
+<hr class="margin-top-double"/>
+<details>
+  <summary>Vis rå data</summary>
+  <pre><%= JSON.pretty_generate(@decision.as_json) %></pre>
+</details>

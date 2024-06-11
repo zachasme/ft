@@ -1,12 +1,4 @@
 <h1>Folketingsgrupper</h1>
-<ul>
-  <% @parties.each do |party| %>
-    <li>
-      <%= link_to party do %>
-        <%= party.ftid %>: <%= party.name %> (<%= party.abbreviation %>)</li>
-      <% end %>
-  <% end %>
-</ul>
 
 <h1>Personer</h1>
 <ul>

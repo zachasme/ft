@@ -1,9 +1,5 @@
 class VotesController < ApplicationController
   def index
-    base = case
-    when params[:person_id]
-      Person.find(params[:person_id])
-    end
-    @votes = base.votes
+    @votes = Vote.includes(:decision)
   end
 end

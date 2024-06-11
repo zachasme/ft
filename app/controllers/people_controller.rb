@@ -1,10 +1,9 @@
 class PeopleController < ApplicationController
   def index
-    @people = Person.all
-    @parties = Party.all
+    @people = Person.alphabetical
   end
 
   def show
-    @person = Person.find params[:id]
+    @person = Person.includes(:parties, votes: :decision).find(params[:id])
   end
 end
