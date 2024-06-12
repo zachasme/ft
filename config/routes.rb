@@ -14,6 +14,7 @@ Rails.application.routes.draw do
 
   resource :browser
 
+  resources :bills
   resources :people
   resources :parties
   resources :meetings

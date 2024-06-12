@@ -1,10 +1,16 @@
-<h1><%= @decision.name %></h1>
+<h1><%= @decision.name %> (ftid <%= @decision.ftid %>)</h1>
 <p><small>Kommentar: <%= @decision.comment %></small></p>
+
+Sag: <%= link_to @decision.bill.name, @decision.bill if @decision.bill %>
+
+<% @decision.votes.group_by{|x| x.voter.parties.first }.each do |party, votes| %>
+<h2><%= party&.name || "Intet parti" %></h2>
 <ul>
-  <% @decision.votes.each do |vote| %>
+  <% votes.each do |vote| %>
     <li><%= vote.what %> <%= link_to vote.voter.name, vote.voter %></li>
   <% end %>
 </ul>
+<% end %>
 
 <hr class="margin-top-double"/>
 <details>

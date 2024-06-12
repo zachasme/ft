@@ -26,10 +26,35 @@ class CreateInitialSchema < ActiveRecord::Migration[8.0]
       t.integer :ftid, index: { unique: true }
       t.date :ftts, null: false
 
-      t.references :person, foreign_key: true
-      t.references :party, foreign_key: true
+      t.references :person, null: false, foreign_key: true
+      t.references :party, null: false, foreign_key: true
       t.string :name
       t.string :abbreviation
+
+      t.timestamps
+    end
+
+    create_table :bills do |t|
+      t.integer :ftid, index: { unique: true }
+      t.date :ftts, null: false
+
+      t.string :name
+      t.string :category
+      t.string :typename
+      t.string :status
+      t.string :resume
+
+      t.timestamps
+    end
+
+    create_table :stages do |t|
+      t.integer :ftid, index: { unique: true }
+      t.date :ftts, null: false
+
+      t.references :bill, null: false, foreign_key: true
+
+      t.string :typename # enum?
+      t.string :status # enum?
 
       t.timestamps
     end
@@ -37,6 +62,8 @@ class CreateInitialSchema < ActiveRecord::Migration[8.0]
     create_table :decisions do |t|
       t.integer :ftid, index: { unique: true }
       t.date :ftts, null: false
+
+      t.references :stage, null: false, foreign_key: true
 
       t.string :name, null: false
       t.string :comment
@@ -52,31 +79,9 @@ class CreateInitialSchema < ActiveRecord::Migration[8.0]
       t.integer :ftid, index: { unique: true }
       t.date :ftts, null: false
 
-      t.references :decision, foreign_key: true
-      t.references :voter, foreign_key: { to_table: :people }
+      t.references :decision, null: false, foreign_key: true
+      t.references :voter, null: false, foreign_key: { to_table: :people }
       t.integer :what, null: false
-
-      t.timestamps
-    end
-
-    create_table :cases do |t|
-      t.integer :ftid, index: { unique: true }
-      t.date :ftts, null: false
-
-      t.string :name
-      t.string :resume
-
-      t.timestamps
-    end
-
-    create_table :stages do |t|
-      t.integer :ftid, index: { unique: true }
-      t.date :ftts, null: false
-
-      t.references :decision, null: true, foreign_key: true
-      t.references :case, foreign_key: true
-      t.string :name # enum?
-      t.string :status # enum?
 
       t.timestamps
     end

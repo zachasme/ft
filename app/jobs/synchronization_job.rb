@@ -38,8 +38,9 @@ class SynchronizationJob < ApplicationJob
       after: Membership.maximum(:ftts),
       filter: "rolleid eq 15"
     ).each_with_progress do |aktøraktør|
-      party = Party.find_by(ftid: aktøraktør["fraaktørid"])
-      person = Person.find_by(ftid: aktøraktør["tilaktørid"])
+      ftids = [ aktøraktør["fraaktørid"], aktøraktør["tilaktørid"] ]
+      party = Party.find_by(ftid: ftids)
+      person = Person.find_by(ftid: ftids)
       next if party.nil? || person.nil?
       Membership.upsert({
         ftid: aktøraktør["id"],
@@ -49,6 +50,32 @@ class SynchronizationJob < ApplicationJob
       }, unique_by: :ftid)
     end
 
+    # bills
+    Odata::Resource.new(
+      "Sag",
+      expand: [ "Sagstype", "Sagsstatus", "Sagskategori", "Sagstrin/Sagstrinstype", "Sagstrin/Sagstrinsstatus" ],
+      after: Bill.maximum(:ftts)
+    ).each_with_progress do |sag|
+      bills = Bill.upsert({
+        ftid: sag["id"],
+        ftts: sag["opdateringsdato"],
+        name: sag["titel"],
+        category: sag.dig("Sagskategori", "kategori"),
+        typename: sag["Sagstype"]["type"],
+        status: sag["Sagsstatus"]["status"],
+        resume: sag["resume"]
+      }, unique_by: :ftid)
+      sag["Sagstrin"].each do |trin|
+        Stage.upsert({
+          ftid: trin["id"],
+          ftts: trin["opdateringsdato"],
+          bill_id: bills.first["id"],
+          typename: trin["Sagstrinstype"]["type"],
+          status: trin["Sagstrinsstatus"]["status"]
+        }, unique_by: :ftid)
+      end
+    end
+
     # decisions
     Odata::Resource.new(
       "Afstemning",
@@ -56,10 +83,12 @@ class SynchronizationJob < ApplicationJob
       after: Decision.maximum(:ftts)
     ).each_with_progress do |afstemning|
       name = afstemning.dig("Sagstrin", "Sag", "titelkort") || afstemning.dig("Sagstrin", "Sag", "titel")
-      next unless name.present?
+      stage = Stage.find_by(ftid: afstemning["sagstrinid"])
+      next unless name.present? && stage.present?
       Decision.upsert({
         ftid: afstemning["id"],
         ftts: afstemning["opdateringsdato"],
+        stage_id: stage.id,
         number: afstemning["nummer"],
         comment: afstemning["kommentar"],
         passed: afstemning["vedtaget"],

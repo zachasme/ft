@@ -1,4 +1,4 @@
-<h1><%= @person.name %> </h1>
+<h1><%= @person.name %> (ftid <%= @person.ftid %>)</h1>
 
 <h2 class="margin-top">Medlemskaber</h2>
 <ul>
@@ -8,8 +8,19 @@
 </ul>
 
 <h2 class="margin-top">Stemmer</h2>
-<ul>
-  <% @person.votes.each do |vote| %>
-    <li><%= vote.what %> - <%= link_to vote.decision.name, vote.decision %></li>
+
+<p class="margin-top">Side <%= @page.number %> af <%= @page.recordset.page_count %> (<%= @page.recordset.records_count %> i alt):</p>
+
+<ul class="margin-top">
+  <% @page.records.each do |vote| %>
+    <li><%= vote.what? ? '✓' : '✕' %> <%= link_to vote.decision.name, vote.decision %></li>
   <% end %>
 </ul>
+
+<div class="margin-top">
+  <% if @page.last? %>
+    No more pages!
+  <% else %>
+    <%= link_to "Næste side", person_path(@person, page: @page.next_param, search: params[:search]) %>
+  <% end %>
+</div>

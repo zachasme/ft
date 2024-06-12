@@ -8,7 +8,6 @@ class BrowsersController < ApplicationController
     skip = (@page - 1) * PAGE_SIZE
     url = "https://oda.ft.dk/api/Afstemning?$expand=Sagstrin/Sag,Stemme/Stemmetype,Stemme/Akt%C3%B8r&$orderby=id desc&$inlinecount=allpages&$skip=#{skip}"
     url += "&$filter=substringof('#{CGI.escape(params[:search])}', Sagstrin/Sag/titel)" if params[:search]
-    puts url
     @response = JSON.parse(URI.open(URI.parse(url)).read)
   end
 

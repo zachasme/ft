@@ -4,6 +4,6 @@ class DecisionsController < ApplicationController
   end
 
   def show
-    @decision = Decision.includes(votes: :voter).find(params[:id])
+    @decision = Decision.includes(stage: :bill, votes: { voter: :parties }).find(params[:id])
   end
 end

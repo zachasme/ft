@@ -2,9 +2,9 @@ class Odata::Resource
   include ProgressBar::WithProgress
 
   BASE = "https://oda.ft.dk/api/"
-  DATA_BEGIN = 1.months.ago
 
-  def initialize(resource, filter: [], expand: [], after: DATA_BEGIN)
+  def initialize(resource, filter: [], expand: [], after: nil)
+    # after ||= 1.month.ago
     url = BASE + CGI.escape(resource)
     url += "?$inlinecount=allpages&$orderby=opdateringsdato"
     filters = Array.wrap(filter)

@@ -11,19 +11,23 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[8.0].define(version: 2024_06_10_062501) do
-  create_table "cases", force: :cascade do |t|
+  create_table "bills", force: :cascade do |t|
     t.integer "ftid"
     t.date "ftts", null: false
     t.string "name"
+    t.string "category"
+    t.string "typename"
+    t.string "status"
     t.string "resume"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["ftid"], name: "index_cases_on_ftid", unique: true
+    t.index ["ftid"], name: "index_bills_on_ftid", unique: true
   end
 
   create_table "decisions", force: :cascade do |t|
     t.integer "ftid"
     t.date "ftts", null: false
+    t.integer "stage_id", null: false
     t.string "name", null: false
     t.string "comment"
     t.boolean "passed", null: false
@@ -32,13 +36,14 @@ ActiveRecord::Schema[8.0].define(version: 2024_06_10_062501) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["ftid"], name: "index_decisions_on_ftid", unique: true
+    t.index ["stage_id"], name: "index_decisions_on_stage_id"
   end
 
   create_table "memberships", force: :cascade do |t|
     t.integer "ftid"
     t.date "ftts", null: false
-    t.integer "person_id"
-    t.integer "party_id"
+    t.integer "person_id", null: false
+    t.integer "party_id", null: false
     t.string "name"
     t.string "abbreviation"
     t.datetime "created_at", null: false
@@ -73,22 +78,20 @@ ActiveRecord::Schema[8.0].define(version: 2024_06_10_062501) do
   create_table "stages", force: :cascade do |t|
     t.integer "ftid"
     t.date "ftts", null: false
-    t.integer "decision_id"
-    t.integer "case_id"
-    t.string "name"
+    t.integer "bill_id", null: false
+    t.string "typename"
     t.string "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["case_id"], name: "index_stages_on_case_id"
-    t.index ["decision_id"], name: "index_stages_on_decision_id"
+    t.index ["bill_id"], name: "index_stages_on_bill_id"
     t.index ["ftid"], name: "index_stages_on_ftid", unique: true
   end
 
   create_table "votes", force: :cascade do |t|
     t.integer "ftid"
     t.date "ftts", null: false
-    t.integer "decision_id"
-    t.integer "voter_id"
+    t.integer "decision_id", null: false
+    t.integer "voter_id", null: false
     t.integer "what", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -97,10 +100,10 @@ ActiveRecord::Schema[8.0].define(version: 2024_06_10_062501) do
     t.index ["voter_id"], name: "index_votes_on_voter_id"
   end
 
+  add_foreign_key "decisions", "stages"
   add_foreign_key "memberships", "parties"
   add_foreign_key "memberships", "people"
-  add_foreign_key "stages", "cases"
-  add_foreign_key "stages", "decisions"
+  add_foreign_key "stages", "bills"
   add_foreign_key "votes", "decisions"
   add_foreign_key "votes", "people", column: "voter_id"
 end
