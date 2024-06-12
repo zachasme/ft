@@ -9,7 +9,10 @@
 
 <ul class="margin-top">
   <% @page.records.each do |decision| %>
-    <li><%= decision.passed? ? '✓' : '✕' %> <%= link_to decision.name, decision %></li>
+    <li>
+      <strong><%= l decision.ftts %> </strong><br />
+      <%= decision.passed? ? '✓' : '✕' %> <%= link_to decision.name, decision %>
+    </li>
   <% end %>
 </ul>
 

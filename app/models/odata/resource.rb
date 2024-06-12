@@ -4,7 +4,9 @@ class Odata::Resource
   BASE = "https://oda.ft.dk/api/"
 
   def initialize(resource, filter: [], expand: [], after: nil)
-    # after ||= 1.month.ago
+    if Rails.env.development?
+      after ||= 1.month.ago
+    end
     url = BASE + CGI.escape(resource)
     url += "?$inlinecount=allpages&$orderby=opdateringsdato"
     filters = Array.wrap(filter)
