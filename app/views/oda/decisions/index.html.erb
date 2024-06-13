@@ -10,6 +10,7 @@
 <ul>
   <% @page.records.each do |decision| %>
     <li>
+      <%= decision.vedtaget ? '✓' : '✕' %>
       <strong><%= l decision.sagstrin.dato.to_date, format: :long %></strong>
       <%= link_to decision.sag.titelkort, oda_decision_path(decision) %>
     </li>
