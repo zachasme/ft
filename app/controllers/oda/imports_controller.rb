@@ -3,7 +3,7 @@ class Oda::ImportsController < ApplicationController
   end
 
   def create
-    IO.copy_stream(params[:backup].tempfile, "storage/oda.sqlite3")
+    IO.copy_stream(params[:backup].tempfile, "storage/oda_production.sqlite3")
     redirect_to oda_import_url
   end
 end

@@ -16,7 +16,7 @@ development:
   oda:
     <<: *default
     migrations_paths: db/oda_migrate
-    database: storage/oda.sqlite3
+    database: storage/oda_development.sqlite3
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -28,7 +28,7 @@ test:
   oda:
     <<: *default
     migrations_paths: db/oda_migrate
-    database: storage/oda.sqlite3
+    database: storage/oda_test.sqlite3
 
 # Store production database in the storage/ directory, which by default
 # is mounted as a persistent Docker volume in config/deploy.yml.
@@ -39,4 +39,4 @@ production:
   oda:
     <<: *default
     migrations_paths: db/oda_migrate
-    database: storage/oda.sqlite3
+    database: storage_production/oda.sqlite3
