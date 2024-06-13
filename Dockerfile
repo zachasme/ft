@@ -34,12 +34,8 @@ RUN apt-get update -qq && \
 
 # Tiny TDS
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y wget libc6-dev && \
+    apt-get install --no-install-recommends -y freetds-dev freetds-bin tdsodbc && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
-
-RUN wget http://www.freetds.org/files/stable/freetds-1.4.10.tar.gz
-RUN tar -xzf freetds-1.4.10.tar.gz
-RUN cd freetds-1.4.10 && ./configure --prefix=/usr/local --with-tdsver=7.4 && make && make install
 
 # Install application gems
 COPY Gemfile Gemfile.lock ./
