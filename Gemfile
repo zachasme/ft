@@ -59,6 +59,9 @@ group :test do
   gem "selenium-webdriver"
 end
 
-gem "progress_bar"
 gem "geared_pagination"
-gem "tiny_tds"
+
+group :development do
+  gem "progress_bar"
+  gem "tiny_tds"
+end
