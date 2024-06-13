@@ -1,2 +1,2 @@
-class Oda::SagstrinDokumnent < Oda::ApplicationRecord
+class Oda::SagstrinDokument < Oda::ApplicationRecord
 end

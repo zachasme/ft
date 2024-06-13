@@ -1,6 +1,4 @@
 class Odata::Resource
-  include ProgressBar::WithProgress
-
   BASE = "https://oda.ft.dk/api/"
 
   def initialize(resource, filter: [], expand: [], after: nil)
