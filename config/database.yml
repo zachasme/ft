@@ -39,4 +39,4 @@ production:
   oda:
     <<: *default
     migrations_paths: db/oda_migrate
-    database: storage_production/oda.sqlite3
+    database: storage/oda_production.sqlite3
