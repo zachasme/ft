@@ -4,6 +4,8 @@ class Oda::CasesController < ApplicationController
       .includes(:periode, :kategori, :status, :type, :deltundersag, :fremsatundersag)
       .chronological
       .matches(params[:search])
+
+    records = records.casetype(params[:casetype_id]) if params[:casetype_id].present?
     set_page_and_extract_portion_from records
   end
 

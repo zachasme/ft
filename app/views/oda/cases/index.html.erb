@@ -2,6 +2,9 @@
 
 <%= form_with method: :get do |form| %>
   <%= form.search_field :search, value: params[:search] %>
+
+  <%= form.collection_select :casetype_id, Oda::Sagstype.all, :id, :typenavn, include_blank: "Alle sagstyper", selected: params[:casetype_id] %>
+
   <%= form.submit "Søg" %>
 <% end %>
 
