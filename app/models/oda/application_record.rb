@@ -1,4 +1,5 @@
 class Oda::ApplicationRecord <  ActiveRecord::Base
-  primary_abstract_class
+  self.abstract_class = true
+
   connects_to database: { reading: :oda, writing: :oda }
 end
