@@ -61,5 +61,7 @@ end
 
 gem "geared_pagination"
 
-gem "progress_bar"
-gem "tiny_tds"
+group :development do
+  gem "progress_bar"
+  gem "tiny_tds"
+end
