@@ -1,2 +1,2 @@
-class Oda::Sagskategori < ApplicationRecord
+class Oda::Sagskategori < Oda::ApplicationRecord
 end

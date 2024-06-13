@@ -1,4 +1,4 @@
-class Oda::Sag < ApplicationRecord
+class Oda::Sag < Oda::ApplicationRecord
   belongs_to :periode, class_name: "Oda::Periode"
   belongs_to :kategori, class_name: "Oda::Sagskategori"
   belongs_to :status, class_name: "Oda::Sagsstatus"

@@ -1,2 +1,2 @@
-class Oda::SagstrinAktør < ApplicationRecord
+class Oda::SagstrinAktør < Oda::ApplicationRecord
 end

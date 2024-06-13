@@ -1,2 +1,2 @@
-class Oda::Debat < ApplicationRecord
+class Oda::Debat < Oda::ApplicationRecord
 end

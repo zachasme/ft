@@ -1,2 +1,2 @@
-class Oda::Aktstykke < ApplicationRecord
+class Oda::Aktstykke < Oda::ApplicationRecord
 end

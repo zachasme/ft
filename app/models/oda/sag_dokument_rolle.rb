@@ -1,2 +1,2 @@
-class Oda::SagDokumentRolle < ApplicationRecord
+class Oda::SagDokumentRolle < Oda::ApplicationRecord
 end

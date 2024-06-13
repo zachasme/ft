@@ -1,2 +1,2 @@
-class Oda::Sagsstatus < ApplicationRecord
+class Oda::Sagsstatus < Oda::ApplicationRecord
 end

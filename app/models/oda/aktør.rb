@@ -1,4 +1,4 @@
-class Oda::Aktør < ApplicationRecord
+class Oda::Aktør < Oda::ApplicationRecord
   has_many :stemmes
   has_many :afstemnings, through: :stemmes
 

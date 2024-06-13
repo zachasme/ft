@@ -1,4 +1,4 @@
-class Oda::Afstemning < ApplicationRecord
+class Oda::Afstemning < Oda::ApplicationRecord
   belongs_to :sagstrin
   has_one :sag, through: :sagstrin
   has_many :stemmes

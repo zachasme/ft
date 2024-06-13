@@ -1,2 +1,2 @@
-class Oda::SagDokument < ApplicationRecord
+class Oda::SagDokument < Oda::ApplicationRecord
 end

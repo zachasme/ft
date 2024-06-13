@@ -1,2 +1,2 @@
-class Oda::Møde < ApplicationRecord
+class Oda::Møde < Oda::ApplicationRecord
 end

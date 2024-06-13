@@ -1,2 +1,2 @@
-class Oda::AktørAktørRolle < ApplicationRecord
+class Oda::AktørAktørRolle < Oda::ApplicationRecord
 end

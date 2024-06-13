@@ -1,2 +1,2 @@
-class Oda::DagsordenspunktDokument < ApplicationRecord
+class Oda::DagsordenspunktDokument < Oda::ApplicationRecord
 end

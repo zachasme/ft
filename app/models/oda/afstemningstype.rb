@@ -1,2 +1,2 @@
-class Oda::Afstemningstype < ApplicationRecord
+class Oda::Afstemningstype < Oda::ApplicationRecord
 end

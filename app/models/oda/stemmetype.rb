@@ -1,2 +1,2 @@
-class Oda::Stemmetype < ApplicationRecord
+class Oda::Stemmetype < Oda::ApplicationRecord
 end

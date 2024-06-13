@@ -1,2 +1,2 @@
-class Oda::Sagstype < ApplicationRecord
+class Oda::Sagstype < Oda::ApplicationRecord
 end

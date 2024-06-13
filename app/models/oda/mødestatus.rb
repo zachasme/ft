@@ -1,2 +1,2 @@
-class Oda::Mødestatus < ApplicationRecord
+class Oda::Mødestatus < Oda::ApplicationRecord
 end

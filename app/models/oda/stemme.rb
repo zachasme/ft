@@ -1,4 +1,4 @@
-class Oda::Stemme < ApplicationRecord
+class Oda::Stemme < Oda::ApplicationRecord
   belongs_to :aktør
   belongs_to :afstemning
 

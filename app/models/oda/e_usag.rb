@@ -1,2 +1,2 @@
-class Oda::EUsag < ApplicationRecord
+class Oda::EUsag < Oda::ApplicationRecord
 end
