@@ -1,0 +1,22 @@
+<h1>Sager</h1>
+
+<%= form_with method: :get do |form| %>
+  <%= form.search_field :search, value: params[:search] %>
+  <%= form.submit "Søg" %>
+<% end %>
+
+<%= render partial: 'oda/pagination' %>
+
+<ul>
+<% @page.records.each do |sag| %>
+  <li>
+    <strong><%= l sag.opdateringsdato, format: :short %></strong>
+    <%= link_to oda_case_path(sag) do %>
+      <%= sag.titelkort %>
+    <% end %>
+    (<%= sag.status.status %>)
+  </li>
+<% end %>
+</ul>
+
+<%= render partial: 'oda/pagination' %>

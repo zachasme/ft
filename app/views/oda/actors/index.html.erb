@@ -1,0 +1,15 @@
+<h1>Aktører</h1>
+<ul>
+  <% @aktørs.group_by{|aktør| aktør.type }.each do |type, aktørs| %>
+    <li><%= link_to "#{type.typenavn} (#{aktørs.count} aktører)", "##{type.typenavn.parameterize.underscore}" %></li>
+  <% end %>
+</ul>
+
+<% @aktørs.group_by{|aktør| aktør.type }.each do |type, aktørs| %>
+  <h2 id="<%= type.typenavn.parameterize.underscore %>"><%= type.typenavn %> (<%= aktørs.count %>)</h2>
+  <% aktørs.each do |aktør| %>
+    <div>
+      <%= link_to aktør.navn, oda_actor_path(aktør) %>
+    </div>
+  <% end %>
+<% end %>
