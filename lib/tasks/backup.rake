@@ -22,6 +22,7 @@ namespace :backup do
     Dir.foreach(DIRECTORY) do |filename|
       path = DIRECTORY + filename
       next if File.directory? path
+      puts path
       rows = JSON.parse(File.open(path).read)
       inserts = rows.collect do |row|
         row.transform_keys do |key|
