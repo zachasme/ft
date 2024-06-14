@@ -21,11 +21,22 @@ namespace :backup do
 
     Dir.foreach(DIRECTORY) do |filename|
       path = DIRECTORY + filename
+      resource = File.basename(filename, ".json")
+
       next if File.directory? path
-      puts path
-      rows = JSON.parse(File.open(path).read)
-      inserts = rows.collect do |row|
-        row.transform_keys do |key|
+      Kernel.const_get("Oda::#{resource}").delete_all
+
+      bar = nil
+      File.readlines(path, chomp: true).each do |line|
+        # first line is count
+        if bar.nil?
+          bar = ProgressBar.new(line.to_i)
+          bar.puts path
+          next
+        end
+        bar.increment!
+        row = JSON.parse(line)
+        row.transform_keys! do |key|
           case
           when key == "id"
              key
@@ -37,14 +48,12 @@ namespace :backup do
              key
           end
         end
+        Kernel.const_get("Oda::#{resource}").insert_all([ row ])
       end
-      resource = File.basename(filename, ".json")
-      Kernel.const_get("Oda::#{resource}").delete_all
-      Kernel.const_get("Oda::#{resource}").insert_all(inserts)
     end
   end
 
-  task build: :environment do
+  task export: :environment do
     download(BACKUP_URL, BACKUP_FILE, http_basic_authentication: [ BACKUP_USER, BACKUP_PASS ])
 
     FileUtils.mkdir_p(DIRECTORY)
@@ -79,10 +88,19 @@ namespace :backup do
     end
 
     tables.each do |resource|
+      result = client.execute("SELECT COUNT(*) AS count FROM oda.dbo.#{resource}")
+      count = result.first["count"]
+      bar = ProgressBar.new(count)
+      bar.puts resource
+
       path = DIRECTORY.join("#{resource}.json")
-      puts path
-      inserts = client.execute("SELECT * FROM oda.dbo.#{resource} ORDER BY id").to_a
-      File.write(path, inserts.to_json, mode: "w")
+      File.open(path, mode: "w") do |file|
+        file.puts(count)
+        client.execute("SELECT * FROM oda.dbo.#{resource} ORDER BY id").each do |row|
+          bar.increment!
+          file.puts(row.to_json)
+        end
+      end
     end
 
     puts "[PACK]"
