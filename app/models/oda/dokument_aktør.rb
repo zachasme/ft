@@ -1,2 +1,2 @@
-class Oda::DokumentAktør < Oda::ApplicationRecord
+class Oda::DokumentAktør < ApplicationRecord
 end

@@ -1,2 +1,2 @@
-class Oda::DagsordenspunktSag < Oda::ApplicationRecord
+class Oda::DagsordenspunktSag < ApplicationRecord
 end

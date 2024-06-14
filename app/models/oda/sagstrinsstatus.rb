@@ -1,2 +1,2 @@
-class Oda::Sagstrinsstatus < Oda::ApplicationRecord
+class Oda::Sagstrinsstatus < ApplicationRecord
 end

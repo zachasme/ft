@@ -1,2 +1,2 @@
-class Oda::Almdel < Oda::ApplicationRecord
+class Oda::Almdel < ApplicationRecord
 end

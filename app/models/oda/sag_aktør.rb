@@ -1,2 +1,2 @@
-class Oda::SagAktør < Oda::ApplicationRecord
+class Oda::SagAktør < ApplicationRecord
 end

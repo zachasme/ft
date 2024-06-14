@@ -1,2 +1,2 @@
-class Oda::EntitetBeskrivelse < Oda::ApplicationRecord
+class Oda::EntitetBeskrivelse < ApplicationRecord
 end

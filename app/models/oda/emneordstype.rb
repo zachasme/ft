@@ -1,2 +1,2 @@
-class Oda::Emneordstype < Oda::ApplicationRecord
+class Oda::Emneordstype < ApplicationRecord
 end

@@ -1,2 +1,2 @@
-class Oda::Mødetype < Oda::ApplicationRecord
+class Oda::Mødetype < ApplicationRecord
 end

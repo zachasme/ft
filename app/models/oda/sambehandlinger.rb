@@ -1,2 +1,2 @@
-class Oda::Sambehandlinger < Oda::ApplicationRecord
+class Oda::Sambehandlinger < ApplicationRecord
 end

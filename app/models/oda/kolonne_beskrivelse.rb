@@ -1,2 +1,2 @@
-class Oda::KolonneBeskrivelse < Oda::ApplicationRecord
+class Oda::KolonneBeskrivelse < ApplicationRecord
 end

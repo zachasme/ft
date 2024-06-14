@@ -1,2 +1,2 @@
-class Oda::Periode < Oda::ApplicationRecord
+class Oda::Periode < ApplicationRecord
 end

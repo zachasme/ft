@@ -1,2 +1,2 @@
-class Oda::EmneordDokument < Oda::ApplicationRecord
+class Oda::EmneordDokument < ApplicationRecord
 end

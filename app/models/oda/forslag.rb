@@ -1,2 +1,2 @@
-class Oda::Forslag < Oda::ApplicationRecord
+class Oda::Forslag < ApplicationRecord
 end

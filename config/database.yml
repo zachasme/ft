@@ -10,33 +10,18 @@ default: &default
   timeout: 5000
 
 development:
-  primary:
-    <<: *default
-    database: storage/development.sqlite3
-  oda:
-    <<: *default
-    migrations_paths: db/oda_migrate
-    database: storage/oda_development.sqlite3
+  <<: *default
+  database: storage/development.sqlite3
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
-  primary:
-    <<: *default
-    database: storage/test.sqlite3
-  oda:
-    <<: *default
-    migrations_paths: db/oda_migrate
-    database: storage/oda_test.sqlite3
+  <<: *default
+  database: storage/test.sqlite3
 
 # Store production database in the storage/ directory, which by default
 # is mounted as a persistent Docker volume in config/deploy.yml.
 production:
-  primary:
-    <<: *default
-    database: storage/production.sqlite3
-  oda:
-    <<: *default
-    migrations_paths: db/oda_migrate
-    database: storage/oda_production.sqlite3
+  <<: *default
+  database: storage/production.sqlite3
