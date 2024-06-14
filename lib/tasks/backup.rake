@@ -27,7 +27,8 @@ namespace :backup do
       Kernel.const_get("Oda::#{resource}").delete_all
 
       bar = nil
-      File.readlines(path, chomp: true).each do |line|
+      File.new(path).each do |line|
+        line = line.chomp
         # first line is count
         if bar.nil?
           bar = ProgressBar.new(line.to_i)
