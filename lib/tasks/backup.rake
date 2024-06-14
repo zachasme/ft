@@ -9,8 +9,42 @@ DOCKER_NAME = "sql-server-bak"
 DIRECTORY = Rails.root.join("tmp/storage/export")
 
 namespace :backup do
+  task import: :environment do
+    download(
+      "https://github.com/zachasme/ft/releases/latest/download/export.tar.gz",
+      Rails.root.join("tmp/storage/import.tar.gz")
+    )
+
+    puts "[UNPACK]"
+    FileUtils.mkdir_p(DIRECTORY)
+    `tar -xzf tmp/storage/import.tar.gz`
+
+    Dir.foreach(DIRECTORY) do |filename|
+      path = DIRECTORY + filename
+      next if File.directory? path
+      rows = JSON.parse(File.open(path).read)
+      inserts = rows.collect do |row|
+        row.transform_keys do |key|
+          case
+          when key == "id"
+             key
+          when key == "type"
+             "typenavn"
+          when key.end_with?("id")
+             key.delete_suffix("id") + "_id"
+          else
+             key
+          end
+        end
+      end
+      resource = File.basename(filename, ".json")
+      Kernel.const_get("Oda::#{resource}").delete_all
+      Kernel.const_get("Oda::#{resource}").insert_all(inserts)
+    end
+  end
+
   task build: :environment do
-    download(BACKUP_URL, BACKUP_USER, BACKUP_PASS, BACKUP_FILE)
+    download(BACKUP_URL, BACKUP_FILE, http_basic_authentication: [ BACKUP_USER, BACKUP_PASS ])
 
     FileUtils.mkdir_p(DIRECTORY)
     FileUtils.chmod("a+w", DIRECTORY)
@@ -49,14 +83,17 @@ namespace :backup do
       inserts = client.execute("SELECT * FROM oda.dbo.#{resource} ORDER BY id").to_a
       File.write(path, inserts.to_json, mode: "w")
     end
+
+    puts "[PACK]"
+    `tar -czf tmp/storage/export.tar.gz tmp/storage/export/*`
   end
 end
 
-def download(url, user, pass, destination)
+def download(url, destination, **options)
   return if File.exist? destination
   total = nil
   URI.open(url,
-    http_basic_authentication: [ user, pass ],
+    **options,
     content_length_proc: ->(t) { total = t },
     progress_proc: ->(s) { puts s.fdiv(total)*100 }
   ) do |download|
