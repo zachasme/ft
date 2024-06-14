@@ -3,14 +3,19 @@
   <small>/ <%= l @sag.opdateringsdato, format: :short %></small>
 </h1>
 
-<% @sag.sagstrin.each do |sagstrin| %>
-  <li>
-    <%= l sagstrin.dato, format: :long %>
-    <%= sagstrin.type.typenavn %> / <%= sagstrin.status.status %>
-    <% if sagstrin.afstemning %>
-      <%= link_to "Afstemning", oda_decision_path(sagstrin.afstemning) %>
-    <% end %>
-  </li>
-<% end %>
+<p><%= @sag.resume %></p>
+<p><em><%= @sag.afstemningskonklusion %></em></p>
+
+<ul>
+  <% @sag.sagstrin.each do |sagstrin| %>
+    <li>
+      <%= l sagstrin.dato, format: :long %>
+      <%= sagstrin.type.typenavn %> / <%= sagstrin.status.status %>
+      <% if sagstrin.afstemning %>
+        <%= link_to "Afstemning", oda_decision_path(sagstrin.afstemning) %>
+      <% end %>
+    </li>
+  <% end %>
+</ul>
 
 <%= json_details @sag %>
