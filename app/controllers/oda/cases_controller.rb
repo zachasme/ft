@@ -5,7 +5,8 @@ class Oda::CasesController < ApplicationController
       .chronological
       .matches(params[:search])
 
-    records = records.casetype(params[:casetype_id]) if params[:casetype_id].present?
+    @casetype_id = params.has_key?(:casetype_id) ? params[:casetype_id] : "3"
+    records = records.casetype(@casetype_id) unless @casetype_id.empty?
     set_page_and_extract_portion_from records
   end
 

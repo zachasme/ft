@@ -1,15 +1,21 @@
 <h1>Aktører</h1>
+
+<%= form_with method: :get do |form| %>
+  <%= form.search_field :search, value: params[:search] %>
+
+  <%= form.collection_select :actortype_id, Oda::Aktørtype.all, :id, :typenavn, include_blank: "Alle aktørtyper", selected: @actortype_id %>
+
+  <%= form.submit "Søg" %>
+<% end %>
+
+<%= render partial: 'oda/pagination' %>
+
 <ul>
-  <% @aktørs.group_by{|aktør| aktør.type }.each do |type, aktørs| %>
-    <li><%= link_to "#{type.typenavn} (#{aktørs.count} aktører)", "##{type.typenavn.parameterize.underscore}" %></li>
+  <% @page.records.each do |aktør| %>
+    <li>
+      <%= link_to aktør.navn, oda_actor_path(aktør) %>
+    </li>
   <% end %>
 </ul>
 
-<% @aktørs.group_by{|aktør| aktør.type }.each do |type, aktørs| %>
-  <h2 id="<%= type.typenavn.parameterize.underscore %>"><%= type.typenavn %> (<%= aktørs.count %>)</h2>
-  <% aktørs.each do |aktør| %>
-    <div>
-      <%= link_to aktør.navn, oda_actor_path(aktør) %>
-    </div>
-  <% end %>
-<% end %>
+<%= render partial: 'oda/pagination' %>

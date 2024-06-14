@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_06_10_062501) do
+ActiveRecord::Schema[8.0].define(version: 2024_06_14_124845) do
   create_table "bills", force: :cascade do |t|
     t.integer "ftid"
     t.date "ftts", null: false
@@ -70,6 +70,11 @@ ActiveRecord::Schema[8.0].define(version: 2024_06_10_062501) do
   create_table "oda_afstemningstypes", force: :cascade do |t|
     t.datetime "opdateringsdato"
     t.string "typenavn"
+  end
+
+  create_table "oda_aktør_aktør_rolles", force: :cascade do |t|
+    t.datetime "opdateringsdato"
+    t.string "rolle"
   end
 
   create_table "oda_aktør_aktørs", force: :cascade do |t|

@@ -5,6 +5,11 @@ body {
   font-family: system-ui;
 }
 
+svg {
+  display: block;
+  height: 2cap
+}
+
 .flex { display: flex }
 .gap { gap: 1em }
 .justify-space-between { justify-content: space-between }
