@@ -1,3 +1,9 @@
+<menu class="margin-top">
+  <li><%= link_to "L | Lovforslag", oda_cases_path(casetype_id: 3) %></li>
+  <li><%= link_to "B | Beslutningsforslag", oda_cases_path(casetype_id: 5) %></li>
+  <li><%= link_to "S | § 20-spørgsmål", oda_cases_path(casetype_id: 10) %></li>
+</menu>
+
 <h1>Sager</h1>
 
 <%= form_with method: :get do |form| %>
@@ -10,16 +16,25 @@
 
 <%= render partial: 'oda/pagination' %>
 
-<ul>
-<% @page.records.each do |sag| %>
-  <li>
-    <strong><%= l sag.opdateringsdato, format: :short %></strong>
-    <%= link_to oda_case_path(sag) do %>
-      <%= sag.titelkort %>
-    <% end %>
-    (<%= sag.status.status %>)
-  </li>
-<% end %>
-</ul>
+<table>
+  <thead>
+    <tr>
+      <th colspan="3">Sagsnr</th>
+      <th>Titel (kort)</th>
+      <th>Opdateret</th>
+      <th>Status</th>
+  <% @page.records.each do |sag| %>
+    <tr>
+      <td><%= sag.periode.kode %></td>
+      <td><%= sag.nummerprefix %></td>
+      <td><%= sag.nummernumerisk %></td>
+      <td><%= link_to sag.titelkort, oda_case_path(sag) %></td>
+      <td>
+        <strong><%= l sag.opdateringsdato, format: :short %></strong>
+      </td>
+      <td><%= sag.status.status %></td>
+    </tr>
+  <% end %>
+</table>
 
 <%= render partial: 'oda/pagination' %>

@@ -11,6 +11,22 @@ class CreateOdaSchema < ActiveRecord::Migration[8.0]
       t.string :typenavn
     end
 
+    create_table :oda_sag_dokuments do |t|
+      t.string :bilagsnummer
+      t.references :dokument
+      t.datetime :frigivelsesdato
+      # t.integer :id
+      t.datetime :opdateringsdato
+      t.references :rolle
+      t.references :sag
+    end
+
+    create_table :oda_sag_dokument_rolles do |t|
+      # t.integer :id
+      t.datetime :opdateringsdato
+      t.string :rolle
+    end
+
     # Aktør
     create_table :oda_aktørtypes do |t|
       # t.integer :id

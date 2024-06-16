@@ -145,6 +145,23 @@ ActiveRecord::Schema[8.0].define(version: 2024_06_14_124845) do
     t.string "typenavn"
   end
 
+  create_table "oda_sag_dokument_rolles", force: :cascade do |t|
+    t.datetime "opdateringsdato"
+    t.string "rolle"
+  end
+
+  create_table "oda_sag_dokuments", force: :cascade do |t|
+    t.string "bilagsnummer"
+    t.integer "dokument_id"
+    t.datetime "frigivelsesdato"
+    t.datetime "opdateringsdato"
+    t.integer "rolle_id"
+    t.integer "sag_id"
+    t.index ["dokument_id"], name: "index_oda_sag_dokuments_on_dokument_id"
+    t.index ["rolle_id"], name: "index_oda_sag_dokuments_on_rolle_id"
+    t.index ["sag_id"], name: "index_oda_sag_dokuments_on_sag_id"
+  end
+
   create_table "oda_sags", force: :cascade do |t|
     t.string "afgørelse"
     t.datetime "afgørelsesdato"

@@ -1,6 +1,6 @@
 <h1>
   (<%= @sag.id %> <small>/ <%= @sag.periode.titel %></small>) <%= @sag.titel %>
-  <small>/ <%= l @sag.opdateringsdato, format: :short %></small>
+  <small>/ <%= @sag.type.typenavn %></small>
 </h1>
 
 <p><%= @sag.resume %></p>

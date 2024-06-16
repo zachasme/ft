@@ -8,7 +8,7 @@ class Oda::Sag < ApplicationRecord
 
   has_many :sagstrin
 
-  scope :chronological, -> { order(opdateringsdato: :desc) }
+  scope :chronological, -> { order(periode_id: :desc, nummernumerisk: :desc) }
   scope :matches, ->(x) { where("lower(oda_sags.titel) LIKE lower(?)", "%#{x}%") }
   scope :casetype, ->(id) { joins(:type).where(type: { id: }) }
 end
