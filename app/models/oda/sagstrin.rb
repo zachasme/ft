@@ -4,4 +4,6 @@ class Oda::Sagstrin < ApplicationRecord
   belongs_to :type, class_name: "Oda::Sagstrinstype"
 
   has_one :afstemning
+
+  scope :chronological, -> { order dato: :desc }
 end

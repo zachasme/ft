@@ -7,7 +7,7 @@
 <p><em><%= @sag.afstemningskonklusion %></em></p>
 
 <ul>
-  <% @sag.sagstrin.each do |sagstrin| %>
+  <% @sagstrin.each do |sagstrin| %>
     <li>
       <%= l sagstrin.dato, format: :long %>
       <%= sagstrin.type.typenavn %> / <%= sagstrin.status.status %>

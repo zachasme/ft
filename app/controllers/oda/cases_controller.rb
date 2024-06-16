@@ -18,7 +18,10 @@ class Oda::CasesController < ApplicationController
       :type,
       :deltundersag,
       :fremsatundersag,
-      sagstrin: [ :status, :type, :afstemning ]
     ).find(params[:id])
+
+    @sagstrin = @sag.sagstrin
+      .includes(:status, :type, :afstemning)
+      .chronological
   end
 end
