@@ -100,11 +100,8 @@ namespace :backup do
       [ path, batch, Kernel.const_get("Oda::#{resource}") ]
     end
 
-    skip = 71 + 58
-    bar = ProgressBar.new(files.length - skip)
+    bar = ProgressBar.new(files.length)
     files.each do |path, batch, resource|
-      skip -= 1
-      next if skip > 0
       bar.puts "#{path} (batch #{batch})"
       bar.increment!
 
