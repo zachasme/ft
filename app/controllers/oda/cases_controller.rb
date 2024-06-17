@@ -23,5 +23,7 @@ class Oda::CasesController < ApplicationController
     @sagstrin = @sag.sagstrin
       .includes(:status, :type, :afstemning)
       .chronological
+
+    @dokuments = @sag.dokuments
   end
 end

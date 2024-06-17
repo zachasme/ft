@@ -13,9 +13,10 @@ Rails.application.routes.draw do
   root "oda/decisions#index"
 
   namespace :oda do
+    resources :actors
+    resources :documents
     resources :cases
     resources :decisions
-    resources :actors
   end
 
   resources :bills

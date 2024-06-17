@@ -7,6 +7,8 @@ class Oda::Sag < ApplicationRecord
   belongs_to :fremsatundersag, class_name: "Oda::Sag"
 
   has_many :sagstrin
+  has_many :sag_dokuments
+  has_many :dokuments, through: :sag_dokuments
 
   scope :chronological, -> { order(periode_id: :desc, nummernumerisk: :desc) }
   scope :matches, ->(x) { where("lower(oda_sags.titel) LIKE lower(?)", "%#{x}%") }

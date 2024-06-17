@@ -6,6 +6,7 @@
 <p><%= @sag.resume %></p>
 <p><em><%= @sag.afstemningskonklusion %></em></p>
 
+<h2>Sagstrin</h2>
 <ul>
   <% @sagstrin.each do |sagstrin| %>
     <li>
@@ -14,6 +15,15 @@
       <% if sagstrin.afstemning %>
         <%= link_to "Afstemning", oda_decision_path(sagstrin.afstemning) %>
       <% end %>
+    </li>
+  <% end %>
+</ul>
+
+<h2>Dokumenter</h2>
+<ul>
+  <% @dokumenter.each do |dokument| %>
+    <li>
+      <%= link_to dokument.inspect, document_path(dokument) %>
     </li>
   <% end %>
 </ul>
