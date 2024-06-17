@@ -25,18 +25,20 @@
       <th>Status</th>
     </tr>
   </thead>
-  <% @page.records.each do |sag| %>
-    <tr>
-      <td><%= sag.periode.kode %></td>
-      <td><%= sag.nummerprefix %></td>
-      <td><%= sag.nummernumerisk %></td>
-      <td><%= link_to sag.titelkort, oda_case_path(sag) %></td>
-      <td>
-        <strong><%= l sag.opdateringsdato, format: :short %></strong>
-      </td>
-      <td><%= sag.status.status %></td>
-    </tr>
-  <% end %>
+  <tbody>
+    <% @page.records.each do |sag| %>
+      <tr>
+        <td><%= sag.periode.kode %></td>
+        <td><%= sag.nummerprefix %></td>
+        <td><%= sag.nummernumerisk %></td>
+        <td><%= link_to sag.titelkort, oda_case_path(sag) %></td>
+        <td>
+          <strong><%= l sag.opdateringsdato, format: :short %></strong>
+        </td>
+        <td><%= sag.status.status %></td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
 
 <%= render partial: 'oda/pagination' %>

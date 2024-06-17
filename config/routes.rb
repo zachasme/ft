@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     resources :documents
     resources :cases
     resources :decisions
+    resources :periods
   end
 
   resources :bills

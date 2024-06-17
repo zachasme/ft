@@ -24,7 +24,8 @@ class Oda::CasesController < ApplicationController
       .includes(:status, :type, :afstemning, :dokuments)
       .chronological
 
-    @dokuments = @sag.dokuments
+    @sag_dokuments = @sag.sag_dokuments
+      .includes(:dokument, :rolle)
       .order(:opdateringsdato)
   end
 end

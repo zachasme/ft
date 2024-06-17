@@ -7,28 +7,57 @@
 <p><em><%= @sag.afstemningskonklusion %></em></p>
 
 <h2>Sagstrin</h2>
-<ul>
-  <% @sagstrin.each do |sagstrin| %>
-    <li>
-      <%= l sagstrin.dato, format: :long %>
-      <%= sagstrin.type.typenavn %> / <%= sagstrin.status.status %>
-      <% if sagstrin.afstemning %>
-        <%= link_to "Afstemning", oda_decision_path(sagstrin.afstemning) %>
-      <% end %>
-      <% sagstrin.dokuments.each do |dokument| %>
-        <%= link_to dokument.titel, oda_document_path(dokument) %>
-      <% end %>
-    </li>
-  <% end %>
-</ul>
+<table>
+  <thead>
+    <tr>
+      <th>Dato</th>
+      <th>Type</th>
+      <th>Status</th>
+      <th>Afstemning</th>
+      <th>Dokumenter</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @sagstrin.each do |sagstrin| %>
+      <tr>
+        <td><strong><%= l sagstrin.dato.to_date, format: :short %></strong></td>
+        <td><%= sagstrin.type.typenavn %></td>
+        <td><%= sagstrin.status.status %></td>
+        <td>
+          <% if sagstrin.afstemning %>
+            <%= link_to "Afstemning", oda_decision_path(sagstrin.afstemning) %>
+          <% end %>
+        </td>
+        <td>
+          <% sagstrin.dokuments.each do |dokument| %>
+            <%= link_to truncate(dokument.titel), oda_document_path(dokument) %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
 <h2>Dokumenter</h2>
-<ul>
-  <% @dokuments.each do |dokument| %>
-    <li>
-      <%= link_to dokument.titel, oda_document_path(dokument) %>
-    </li>
-  <% end %>
-</ul>
+<table>
+  <thead>
+    <tr>
+      <th>Bilag#</th>
+      <th>Dokument</th>
+      <th>Frigivelsesdato</th>
+      <th>Rolle</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @sag_dokuments.each do |sag_dokument| %>
+      <tr>
+        <td><%= sag_dokument.bilagsnummer %></td>
+        <td><%= link_to truncate(sag_dokument.dokument.titel), oda_document_path(sag_dokument.dokument) if sag_dokument.dokument %></td>
+        <td><%= l sag_dokument.frigivelsesdato.to_date, format: :long %></td>
+        <td><%= sag_dokument.rolle.rolle %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
 <%= json_details @sag %>

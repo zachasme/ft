@@ -18,8 +18,8 @@
 
 <h2>Sagstrin</h2>
 <ul>
-  <% @dokument.sagstrin.each do |sag| %>
-    <li><%= link_to sag.titel, oda_case_path(sag) %></li>
+  <% @dokument.sagstrin.each do |sagstrin| %>
+    <li><%= link_to sagstrin.titel, oda_case_path(sagstrin.sag_id) %></li>
   <% end %>
 </ul>
 

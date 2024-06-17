@@ -26,3 +26,18 @@ summary {
     border-radius: 10px;
   }
 }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+
+  thead th {
+    background-color: rgba(0,0,0,.2);
+  }
+  tbody tr:nth-child(even) {
+    background-color: rgba(0,0,0,.1);
+  }
+  td, th {
+    border: 1px solid rgba(0,0,0,.5);
+  }
+}

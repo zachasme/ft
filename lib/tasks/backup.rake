@@ -97,7 +97,7 @@ namespace :backup do
       basename = File.basename(filename, ".json")
       resource, batch = basename.split(".")
       next unless !File.directory?(path) && Kernel.const_defined?("Oda::#{resource}")
-      [ path, batch, Kernel.const_get("Oda::#{resource}") ]
+      [ path, batch.to_i, Kernel.const_get("Oda::#{resource}") ]
     end
 
     bar = ProgressBar.new(files.length)
@@ -105,7 +105,7 @@ namespace :backup do
       bar.puts "#{path} (batch #{batch})"
       bar.increment!
 
-      resource.delete_all
+      resource.delete_all if batch === 0
 
       rows = JSON.parse(File.open(path).read)
       inserts = rows.collect do |row|
