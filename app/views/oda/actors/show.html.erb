@@ -26,23 +26,21 @@
   </ul>
 </details>
 
-<h2>Stemmer</h2>
-<p>Side <%= @page.number %> af <%= @page.recordset.page_count %> (<%= @page.recordset.records_count %> i alt):</p>
-<ul>
-  <% @page.records.each do |stemme| %>
-    <li>
-      <strong><%= l stemme.afstemning.opdateringsdato, format: :long %></strong>
-      Stemte <%= stemme.type.typenavn %> ifm. <%= link_to stemme.afstemning.sag.titelkort, oda_decision_path(stemme.afstemning) %></li>
-  <% end %>
-</ul>
+<% unless @page.recordset.records_count.zero? %>
+  <h2>Stemmer</h2>
 
-<div class="margin-top">
-  <% if @page.last? %>
-    No more pages!
-  <% else %>
-    <%= link_to "Næste side", { page: @page.next_param } %>
-  <% end %>
-</div>
+  <%= render partial: 'oda/pagination' %>
+
+  <ul>
+    <% @page.records.each do |stemme| %>
+      <li>
+        <strong><%= l stemme.afstemning.opdateringsdato, format: :long %></strong>
+        Stemte <%= stemme.type.typenavn %> ifm. <%= link_to stemme.afstemning.sag.titelkort, oda_decision_path(stemme.afstemning) %></li>
+    <% end %>
+  </ul>
+  
+  <%= render partial: 'oda/pagination' %>
+<% end %>
 
 
 <%= json_details @aktør %>

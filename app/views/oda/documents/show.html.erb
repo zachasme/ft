@@ -9,6 +9,18 @@
 /
 <strong>Status:</strong> <%= @dokument.status.status %>
 
+<h2>Aktører</h2>
+<ul>
+  <% @dokument.dokument_aktørs.each do |dokument_aktør| %>
+    <li>
+      <%= dokument_aktør.rolle.rolle %>:
+      <%= link_to oda_actor_path(dokument_aktør.aktør) do %>
+        <%= dokument_aktør.aktør.navn %>
+      <% end %>
+    </li>
+  <% end %>
+</ul>
+
 <h2>Sager</h2>
 <ul>
   <% @dokument.sags.each do |sag| %>
@@ -16,23 +28,15 @@
   <% end %>
 </ul>
 
-<h2>Sagstrin</h2>
-<ul>
-  <% @dokument.sagstrin.each do |sagstrin| %>
-    <li><%= link_to sagstrin.titel, oda_case_path(sagstrin.sag_id) %></li>
-  <% end %>
-</ul>
+<% unless @dokument.sagstrin.empty? %>
+  <h3>Sagstrin</h3>
+  <ul>
+    <% @dokument.sagstrin.each do |sagstrin| %>
+      <li><%= link_to sagstrin.titel, oda_case_path(sagstrin.sag_id) %></li>
+    <% end %>
+  </ul>
+<% end %>
 
-<h2>Aktører</h2>
-<ul>
-  <% @dokument.dokument_aktørs.each do |dokument_aktør| %>
-    <li>
-      <%= link_to oda_actor_path(dokument_aktør.aktør) do %>
-        <%= dokument_aktør.aktør.navn %> (<%= dokument_aktør.rolle.rolle %>)
-      <% end %>
-    </li>
-  <% end %>
-</ul>
 
 <h2>Filer</h2>
 <ul>

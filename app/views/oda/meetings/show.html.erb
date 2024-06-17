@@ -1,0 +1,30 @@
+<h1>
+  <small>Møde:</small>
+  <%= @møde.titel %>
+</h1>
+
+<dl>
+  <dt>Periode</dt>
+  <dd><%= link_to @møde.periode.titel, oda_period_path(@møde.periode) %></dd>
+
+  <dt>Type</dt>
+  <dd><%= @møde.type.typenavn %></dd>
+
+  <dt>Status</dt>
+  <dd><%= @møde.status.status %></dd>
+</dl>
+
+<% unless @møde.møde_aktørs.empty? %>
+  <h2>Aktører</h2>
+  <ul>
+    <% @møde.møde_aktørs.each do |møde_aktør| %>
+      <li>
+        <%= link_to oda_actor_path(møde_aktør.aktør) do %>
+          <%= møde_aktør.aktør.navn %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= json_details @møde %>

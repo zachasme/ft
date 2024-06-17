@@ -1,6 +1,8 @@
 class Oda::DocumentsController < ApplicationController
   def index
     records = Oda::Dokument
+      .chronological
+      .includes(:kategori, :status, :type)
 
     set_page_and_extract_portion_from records
   end

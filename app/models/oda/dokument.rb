@@ -11,4 +11,6 @@ class Oda::Dokument < ApplicationRecord
   belongs_to :kategori, class_name: "Oda::Dokumentkategori"
   belongs_to :status, class_name: "Oda::Dokumentstatus"
   belongs_to :type, class_name: "Oda::Dokumenttype"
+
+  scope :chronological, -> { order(dato: :desc) }
 end

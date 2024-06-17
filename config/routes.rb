@@ -21,11 +21,4 @@ Rails.application.routes.draw do
     resources :meetings
     resources :periods
   end
-
-  resources :bills
-  resources :people
-  resources :parties
-  resources :meetings
-  resources :decisions
-  resources :votes
 end

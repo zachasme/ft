@@ -1,24 +1,14 @@
-# README
+# Conventions
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+We're importing the ODA database directly, with minor tweaks:
+ - `type` column becomes `typenavn`
+ - `id` column prefix becomes `_id`
 
-Things you may want to cover:
+But everything is in danish, which means some of the inflections become wierd.
 
-* Ruby version
+The system we're going with is the following:
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+ - Models are in danish
+ - The pluralization is danglish (ie. "Dokumenters")
+ - Controllers are in english
+ - Instance variables (for sending to views) is in danglish
