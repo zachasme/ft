@@ -6,17 +6,18 @@ body {
 }
 
 svg {
-  display: block;
-  height: 2cap
+  height: 1.5cap
 }
 
 .flex { display: flex }
+.flex-wrap { flex-wrap: wrap }
 .gap { gap: 1em }
 .justify-space-between { justify-content: space-between }
 .align-center { align-items: center }
 .margin-top { margin-top: 1em }
 .margin-top-double { margin-top: 2em }
 .pad { padding: 1em }
+.translucent { opacity: .5 }
 
 summary {
   cursor: pointer;

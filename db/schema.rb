@@ -248,7 +248,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_06_10_062501) do
   end
 
   create_table "oda_kollone_beskrivelses", force: :cascade do |t|
-    t.string "entitetsnavn"
+    t.string "entitetnavn"
     t.string "kolonnenavn"
     t.string "beskrivelse"
     t.datetime "opdateringsdato"

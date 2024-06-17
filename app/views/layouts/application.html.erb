@@ -19,7 +19,7 @@
   </head>
 
   <body>
-    <div class="flex gap">
+    <div class="flex flex-wrap gap">
       <%= link_to oda_decisions_path do %>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
           <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18 9 11.25l4.306 4.306a11.95 11.95 0 0 1 5.814-5.518l2.74-1.22m0 0-5.94-2.281m5.94 2.28-2.28 5.941" />
@@ -50,8 +50,19 @@
         </svg>
         Perioder
       <% end %>
+      <%= link_to oda_descriptions_path do %>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />
+        </svg>
+        Entitet- & kolonne-beskrivelser
+      <% end %>
     </div>
 
     <%= yield %>
+
+    <footer class="translucent flex justify-space-between">
+      <p>Baseret på <%= link_to "Folketingets åbne data", "https://oda.ft.dk" %></p>
+      <p>2024 <%= link_to "z@chari.as", "mailto:z@chari.as" %></p>
+    </footer>
   </body>
 </html>

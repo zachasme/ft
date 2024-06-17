@@ -190,7 +190,7 @@ class CreateOdaSchema < ActiveRecord::Migration[8.0]
 
     create_table :oda_kollone_beskrivelses do |t|
       # t.integer :id
-      t.string :entitetsnavn
+      t.string :entitetnavn
       t.string :kolonnenavn
       t.string :beskrivelse
       t.datetime :opdateringsdato
