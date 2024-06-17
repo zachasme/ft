@@ -63,7 +63,7 @@ namespace :backup do
       bar.puts resource
       bar.increment!
       0.step do |batch|
-        path = EXPORT_DIR.join("#{resource}.#{batch}.json")
+        path = EXPORT_DIR.join("#{resource}.#{batch.to_s.rjust(2, '0')}.json")
         rows = client.execute("
           SELECT * FROM oda.dbo.#{resource}
           ORDER BY id
@@ -100,8 +100,11 @@ namespace :backup do
       [ path, batch, Kernel.const_get("Oda::#{resource}") ]
     end
 
-    bar = ProgressBar.new(files.length)
+    skip = 71 + 58
+    bar = ProgressBar.new(files.length - skip)
     files.each do |path, batch, resource|
+      skip -= 1
+      next if skip > 0
       bar.puts "#{path} (batch #{batch})"
       bar.increment!
 

@@ -184,7 +184,7 @@ class CreateOdaSchema < ActiveRecord::Migration[8.0]
 
     create_table :oda_id_maps do |t|
       # t.integer :id
-      t.string :originalid
+      t.string :original_id
       t.string :entity
     end
 
@@ -381,14 +381,14 @@ class CreateOdaSchema < ActiveRecord::Migration[8.0]
       t.datetime :opdateringsdato
     end
 
-    create_table :slettets do |t|
+    create_table :oda_slettets do |t|
       # t.integer :id
       t.references :slettetmap
       t.datetime :opdateringsdato
-      t.string :objektid
+      t.string :objekt_id
     end
 
-    create_table :slettet_maps do |t|
+    create_table :oda_slettet_maps do |t|
       # t.integer :id
       t.string :datatype
       t.datetime :opdateringsdato

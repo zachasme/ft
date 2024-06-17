@@ -243,7 +243,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_06_10_062501) do
   end
 
   create_table "oda_id_maps", force: :cascade do |t|
-    t.string "originalid"
+    t.string "original_id"
     t.string "entity"
   end
 
@@ -446,6 +446,18 @@ ActiveRecord::Schema[8.0].define(version: 2024_06_10_062501) do
     t.index ["førstesagstrin_id"], name: "index_oda_sambehandlingers_on_førstesagstrin_id"
   end
 
+  create_table "oda_slettet_maps", force: :cascade do |t|
+    t.string "datatype"
+    t.datetime "opdateringsdato"
+  end
+
+  create_table "oda_slettets", force: :cascade do |t|
+    t.integer "slettetmap_id"
+    t.datetime "opdateringsdato"
+    t.string "objekt_id"
+    t.index ["slettetmap_id"], name: "index_oda_slettets_on_slettetmap_id"
+  end
+
   create_table "oda_stemmes", force: :cascade do |t|
     t.integer "afstemning_id"
     t.integer "aktør_id"
@@ -481,18 +493,6 @@ ActiveRecord::Schema[8.0].define(version: 2024_06_10_062501) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["ftid"], name: "index_people_on_ftid", unique: true
-  end
-
-  create_table "slettet_maps", force: :cascade do |t|
-    t.string "datatype"
-    t.datetime "opdateringsdato"
-  end
-
-  create_table "slettets", force: :cascade do |t|
-    t.integer "slettetmap_id"
-    t.datetime "opdateringsdato"
-    t.string "objektid"
-    t.index ["slettetmap_id"], name: "index_slettets_on_slettetmap_id"
   end
 
   create_table "stages", force: :cascade do |t|
