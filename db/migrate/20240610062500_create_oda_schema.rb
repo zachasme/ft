@@ -188,7 +188,7 @@ class CreateOdaSchema < ActiveRecord::Migration[8.0]
       t.string :entity
     end
 
-    create_table :oda_kolonne_beskrivelses do |t|
+    create_table :oda_kollone_beskrivelses do |t|
       # t.integer :id
       t.string :entitetsnavn
       t.string :kolonnenavn

@@ -1,0 +1,10 @@
+<%= @records.inspect %>
+<ul>
+  <% @records.each do |entitet| %>
+    <li>
+      <%= entitet.entitetnavn %>:
+      <%= entitet.kolonnenavn %>:
+      <em><%= entitet.beskrivelse %></em>
+    </li>
+  <% end %>
+</ul>
