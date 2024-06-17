@@ -1,11 +1,20 @@
 <h1>Entitet- & kollone-beskrivelser</h1>
-<ul>
-  <% @beskrivelser.each do |beskrivelse| %>
-    <li>
-      <%= beskrivelse.entitetnavn %>
-      /
-      <%= beskrivelse.kollonenavn %>:
-      <em><%= beskrivelse.beskrivelse %></em>
-    </li>
-  <% end %>
-</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>Entitet</th>
+      <th>Kollone</th>
+      <th>Beskrivelse</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @beskrivelser.each do |beskrivelse| %>
+      <tr>
+        <td><%= beskrivelse.entitetnavn %></td>
+        <td><%= beskrivelse.kollonenavn %></td>
+        <td><%= beskrivelse.beskrivelse %>:</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
