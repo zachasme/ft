@@ -15,15 +15,18 @@
       <% if sagstrin.afstemning %>
         <%= link_to "Afstemning", oda_decision_path(sagstrin.afstemning) %>
       <% end %>
+      <% sagstrin.dokuments.each do |dokument| %>
+        <%= link_to dokument.titel, oda_document_path(dokument) %>
+      <% end %>
     </li>
   <% end %>
 </ul>
 
 <h2>Dokumenter</h2>
 <ul>
-  <% @dokumenter.each do |dokument| %>
+  <% @dokuments.each do |dokument| %>
     <li>
-      <%= link_to dokument.inspect, document_path(dokument) %>
+      <%= link_to dokument.titel, oda_document_path(dokument) %>
     </li>
   <% end %>
 </ul>

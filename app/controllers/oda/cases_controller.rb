@@ -21,9 +21,10 @@ class Oda::CasesController < ApplicationController
     ).find(params[:id])
 
     @sagstrin = @sag.sagstrin
-      .includes(:status, :type, :afstemning)
+      .includes(:status, :type, :afstemning, :dokuments)
       .chronological
 
     @dokuments = @sag.dokuments
+      .order(:opdateringsdato)
   end
 end

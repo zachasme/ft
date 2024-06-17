@@ -1,5 +1,48 @@
 <h1>
-  Dokument:
+  <small>Dokument:</small>
+  <%= @dokument.titel %>
 </h1>
+
+<strong>Type:</strong> <%= @dokument.type.typenavn %>
+/
+<strong>Kategori:</strong> <%= @dokument.kategori.kategori %>
+/
+<strong>Status:</strong> <%= @dokument.status.status %>
+
+<h2>Sager</h2>
+<ul>
+  <% @dokument.sags.each do |sag| %>
+    <li><%= link_to sag.titel, oda_case_path(sag) %></li>
+  <% end %>
+</ul>
+
+<h2>Sagstrin</h2>
+<ul>
+  <% @dokument.sagstrin.each do |sag| %>
+    <li><%= link_to sag.titel, oda_case_path(sag) %></li>
+  <% end %>
+</ul>
+
+<h2>Aktører</h2>
+<ul>
+  <% @dokument.dokument_aktørs.each do |dokument_aktør| %>
+    <li>
+      <%= link_to oda_actor_path(dokument_aktør.aktør) do %>
+        <%= dokument_aktør.aktør.navn %> (<%= dokument_aktør.rolle.rolle %>)
+      <% end %>
+    </li>
+  <% end %>
+</ul>
+
+<h2>Filer</h2>
+<ul>
+  <% @dokument.fils.each do |fil| %>
+    <li>
+      <%= link_to fil.filurl do %>
+        <%= fil.titel %> (<%= fil.format %>)
+      <% end %>
+    </li>
+  <% end %>
+</ul>
 
 <%= json_details @dokument %>

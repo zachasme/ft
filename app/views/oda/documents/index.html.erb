@@ -1,0 +1,13 @@
+<h1>Dokumenter</h1>
+
+<%= render partial: 'oda/pagination' %>
+
+<table>
+  <% @page.records.each do |dokument| %>
+    <tr>
+      <td><%= link_to dokument.titel, oda_document_path(dokument) %></td>
+    </tr>
+  <% end %>
+</table>
+
+<%= render partial: 'oda/pagination' %>

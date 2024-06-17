@@ -9,11 +9,19 @@
   </summary>
   <ul>
     <% @aktør.fra_aktør_aktørs.each do |aktøraktør| %>
-      <li><%= aktøraktør.rolle %> / <%= link_to aktøraktør.tilaktør.navn, oda_actor_path(aktøraktør.tilaktør) %></li>
+      <li>
+        <%= aktøraktør.id %>
+        <%= aktøraktør.rolle.rolle %> / <%= link_to aktøraktør.tilaktør.navn, oda_actor_path(aktøraktør.tilaktør) %>
+        (<%= aktøraktør.startdato %> til <%= aktøraktør.slutdato %>)
+      </li>
     <% end %>
     <li> - anden retning -</li>
     <% @aktør.til_aktør_aktørs.each do |aktøraktør| %>
-      <li><%= aktøraktør.rolle %> / <%= link_to aktøraktør.fraaktør.navn, oda_actor_path(aktøraktør.fraaktør) %></li>
+      <li>
+        <%= aktøraktør.id %>
+        <%= aktøraktør.rolle.rolle %> / <%= link_to aktøraktør.fraaktør.navn, oda_actor_path(aktøraktør.fraaktør) %>
+        (<%= aktøraktør.startdato %> til <%= aktøraktør.slutdato %>)
+      </li>
     <% end %>
   </ul>
 </details>
