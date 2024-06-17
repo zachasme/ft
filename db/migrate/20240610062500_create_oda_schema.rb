@@ -119,19 +119,19 @@ class CreateOdaSchema < ActiveRecord::Migration[8.0]
       t.string :rolle
     end
 
-    create_table :oda_dokument_kategoris do |t|
+    create_table :oda_dokumentkategoris do |t|
       # t.integer :id
       t.string :kategori
       t.datetime :opdateringsdato
     end
 
-    create_table :oda_dokument_statuses do |t|
+    create_table :oda_dokumentstatuses do |t|
       # t.integer :id
       t.datetime :opdateringsdato
       t.string :status
     end
 
-    create_table :oda_dokument_types do |t|
+    create_table :oda_dokumenttypes do |t|
       # t.integer :id
       t.datetime :opdateringsdato
       t.string :typenavn

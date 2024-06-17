@@ -158,19 +158,9 @@ ActiveRecord::Schema[8.0].define(version: 2024_06_10_062501) do
     t.index ["rolle_id"], name: "index_oda_dokument_aktørs_on_rolle_id"
   end
 
-  create_table "oda_dokument_kategoris", force: :cascade do |t|
+  create_table "oda_dokumentkategoris", force: :cascade do |t|
     t.string "kategori"
     t.datetime "opdateringsdato"
-  end
-
-  create_table "oda_dokument_statuses", force: :cascade do |t|
-    t.datetime "opdateringsdato"
-    t.string "status"
-  end
-
-  create_table "oda_dokument_types", force: :cascade do |t|
-    t.datetime "opdateringsdato"
-    t.string "typenavn"
   end
 
   create_table "oda_dokuments", force: :cascade do |t|
@@ -195,6 +185,16 @@ ActiveRecord::Schema[8.0].define(version: 2024_06_10_062501) do
     t.index ["spørgsmåls_id"], name: "index_oda_dokuments_on_spørgsmåls_id"
     t.index ["status_id"], name: "index_oda_dokuments_on_status_id"
     t.index ["type_id"], name: "index_oda_dokuments_on_type_id"
+  end
+
+  create_table "oda_dokumentstatuses", force: :cascade do |t|
+    t.datetime "opdateringsdato"
+    t.string "status"
+  end
+
+  create_table "oda_dokumenttypes", force: :cascade do |t|
+    t.datetime "opdateringsdato"
+    t.string "typenavn"
   end
 
   create_table "oda_emneord_dokuments", force: :cascade do |t|
