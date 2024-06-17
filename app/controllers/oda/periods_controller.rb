@@ -8,5 +8,8 @@ class Oda::PeriodsController < ApplicationController
 
   def show
     @periode = Oda::Periode.find(params[:id])
+    @aktørs = @periode.aktørs.chronological
+    @sags = @periode.sags.chronological
+    @mødes = @periode.mødes.chronological
   end
 end

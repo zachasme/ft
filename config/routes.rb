@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     resources :cases
     resources :decisions
     resources :descriptions
+    resources :meetings
     resources :periods
   end
 

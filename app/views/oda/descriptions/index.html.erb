@@ -2,9 +2,10 @@
 <ul>
   <% @beskrivelser.each do |beskrivelse| %>
     <li>
-      <%= entitet.entitetnavn %>:
-      <%= entitet.kollonenavn %>:
-      <em><%= entitet.beskrivelse %></em>
+      <%= beskrivelse.entitetnavn %>
+      /
+      <%= beskrivelse.kollonenavn %>:
+      <em><%= beskrivelse.beskrivelse %></em>
     </li>
   <% end %>
 </ul>

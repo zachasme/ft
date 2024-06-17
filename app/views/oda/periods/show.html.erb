@@ -2,4 +2,43 @@
   <%= @periode.titel %>
 </h1>
 
-<%= json_details @periode %>
+<% unless @aktørs.empty? %>
+  <details>
+    <summary>
+      <h2 style="display:inline-block">Aktører (<%= @aktørs.size%>)</h2>
+    </summary>
+    <ul>
+      <% @aktørs.each do |aktør| %>
+        <li><%= link_to aktør.navn, oda_actor_path(aktør) %></li>
+      <% end %>
+    </ul>
+  </details>
+<% end %>
+
+<% unless @sags.empty? %>
+  <details>
+    <summary>
+      <h2 style="display:inline-block">Sager (<%= @sags.size%>)</h2>
+    </summary>
+    <ul>
+      <% @sags.each do |sag| %>
+        <li><%= link_to sag.titelkort, oda_case_path(sag) %></li>
+      <% end %>
+    </ul>
+  </details>
+<% end %>
+
+<% unless @mødes.empty? %>
+<details>
+    <summary>
+      <h2 style="display:inline-block">Møder (<%= @mødes.size%>)</h2>
+    </summary>
+    <ul>
+      <% @mødes.each do |møde| %>
+        <li><%= link_to møde.titel, oda_meeting_path(møde    ) %></li>
+      <% end %>
+    </ul>
+  </details>
+<% end %>
+
+<%= json_details @period %>
