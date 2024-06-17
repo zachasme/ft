@@ -10,6 +10,8 @@ DOCKER_NAME = "sql-server-bak"
 EXPORT_DIR = Rails.root.join("tmp/storage/export")
 IMPORT_DIR = Rails.root.join("tmp/storage/import")
 
+BATCH_SIZE = 100_000
+
 namespace :backup do
   task export: :environment do
     download(BACKUP_URL, BACKUP_FILE, http_basic_authentication: [ BACKUP_USER, BACKUP_PASS ])
@@ -21,7 +23,7 @@ namespace :backup do
     # ensure service
     puts "[BOOT]"
     unless `docker ps -q -f name=#{DOCKER_NAME}`.present?
-      `docker run \
+      puts `docker run \
         -p 1433:1433 \
         --name #{DOCKER_NAME} \
         -e ACCEPT_EULA=Y -e MSSQL_SA_PASSWORD=#{BACKUP_PASS} \
@@ -38,34 +40,45 @@ namespace :backup do
                 MOVE 'ODA_log' TO '/var/opt/mssql/data/ODA_log.ldf'
       "`
 
+    # tables
+    puts "tables?"
+    result = `docker exec #{DOCKER_NAME} /opt/mssql-tools/bin/sqlcmd \
+     -S localhost -U SA -P #{BACKUP_PASS} \
+     -Q "SELECT table_schema+'.'+table_name FROM oda.INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE'" \
+    `.split("\n")
+    tables = result.filter_map do |line|
+      if line.start_with?("dbo.") && !line.start_with?("dbo.__")
+        line.chomp.strip.delete_prefix("dbo.")
+      end
+    end
+    tables.sort!
+
     # import
     puts "[SERIALIZE]"
     client = TinyTds::Client.new username: "SA", password: BACKUP_PASS, host: "localhost"
-    # find oda tables
-    tables = ApplicationRecord.connection.tables.filter_map do |table|
-      table.delete_prefix("oda_").singularize.camelize if table.start_with? "oda_"
-    end
 
+    # batches serialize
+    bar = ProgressBar.new(tables.length)
     tables.each do |resource|
-      result = client.execute("SELECT COUNT(*) AS count FROM oda.dbo.#{resource}")
-      count = result.first["count"]
-      bar = ProgressBar.new(count)
       bar.puts resource
-
-      path = EXPORT_DIR.join("#{resource}.json")
-      File.open(path, mode: "w") do |file|
-        file.puts(count)
-        client.execute("SELECT * FROM oda.dbo.#{resource} ORDER BY id").each do |row|
-          bar.increment!
-          file.puts(row.to_json)
-        end
+      bar.increment!
+      0.step do |batch|
+        path = EXPORT_DIR.join("#{resource}.#{batch}.json")
+        rows = client.execute("
+          SELECT * FROM oda.dbo.#{resource}
+          ORDER BY id
+          OFFSET #{batch * BATCH_SIZE} ROWS
+          FETCH NEXT #{BATCH_SIZE} ROWS ONLY
+        ").to_a
+        break if rows.empty?
+        File.write(path, rows.to_json)
       end
     end
 
     puts "[PACK]"
     `tar -czf #{EXPORT_FILE} -C #{EXPORT_DIR} .`
-
-    puts "done!"
+    size = File.size(EXPORT_FILE) / 1000000
+    puts "#{EXPORT_FILE} (#{size}MB)"
   end
 
   task import: :environment do
@@ -79,25 +92,24 @@ namespace :backup do
     FileUtils.mkdir_p(IMPORT_DIR)
     `tar -xzf #{EXPORT_FILE} -C #{IMPORT_DIR}`
 
-    Dir.foreach(IMPORT_DIR) do |filename|
+    files = Dir.foreach(IMPORT_DIR).sort.filter_map do |filename|
       path = IMPORT_DIR + filename
-      resource = File.basename(filename, ".json")
+      basename = File.basename(filename, ".json")
+      resource, batch = basename.split(".")
+      next unless !File.directory?(path) && Kernel.const_defined?("Oda::#{resource}")
+      [ path, batch, Kernel.const_get("Oda::#{resource}") ]
+    end
 
-      next if File.directory? path
-      Kernel.const_get("Oda::#{resource}").delete_all
+    bar = ProgressBar.new(files.length)
+    files.each do |path, batch, resource|
+      bar.puts "#{path} (batch #{batch})"
+      bar.increment!
 
-      bar = nil
-      File.new(path).each do |line|
-        line = line.chomp
-        # first line is count
-        if bar.nil?
-          bar = ProgressBar.new(line.to_i)
-          bar.puts path
-          next
-        end
-        bar.increment!
-        row = JSON.parse(line)
-        row.transform_keys! do |key|
+      resource.delete_all
+
+      rows = JSON.parse(File.open(path).read)
+      inserts = rows.collect do |row|
+        row.transform_keys do |key|
           case
           when key == "id"
              key
@@ -109,8 +121,8 @@ namespace :backup do
              key
           end
         end
-        Kernel.const_get("Oda::#{resource}").insert_all([ row ])
       end
+      resource.insert_all(inserts)
     end
   end
 end
@@ -119,8 +131,7 @@ def download(url, destination, **options)
   return if File.exist? destination
   bar = nil
   prev = 0
-  URI.open(url,
-    **options,
+  URI.open(url, **options,
     content_length_proc: ->(t) do
       bar = ProgressBar.new(t)
       bar.puts "[DOWNLOAD]"
