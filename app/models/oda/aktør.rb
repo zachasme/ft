@@ -11,6 +11,6 @@ class Oda::Aktør < ApplicationRecord
 
   scope :alphabetical, -> { order(:navn) }
   scope :chronological, -> { order(opdateringsdato: :desc) }
-  scope :matches, ->(x) { where("lower(oda_aktørs.navn) LIKE lower(?)", "%#{x}%") }
+  scope :matches, ->(search) { where("oda_aktørs.navn Like ?", "%#{search}%") if search.present? }
   scope :actortype, ->(id) { joins(:type).where(type: { id: }) }
 end

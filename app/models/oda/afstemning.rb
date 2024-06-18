@@ -5,5 +5,5 @@ class Oda::Afstemning < ApplicationRecord
   belongs_to :type, class_name: "Oda::Afstemningstype"
 
   scope :chronological, -> { order(:nummer) }
-  scope :matches, ->(x) { joins(:sag).where("lower(oda_sags.titel) LIKE lower(?)", "%#{x}%") }
+  scope :matches, ->(search) { joins(:sag).where("oda_sags.titel LIKE ?", "%#{search}%") if search.present? }
 end

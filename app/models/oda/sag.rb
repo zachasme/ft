@@ -14,6 +14,6 @@ class Oda::Sag < ApplicationRecord
   has_many :dokuments, through: :sag_dokuments, source: :dokument
 
   scope :chronological, -> { order(periode_id: :desc, nummernumerisk: :desc) }
-  scope :matches, ->(x) { where("lower(oda_sags.titel) LIKE lower(?)", "%#{x}%") }
+  scope :matches, ->(search) { where("oda_sags.titel LIKE ?", "%#{search}%") if search.present? }
   scope :casetype, ->(id) { joins(:type).where(type: { id: }) }
 end

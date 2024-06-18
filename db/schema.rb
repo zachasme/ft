@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_06_10_062500) do
+ActiveRecord::Schema[8.0].define(version: 2024_06_18_081358) do
   create_table "oda_afstemnings", force: :cascade do |t|
     t.string "kommentar"
     t.string "konklusion"
@@ -52,12 +52,13 @@ ActiveRecord::Schema[8.0].define(version: 2024_06_10_062500) do
     t.string "efternavn"
     t.string "fornavn"
     t.string "gruppenavnkort"
-    t.string "navn"
+    t.string "navn", collation: "nocase"
     t.datetime "opdateringsdato"
     t.integer "periode_id"
     t.datetime "slutdato"
     t.datetime "startdato"
     t.integer "type_id"
+    t.index ["navn"], name: "index_oda_aktørs_on_navn"
     t.index ["periode_id"], name: "index_oda_aktørs_on_periode_id"
     t.index ["type_id"], name: "index_oda_aktørs_on_type_id"
   end
@@ -137,11 +138,12 @@ ActiveRecord::Schema[8.0].define(version: 2024_06_10_062500) do
     t.string "spørgsmålsordlyd"
     t.string "spørgsmålstitel"
     t.integer "status_id"
-    t.string "titel"
+    t.string "titel", collation: "nocase"
     t.integer "type_id"
     t.index ["kategori_id"], name: "index_oda_dokuments_on_kategori_id"
     t.index ["spørgsmåls_id"], name: "index_oda_dokuments_on_spørgsmåls_id"
     t.index ["status_id"], name: "index_oda_dokuments_on_status_id"
+    t.index ["titel"], name: "index_oda_dokuments_on_titel"
     t.index ["type_id"], name: "index_oda_dokuments_on_type_id"
   end
 
@@ -172,9 +174,10 @@ ActiveRecord::Schema[8.0].define(version: 2024_06_10_062500) do
   end
 
   create_table "oda_emneords", force: :cascade do |t|
-    t.string "emneord"
+    t.string "emneord", collation: "nocase"
     t.datetime "opdateringsdato"
     t.integer "type_id"
+    t.index ["emneord"], name: "index_oda_emneords_on_emneord"
     t.index ["type_id"], name: "index_oda_emneords_on_type_id"
   end
 
@@ -322,7 +325,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_06_10_062500) do
     t.datetime "rådsmødedato"
     t.boolean "statsbudgetsag"
     t.integer "status_id"
-    t.string "titel"
+    t.string "titel", collation: "nocase"
     t.string "titelkort"
     t.integer "type_id"
     t.index ["deltundersag_id"], name: "index_oda_sags_on_deltundersag_id"
@@ -330,6 +333,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_06_10_062500) do
     t.index ["kategori_id"], name: "index_oda_sags_on_kategori_id"
     t.index ["periode_id"], name: "index_oda_sags_on_periode_id"
     t.index ["status_id"], name: "index_oda_sags_on_status_id"
+    t.index ["titel"], name: "index_oda_sags_on_titel"
     t.index ["type_id"], name: "index_oda_sags_on_type_id"
   end
 

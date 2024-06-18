@@ -4,5 +4,5 @@ class Oda::Emneord < ApplicationRecord
   has_many :emneord_sags, class_name: "Oda::EmneordSag"
   has_many :sags, through: :emneord_sags, source: :sag
 
-  scope :matches, ->(x) { where("lower(oda_emneords.emneord) LIKE lower(?)", "%#{x}%") }
+  scope :matches, ->(search) { where("oda_emneords.emneord LIKE ?", "%#{search}%") if search.present? }
 end
