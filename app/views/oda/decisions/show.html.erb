@@ -2,7 +2,10 @@
   Afstemning (nummer <%= @afstemning.nummer %>)
 </h1>
 
-Sag: <%= link_to @afstemning.sag.titel, oda_case_path(@afstemning.sag) %>
+<% if @afstemning.sag %>
+  <p>Sag: <%= link_to @afstemning.sag.titel, oda_case_path(@afstemning.sag) if @afstemning.sag %></p>
+<% end %>
+<p>Møde: <%= link_to @afstemning.møde.titel, oda_meeting_path(@afstemning.møde) if @afstemning.møde %></p>
 
 <p><strong><%= @afstemning.konklusion %></strong></p>
 

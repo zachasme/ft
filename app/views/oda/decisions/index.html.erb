@@ -12,8 +12,8 @@
     <tr>
       <th>nr</th>
       <th>Vedtaget</th>
-      <th>Sagstitel</th>
       <th>Type</th>
+      <th>Sag</th>
     </tr>
   </thead>
   <tbody>
@@ -21,16 +21,14 @@
       <tr>
         <td><%= afstemning.nummer %></td>
         <td style="color:<%= afstemning.vedtaget ? 'green' : 'red' %>"><%= afstemning.vedtaget ? 'Vedtaget' : 'Forkastet' %></td>
+        <td><%= link_to afstemning.type.typenavn, oda_decision_path(afstemning) %></td>
         <td>
-          <%= link_to oda_decision_path(afstemning) do %>
             <% if params[:search] %>
               <%= highlight(excerpt(afstemning.sag&.titel, params[:search], radius: 30), params[:search]) %>
             <% else %>
               <%= truncate(afstemning.sag&.titel, length: 60) %>
             <% end %>
-          <% end %>
         </td>
-        <td><%= afstemning.type.typenavn %></td>
       </tr>
     <% end %>
   </tbody>
