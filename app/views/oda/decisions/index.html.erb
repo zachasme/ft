@@ -1,7 +1,10 @@
 <h1>Afstemninger</h1>
 
 <%= form_with method: :get do |form| %>
+  <%= form.label :search, "Sag" %>
   <%= form.search_field :search, value: params[:search] %>
+  <%= form.label :period_id, "Samling" %>
+  <%= form.collection_select :period_id, Oda::Periode.samlinger.chronological, :id, :titel, include_blank: "Alle samlinger", selected: @period_id %>
   <%= form.submit "Søg" %>
 <% end %>
 
@@ -10,7 +13,8 @@
 <table>
   <thead>
     <tr>
-      <th>nr</th>
+      <th>Samling</th>
+      <th>Nr</th>
       <th>Vedtaget</th>
       <th>Type</th>
       <th>Sag</th>
@@ -19,6 +23,7 @@
   <tbody>
     <% @page.records.each do |afstemning| %>
       <tr>
+        <td><%= afstemning.periode.titel %></td>
         <td><%= afstemning.nummer %></td>
         <td style="color:<%= afstemning.vedtaget ? 'green' : 'red' %>"><%= afstemning.vedtaget ? 'Vedtaget' : 'Forkastet' %></td>
         <td><%= link_to afstemning.type.typenavn, oda_decision_path(afstemning) %></td>
