@@ -13,6 +13,7 @@ class Oda::MeetingsController < ApplicationController
         :type,
         :status,
         :periode,
+        :dagsordenspunkts,
         møde_aktørs: :aktør
       )
       .find(params[:id])

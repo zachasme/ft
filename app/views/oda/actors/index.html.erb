@@ -10,12 +10,33 @@
 
 <%= render partial: 'oda/pagination' %>
 
-<ul>
-  <% @page.records.each do |aktør| %>
-    <li>
-      <%= link_to aktør.navn, oda_actor_path(aktør) %>
-    </li>
-  <% end %>
-</ul>
+<table>
+  <thead>
+    <tr>
+      <th>Navn</th>
+      <th>Type</th>
+      <th>Periode</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @page.records.each do |aktør| %>
+      <tr>
+        <td>
+          <%= link_to oda_actor_path(aktør) do %>
+            <% if params[:search] %>
+              <%= highlight(excerpt(aktør.navn, params[:search], radius: 30), params[:search]) %>
+            <% else %>
+              <%= truncate(aktør.navn, length: 60) %>
+            <% end %>
+          <% end %>
+        </td>
+        <td><%= aktør.type.typenavn %></td>
+        <td>
+          <%= link_to aktør.periode.titel, oda_period_path(aktør.periode) if aktør.periode %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
 <%= render partial: 'oda/pagination' %>

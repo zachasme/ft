@@ -14,11 +14,13 @@ Rails.application.routes.draw do
 
   namespace :oda do
     resources :actors
+    resources :deletions
     resources :documents
     resources :cases
     resources :decisions
     resources :descriptions
     resources :meetings
     resources :periods
+    resources :subjects
   end
 end

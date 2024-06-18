@@ -1,0 +1,24 @@
+<h1>Slettet</h1>
+
+<%= render partial: 'oda/pagination' %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Datatype</th>
+      <th>Objekt ID</th>
+      <th>Dato</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @page.records.each do |slettet| %>
+      <tr>
+        <td><%= slettet.slettetmap.datatype %></td>
+        <td><%= slettet.objekt_id %></td>
+        <td><%= l slettet.opdateringsdato, format: :short %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= render partial: 'oda/pagination' %>

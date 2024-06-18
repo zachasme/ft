@@ -1,19 +1,33 @@
 <h1>
-  (<%= @afstemning.id %>) <%= @afstemning.sag.titel %>
-  <small>/ <%= l @afstemning.opdateringsdato, format: :short %></small>
+  Afstemning (nummer <%= @afstemning.nummer %>)
 </h1>
 
 Sag: <%= link_to @afstemning.sag.titel, oda_case_path(@afstemning.sag) %>
 
 <p><strong><%= @afstemning.konklusion %></strong></p>
-<% if @afstemning.kommentar %>
+
+<% if @afstemning.kommentar.present? %>
   <p>(<%= @afstemning.kommentar %>)</p>
 <% end %>
 
-<ul>
-  <% @afstemning.stemmes.each do |stemme| %>
-    <li><%= link_to stemme.aktør.navn, oda_actor_path(stemme.aktør) %> stemte <%= stemme.type.typenavn %></li>
-  <% end %>
-</ul>
+<table>
+  <caption>
+    Stemmer
+  </caption>
+  <thead>
+    <tr>
+      <th>Stemme</th>
+      <th>Aktør</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @afstemning.stemmes.each do |stemme| %>
+      <tr>
+        <td style="color:<%= stemme.type.typenavn == "For" ? 'green' : 'red' %>"><%= stemme.type.typenavn %></td>
+        <td><%= link_to stemme.aktør.navn, oda_actor_path(stemme.aktør) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
 <%= json_details @afstemning %>

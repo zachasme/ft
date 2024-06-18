@@ -18,6 +18,7 @@ class Oda::CasesController < ApplicationController
       :type,
       :deltundersag,
       :fremsatundersag,
+      :emneords,
     ).find(params[:id])
 
     @sagstrin = @sag.sagstrin

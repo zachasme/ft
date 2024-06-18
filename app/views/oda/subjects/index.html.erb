@@ -1,0 +1,24 @@
+<h1>Emneord</h1>
+
+<%= form_with method: :get do |form| %>
+  <%= form.search_field :search, value: params[:search] %>
+  <%= form.submit "Søg" %>
+<% end %>
+
+<%= render partial: 'oda/pagination' %>
+
+<ul>
+  <% @page.records.each do |emneord| %>
+    <li>
+      <%= link_to oda_subject_path(emneord) do %>
+        <% if params[:search] %>
+          <%= highlight(excerpt(emneord.emneord, params[:search], radius: 30), params[:search]) %>
+        <% else %>
+          <%= truncate(emneord.emneord, length: 60) %>
+        <% end %>
+      <% end %>
+    </li>
+  <% end %>
+</ul>
+
+<%= render partial: 'oda/pagination' %>

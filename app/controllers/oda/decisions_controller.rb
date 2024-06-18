@@ -1,7 +1,7 @@
 class Oda::DecisionsController < ApplicationController
   def index
     records = Oda::Afstemning
-      .includes(:sagstrin, :sag)
+      .includes(:sagstrin, :sag, :type)
       .chronological
       .matches(params[:search])
     set_page_and_extract_portion_from records

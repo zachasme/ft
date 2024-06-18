@@ -1,8 +1,9 @@
 <h1>
-  (<%= @sag.id %> <small>/ <%= @sag.periode.titel %></small>) <%= @sag.titel %>
-  <small>/ <%= @sag.type.typenavn %></small>
+  Sag: <%= @sag.nummer %>
+  <small>(<%= @sag.type.typenavn %>)</small>
 </h1>
 
+<p><strong><%= @sag.titel %></strong></p>
 <p><%= @sag.resume %></p>
 <p><em><%= @sag.afstemningskonklusion %></em></p>
 
@@ -59,5 +60,12 @@
     <% end %>
   </tbody>
 </table>
+
+<h2>Emneord</h2>
+<ul>
+  <% @sag.emneords.each do |emneord| %>
+    <li><%= link_to emneord.emneord, oda_subject_path(emneord) %></li>
+  <% end %>
+</ul>
 
 <%= json_details @sag %>

@@ -1,5 +1,10 @@
 <h1>Dokumenter</h1>
 
+<%= form_with method: :get do |form| %>
+  <%= form.search_field :search, value: params[:search] %>
+  <%= form.submit "Søg" %>
+<% end %>
+
 <%= render partial: 'oda/pagination' %>
 
 <table>
@@ -16,7 +21,15 @@
     <% @page.records.each do |dokument| %>
       <tr>
         <td><%= l dokument.dato, format: :long %></td>
-        <td><%= link_to dokument.titel, oda_document_path(dokument) %></td>
+        <td>
+          <%= link_to oda_document_path(dokument) do %>
+            <% if params[:search] %>
+              <%= highlight(excerpt(dokument.titel, params[:search], radius: 30), params[:search]) %>
+            <% else %>
+              <%= truncate(dokument.titel, length: 60) %>
+            <% end %>
+          <% end %>
+        </td>
         <td><%= dokument.kategori.kategori %></td>
         <td><%= dokument.status.status %></td>
         <td><%= dokument.type.typenavn %></td>

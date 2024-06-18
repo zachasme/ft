@@ -7,14 +7,33 @@
 
 <%= render partial: 'oda/pagination' %>
 
-<ul>
-  <% @page.records.each do |decision| %>
-    <li>
-      <%= decision.vedtaget ? '✓' : '✕' %>
-      <strong><%= l decision.sagstrin.dato.to_date, format: :long %></strong>
-      <%= link_to decision.sag.titelkort, oda_decision_path(decision) %>
-    </li>
-  <% end %>
-</ul>
+<table>
+  <thead>
+    <tr>
+      <th>nr</th>
+      <th>Vedtaget</th>
+      <th>Sagstitel</th>
+      <th>Type</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @page.records.each do |afstemning| %>
+      <tr>
+        <td><%= afstemning.nummer %></td>
+        <td style="color:<%= afstemning.vedtaget ? 'green' : 'red' %>"><%= afstemning.vedtaget ? 'Vedtaget' : 'Forkastet' %></td>
+        <td>
+          <%= link_to oda_decision_path(afstemning) do %>
+            <% if params[:search] %>
+              <%= highlight(excerpt(afstemning.sag.titel, params[:search], radius: 30), params[:search]) %>
+            <% else %>
+              <%= truncate(afstemning.sag.titel, length: 60) %>
+            <% end %>
+          <% end %>
+        </td>
+        <td><%= afstemning.type.typenavn %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
 <%= render partial: 'oda/pagination' %>

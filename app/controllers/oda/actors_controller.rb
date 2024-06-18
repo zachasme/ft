@@ -1,7 +1,7 @@
 class Oda::ActorsController < ApplicationController
   def index
     records = Oda::Aktør
-      .includes(:type)
+      .includes(:type, :periode)
       .alphabetical
       .matches(params[:search])
 

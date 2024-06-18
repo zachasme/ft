@@ -14,6 +14,15 @@
   <dd><%= @møde.status.status %></dd>
 </dl>
 
+<% unless @møde.dagsordenspunkts.empty? %>
+  <h2>Dagsordenspunkter</h2>
+  <ul>
+    <% @møde.dagsordenspunkts.each do |punkt| %>
+      <li><%= punkt.nummer %>: <%= punkt.titel %></li>
+    <% end %>
+  </ul>
+<% end %>
+
 <% unless @møde.møde_aktørs.empty? %>
   <h2>Aktører</h2>
   <ul>

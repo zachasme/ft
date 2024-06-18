@@ -6,6 +6,9 @@ class Oda::Dokument < ApplicationRecord
   has_many :sags, through: :sag_dokuments, source: :sag
   has_many :sagstrin, through: :sagstrin_dokuments, source: :sagstrin
 
+  has_many :emneord_dokuments, class_name: "Oda::EmneordDokument"
+  has_many :emneords, through: :emneord_dokuments, source: :emneord
+
   has_many :fils
 
   belongs_to :kategori, class_name: "Oda::Dokumentkategori"
@@ -13,4 +16,5 @@ class Oda::Dokument < ApplicationRecord
   belongs_to :type, class_name: "Oda::Dokumenttype"
 
   scope :chronological, -> { order(dato: :desc) }
+  scope :matches, ->(x) { where("lower(oda_dokuments.titel) LIKE lower(?)", "%#{x}%") }
 end

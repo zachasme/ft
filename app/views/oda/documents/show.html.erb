@@ -49,4 +49,11 @@
   <% end %>
 </ul>
 
+<h2>Emneord</h2>
+<ul>
+  <% @dokument.emneords.each do |emneord| %>
+    <li><%= link_to emneord.emneord, oda_subject_path(emneord) %></li>
+  <% end %>
+</ul>
+
 <%= json_details @dokument %>
