@@ -33,7 +33,7 @@
         <td><%= sag.nummernumerisk %></td>
         <td>
           <%= link_to oda_case_path(sag) do %>
-            <% if params[:search] %>
+            <% if params[:search].present? %>
               <%= highlight(excerpt(sag.titel, params[:search], radius: 30), params[:search]) %>
             <% else %>
               <%= truncate(sag.titel, length: 60) %>
