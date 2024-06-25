@@ -52,3 +52,6 @@ plugin :tmp_restart
 
 # Only use a pidfile when requested
 pidfile ENV["PIDFILE"] if ENV["PIDFILE"]
+
+activate_control_app
+plugin :yabeda

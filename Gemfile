@@ -65,3 +65,10 @@ gem "progress_bar"
 group :development do
   gem "tiny_tds"
 end
+
+gem "yabeda"
+gem "yabeda-rails"
+gem "yabeda-puma-plugin"
+
+gem "newrelic_rpm"
+gem "yabeda-newrelic"
