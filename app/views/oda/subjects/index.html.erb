@@ -2,24 +2,41 @@
 
 <%= form_with method: :get do |form| %>
   <%= form.search_field :search, value: params[:search] %>
+
+  <%= form.collection_select :subjecttype_id, Oda::Emneordstype.all, :id, :typenavn, include_blank: "Alle emneordstyper", selected: @subjecttype_id %>
+
   <%= form.submit "Søg" %>
 <% end %>
 
 <%= render partial: 'oda/pagination' %>
 
-<ul>
-  <% @page.records.each do |emneord| %>
-    <li>
-      <%= link_to oda_subject_path(emneord) do %>
-        <% if params[:search] %>
-          <%= highlight(excerpt(emneord.emneord, params[:search], radius: 30), params[:search]) %>
-        <% else %>
-          <%= truncate(emneord.emneord, length: 60) %>
-        <% end %>
-        (<%= emneord.emneord_sags_count %> sager, <%= emneord.emneord_dokuments_count %> dokumenter)
-      <% end %>
-    </li>
-  <% end %>
-</ul>
+<table>
+  <thead>
+    <tr>
+      <th>Emneordstype</th>
+      <th>Emneord</th>
+      <th>Antal sager</th>
+      <th>Antal dokumenter</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @page.records.each do |emneord| %>
+      <tr>
+        <td><%= emneord.type.typenavn %></td>
+        <td>
+          <%= link_to oda_subject_path(emneord) do %>
+            <% if params[:search] %>
+              <%= highlight(excerpt(emneord.emneord, params[:search], radius: 30), params[:search]) %>
+            <% else %>
+              <%= truncate(emneord.emneord, length: 60) %>
+            <% end %>
+          <% end %>
+        </td>
+        <td><%= emneord.emneord_sags_count %></td>
+        <td><%= emneord.emneord_dokuments_count %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
 <%= render partial: 'oda/pagination' %>

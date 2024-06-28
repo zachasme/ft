@@ -1,5 +1,11 @@
 <h1>Entitet- & kollone-beskrivelser</h1>
 
+<ul>
+<% @entities.each do |entity| %>
+  <li><%= entity.entitetnavn %>: <%= entity.beskrivelse %></li>
+<% end %>
+</ul>
+
 <table>
   <thead>
     <tr>
@@ -9,11 +15,11 @@
     </tr>
   </thead>
   <tbody>
-    <% @beskrivelser.each do |beskrivelse| %>
+    <% @columns.each do |column| %>
       <tr>
-        <td><%= beskrivelse.entitetnavn %></td>
-        <td><%= beskrivelse.kollonenavn %></td>
-        <td><%= beskrivelse.beskrivelse %>:</td>
+        <td><%= column.entitetnavn %></td>
+        <td><%= column.kollonenavn %></td>
+        <td><%= column.beskrivelse %></td>
       </tr>
     <% end %>
   </tbody>

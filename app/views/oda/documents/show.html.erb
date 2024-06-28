@@ -9,17 +9,28 @@
 /
 <strong>Status:</strong> <%= @dokument.status.status %>
 
-<h2>Aktører</h2>
-<ul>
-  <% @dokument.dokument_aktørs.each do |dokument_aktør| %>
-    <li>
-      <%= dokument_aktør.rolle.rolle %>:
-      <%= link_to oda_actor_path(dokument_aktør.aktør) do %>
-        <%= dokument_aktør.aktør.navn %>
-      <% end %>
-    </li>
-  <% end %>
-</ul>
+<% if @dokument.omtryks %>
+  <h2>Omtryk</h2>
+  <ul>
+    <% @dokument.omtryks.each do |omtryk| %>
+      <li><%= l omtryk.dato, format: :long %>: <%= omtryk.begrundelse %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<% if @dokument.dokument_aktørs %>
+  <h2>Aktører</h2>
+  <ul>
+    <% @dokument.dokument_aktørs.each do |dokument_aktør| %>
+      <li>
+        <%= dokument_aktør.rolle.rolle %>:
+        <%= link_to oda_actor_path(dokument_aktør.aktør) do %>
+          <%= dokument_aktør.aktør.navn %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
 
 <h2>Sager</h2>
 <ul>

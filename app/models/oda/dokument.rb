@@ -9,12 +9,14 @@ class Oda::Dokument < ApplicationRecord
   has_many :emneord_dokuments, class_name: "Oda::EmneordDokument"
   has_many :emneords, through: :emneord_dokuments, source: :emneord
 
+  has_many :omtryks
   has_many :fils
 
   belongs_to :kategori, class_name: "Oda::Dokumentkategori"
   belongs_to :status, class_name: "Oda::Dokumentstatus"
   belongs_to :type, class_name: "Oda::Dokumenttype"
 
+  scope :reprinted, -> { joins(:omtryks) }
   scope :chronological, -> { order(dato: :desc) }
   scope :matches, ->(search) { where("oda_dokuments.titel LIKE ?", "%#{search}%") if search.present? }
 end

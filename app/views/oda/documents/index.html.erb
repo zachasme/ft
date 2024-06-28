@@ -2,6 +2,10 @@
 
 <%= form_with method: :get do |form| %>
   <%= form.search_field :search, value: params[:search] %>
+
+  <%= check_box_tag :reprinted, checked: params[:reprinted].present? %>
+  <%= form.label :reprinted, "Omtrykt" %>
+
   <%= form.submit "Søg" %>
 <% end %>
 
