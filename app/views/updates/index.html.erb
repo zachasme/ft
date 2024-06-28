@@ -11,7 +11,7 @@
     <% @entities.each do |entity| %>
       <tr>
         <td><%= entity.name %></td>
-        <td><%= time_ago_in_words entity.maximum(:opdateringsdato) %> ago</td>
+        <td><%= time_ago_in_words entity.maximum(:opdateringsdato) %> siden</td>
       </tr>
     <% end %>
   </tbody>

@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "oda/decisions#index"
 
+  resources :updates
+
   namespace :oda do
     resources :actors
     resources :deletions
