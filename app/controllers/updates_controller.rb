@@ -5,6 +5,7 @@ class UpdatesController < ApplicationController
       Oda::Afstemningstype,
       Oda::AktørAktørRolle,
       Oda::AktørAktør,
+      Oda::Aktør,
       Oda::Aktstykke,
       Oda::DagsordenspunktDokument,
       Oda::DagsordenspunktSag,
