@@ -13,6 +13,13 @@ IMPORT_DIR = Rails.root.join("tmp/storage/import")
 BATCH_SIZE = 100_000
 
 namespace :backup do
+  task clean: :environment do
+    FileUtils.rm_rf(BACKUP_FILE)
+    FileUtils.rm_rf(EXPORT_DIR)
+    FileUtils.rm_rf(IMPORT_DIR)
+    FileUtils.rm_rf(EXPORT_FILE)
+  end
+
   task export: :environment do
     download(BACKUP_URL, BACKUP_FILE, http_basic_authentication: [ BACKUP_USER, BACKUP_PASS ])
 

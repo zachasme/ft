@@ -1,0 +1,18 @@
+<h1>Dataudforsker til Folketingets åbne data</h1>
+
+<table>
+    <thead>
+    <tr>
+      <th>Entitet</th>
+      <th>Opdateringsdato</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @entities.each do |entity| %>
+      <tr>
+        <td><%= entity.name %></td>
+        <td><%= time_ago_in_words entity.maximum(:opdateringsdato) %> ago</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
