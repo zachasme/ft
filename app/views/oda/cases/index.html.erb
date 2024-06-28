@@ -32,7 +32,7 @@
         <td><%= sag.nummerprefix %></td>
         <td><%= sag.nummernumerisk %></td>
         <td>
-          <%= link_to oda_case_path(sag) do %>
+          <%= link_to oda_case_path(sag), title: sag.titel do %>
             <% if params[:search].present? %>
               <%= highlight(excerpt(sag.titel, params[:search], radius: 30), params[:search]) %>
             <% else %>

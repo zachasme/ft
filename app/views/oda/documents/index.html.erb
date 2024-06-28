@@ -22,7 +22,7 @@
       <tr>
         <td><%= l dokument.dato, format: :long %></td>
         <td>
-          <%= link_to oda_document_path(dokument) do %>
+          <%= link_to oda_document_path(dokument), title: dokument.titel do %>
             <% if params[:search] %>
               <%= highlight(excerpt(dokument.titel, params[:search], radius: 30), params[:search]) %>
             <% else %>

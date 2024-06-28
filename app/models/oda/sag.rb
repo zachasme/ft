@@ -1,5 +1,5 @@
 class Oda::Sag < ApplicationRecord
-  belongs_to :periode, class_name: "Oda::Periode"
+  belongs_to :periode, class_name: "Oda::Periode", counter_cache: true
   belongs_to :kategori, class_name: "Oda::Sagskategori"
   belongs_to :status, class_name: "Oda::Sagsstatus"
   belongs_to :type, class_name: "Oda::Sagstype"

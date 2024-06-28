@@ -7,7 +7,7 @@ class Oda::Aktør < ApplicationRecord
   has_many :tilaktørs, through: :til_aktør_aktørs
 
   belongs_to :type, class_name: "Oda::Aktørtype"
-  belongs_to :periode
+  belongs_to :periode, counter_cache: true
 
   scope :alphabetical, -> { order(:navn) }
   scope :chronological, -> { order(opdateringsdato: :desc) }

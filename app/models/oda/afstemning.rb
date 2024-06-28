@@ -1,9 +1,9 @@
 class Oda::Afstemning < ApplicationRecord
-  belongs_to :sagstrin
-  has_one :sag, through: :sagstrin
   has_many :stemmes
+  belongs_to :sagstrin
+  belongs_to :møde
   belongs_to :type, class_name: "Oda::Afstemningstype"
-  belongs_to :møde, class_name: "Oda::Møde"
+  has_one :sag,     through: :sagstrin
   has_one :periode, through: :møde
 
   scope :with_period, ->(period_id) { where(periode: { id: period_id }) }

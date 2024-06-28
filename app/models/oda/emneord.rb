@@ -5,4 +5,6 @@ class Oda::Emneord < ApplicationRecord
   has_many :sags, through: :emneord_sags, source: :sag
 
   scope :matches, ->(search) { where("oda_emneords.emneord LIKE ?", "%#{search}%") if search.present? }
+
+  scope :by_emneord_sags_count, -> { order(emneord_sags_count: :desc) }
 end

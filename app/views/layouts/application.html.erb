@@ -80,7 +80,10 @@
     <%= yield %>
 
     <footer class="translucent flex justify-space-between">
-      <p>Baseret på <%= link_to "Folketingets åbne data", "https://oda.ft.dk" %></p>
+      <p>
+        Baseret på <%= link_to "Folketingets åbne data", "https://oda.ft.dk" %>,
+        <%= link_to "Kildekoden", "https://github.com/zachasme/ft" %> er frit tilgængelig
+      </p>
       <p>2024 <%= link_to "z@chari.as", "mailto:z@chari.as" %></p>
     </footer>
   </body>

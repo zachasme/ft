@@ -13,6 +13,7 @@
       <th>Start</th>
       <th>Slut</th>
       <th>Titel</th>
+      <th>Aktører / Møder / Sager</th>
     </tr>
   </thead>
   <tbody>
@@ -23,6 +24,7 @@
         <td><%= l periode.startdato.to_date %></td>
         <td><%= l periode.slutdato.to_date %></td>
         <td><%= periode.titel %></td>
+        <td><%= periode.aktørs_count %> / <%= periode.mødes_count %> / <%= periode.sags_count %></td>
       </tr>
     <% end %>
   </tbody>

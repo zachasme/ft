@@ -125,6 +125,31 @@ namespace :backup do
       resource.insert_all(inserts)
     end
   end
+
+  task counters: :environment do
+    bar = ProgressBar.new(Oda::Emneord.count)
+    bar.puts("Emneord")
+    Oda::Emneord.all.each do |emneord|
+      bar.increment!
+      Oda::Emneord.reset_counters(
+        emneord.id,
+        :emneord_sags_count,
+        :emneord_dokuments_count
+      )
+    end
+
+    bar = ProgressBar.new(Oda::Periode.count)
+    bar.puts("Periode")
+    Oda::Periode.all.each do |periode|
+      bar.increment!
+      Oda::Periode.reset_counters(
+        periode.id,
+        :aktørs_count,
+        :mødes_count,
+        :sags_count,
+      )
+    end
+  end
 end
 
 def download(url, destination, **options)

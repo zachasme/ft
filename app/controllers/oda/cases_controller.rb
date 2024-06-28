@@ -22,7 +22,14 @@ class Oda::CasesController < ApplicationController
     ).find(params[:id])
 
     @sagstrin = @sag.sagstrin
-      .includes(:status, :type, :afstemning, :dokuments)
+      .includes(
+        :status,
+        :type,
+        :afstemning,
+        :dokuments,
+        :sambehandlingers_a_sags,
+        :sambehandlingers_b_sags,
+      )
       .chronological
 
     @sag_dokuments = @sag.sag_dokuments

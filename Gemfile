@@ -59,7 +59,10 @@ group :test do
   gem "selenium-webdriver"
 end
 
+gem "solid_queue"
+gem "mission_control-jobs", github: "rails/mission_control-jobs"
 gem "geared_pagination"
+
 gem "progress_bar"
 
 group :development do

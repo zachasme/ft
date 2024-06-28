@@ -16,6 +16,7 @@
         <% else %>
           <%= truncate(emneord.emneord, length: 60) %>
         <% end %>
+        (<%= emneord.emneord_sags_count %> sager, <%= emneord.emneord_dokuments_count %> dokumenter)
       <% end %>
     </li>
   <% end %>

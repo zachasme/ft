@@ -1,4 +1,4 @@
-class Oda::Forslag < ApplicationRecord
-  # zach: It appears Forslag is a synonym for Sag
+class Oda::Forslag < Oda::Sag
+  # zach: It appears this is a synonym for Sag
   #         we should probably ignore
 end

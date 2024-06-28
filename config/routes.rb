@@ -23,4 +23,6 @@ Rails.application.routes.draw do
     resources :periods
     resources :subjects
   end
+
+  mount MissionControl::Jobs::Engine, at: "/jobs"
 end

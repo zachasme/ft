@@ -1,4 +1,4 @@
-class Oda::Debat < ApplicationRecord
-  # zach: It appears Debat is a synonym for Sag
+class Oda::Debat < Oda::Sag
+  # zach: It appears this is a synonym for Sag
   #         we should probably ignore
 end

@@ -55,3 +55,4 @@ pidfile ENV["PIDFILE"] if ENV["PIDFILE"]
 
 activate_control_app
 plugin :yabeda
+plugin :solid_queue
