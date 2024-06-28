@@ -9,7 +9,7 @@
 /
 <strong>Status:</strong> <%= @dokument.status.status %>
 
-<% if @dokument.omtryks %>
+<% unless @dokument.omtryks.empty? %>
   <h2>Omtryk</h2>
   <ul>
     <% @dokument.omtryks.each do |omtryk| %>
@@ -18,7 +18,7 @@
   </ul>
 <% end %>
 
-<% if @dokument.dokument_aktørs %>
+<% unless @dokument.dokument_aktørs.empty? %>
   <h2>Aktører</h2>
   <ul>
     <% @dokument.dokument_aktørs.each do |dokument_aktør| %>
@@ -48,7 +48,6 @@
   </ul>
 <% end %>
 
-
 <h2>Filer</h2>
 <ul>
   <% @dokument.fils.each do |fil| %>
@@ -60,11 +59,13 @@
   <% end %>
 </ul>
 
-<h2>Emneord</h2>
-<ul>
-  <% @dokument.emneords.each do |emneord| %>
-    <li><%= link_to emneord.emneord, oda_subject_path(emneord) %></li>
-  <% end %>
-</ul>
+<% unless @dokument.emneords.empty? %>
+  <h2>Emneord</h2>
+  <ul>
+    <% @dokument.emneords.each do |emneord| %>
+      <li><%= link_to emneord.emneord, oda_subject_path(emneord) %></li>
+    <% end %>
+  </ul>
+<% end %>
 
 <%= json_details @dokument %>
