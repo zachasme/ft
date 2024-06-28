@@ -2,43 +2,39 @@
   <%= @periode.titel %>
 </h1>
 
-<% unless @aktørs.empty? %>
-  <details>
-    <summary>
-      <h2 style="display:inline-block">Aktører (<%= @aktørs.size%>)</h2>
-    </summary>
-    <ul>
-      <% @aktørs.each do |aktør| %>
-        <li><%= link_to aktør.navn, oda_actor_path(aktør) %></li>
-      <% end %>
-    </ul>
-  </details>
-<% end %>
+<div class="flex flex-wrap gap">
+  <% unless @aktørs.empty? %>
+    <div>
+      <h2>Aktører (<%= @aktørs.size%>)</h2>
+      <ul>
+        <% @aktørs.each do |aktør| %>
+          <li><%= link_to truncate(aktør.navn), oda_actor_path(aktør), title: aktør.navn %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
 
-<% unless @sags.empty? %>
-  <details>
-    <summary>
-      <h2 style="display:inline-block">Sager (<%= @sags.size%>)</h2>
-    </summary>
-    <ul>
-      <% @sags.each do |sag| %>
-        <li><%= link_to sag.titelkort, oda_case_path(sag) %></li>
-      <% end %>
-    </ul>
-  </details>
-<% end %>
+  <% unless @sags.empty? %>
+    <div>
+      <h2>Sager (<%= @sags.size%>)</h2>
+      <ul>
+        <% @sags.each do |sag| %>
+          <li><%= link_to truncate(sag.titelkort), oda_case_path(sag), title: sag.titel %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
 
-<% unless @mødes.empty? %>
-<details>
-    <summary>
-      <h2 style="display:inline-block">Møder (<%= @mødes.size%>)</h2>
-    </summary>
-    <ul>
-      <% @mødes.each do |møde| %>
-        <li><%= link_to møde.titel, oda_meeting_path(møde    ) %></li>
-      <% end %>
-    </ul>
-  </details>
-<% end %>
+  <% unless @mødes.empty? %>
+    <div>
+      <h2>Møder (<%= @mødes.size%>)</h2>
+      <ul>
+        <% @mødes.each do |møde| %>
+          <li><%= link_to truncate(møde.titel), oda_meeting_path(møde), title: møde.titel %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+</div>
 
 <%= json_details @periode %>

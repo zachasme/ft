@@ -5,7 +5,7 @@
     <h2>Sager</h2>
     <ul>
       <% @emneord.sags.each do |sag| %>
-        <li><%= link_to truncate(sag.titelkort), oda_case_path(sag) %></li>
+        <li><%= link_to truncate(sag.titelkort), oda_case_path(sag), title: sag.titel %></li>
       <% end %>
     </ul>
   </div>
@@ -14,7 +14,7 @@
     <h2>Dokumenter</h2>
     <ul>
       <% @emneord.dokuments.each do |dokument| %>
-        <li><%= link_to truncate(dokument.titel), oda_document_path(dokument) %></li>
+        <li><%= link_to truncate(dokument.titel), oda_document_path(dokument), title: dokument.titel %></li>
       <% end %>
     </ul>
   </div>
