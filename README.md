@@ -1,3 +1,7 @@
+# Helpful links
+
+https://www.ft.dk/da/dokumenter/aabne_data#C1C823BA157D43669D3DFE0900BCCBC2
+
 # Conventions
 
 We're importing the ODA database directly, with minor tweaks:
