@@ -1,7 +1,7 @@
 require "open-uri"
 
 class SynchronizationJob < ApplicationJob
-  limits_concurrency to: 1
+  limits_concurrency key: :synchronize
 
   RESOURCES = [
     Oda::Periode,
