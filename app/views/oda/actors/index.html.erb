@@ -1,4 +1,7 @@
-<h1>Aktører</h1>
+<div class="flex gap align-baseline">
+  <h1>Aktører</h1>
+  <%= render partial: 'oda/synchronization', locals: { model: Oda::Aktør } %>
+</div>
 
 <%= form_with method: :get do |form| %>
   <%= form.search_field :search, value: params[:search] %>

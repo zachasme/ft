@@ -1,4 +1,6 @@
 class Oda::Sagstrin < ApplicationRecord
+  include Synchronizable
+
   belongs_to :sag
   belongs_to :status, class_name: "Oda::Sagstrinsstatus"
   belongs_to :type, class_name: "Oda::Sagstrinstype"

@@ -1,4 +1,6 @@
 class Oda::Periode < ApplicationRecord
+  include Synchronizable
+
   has_many :aktørs
   has_many :mødes
   has_many :sags

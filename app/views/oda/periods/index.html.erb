@@ -1,7 +1,10 @@
-<h1>
-  Perioder
-  <small>(samlinger)</small>
-</h1>
+<div class="flex gap align-baseline">
+  <h1>
+    Perioder
+    <small>(samlinger)</small>
+  </h1>
+  <%= render partial: 'oda/synchronization', locals: { model: Oda::Periode } %>
+</div>
 
 <%= render partial: 'oda/pagination' %>
 

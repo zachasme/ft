@@ -1,4 +1,6 @@
 class Oda::Emneord < ApplicationRecord
+  include Synchronizable
+
   has_many :emneord_dokuments, class_name: "Oda::EmneordDokument"
   has_many :dokuments, through: :emneord_dokuments, source: :dokument
   has_many :emneord_sags, class_name: "Oda::EmneordSag"

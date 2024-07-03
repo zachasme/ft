@@ -1,4 +1,6 @@
 class Oda::Aktør < ApplicationRecord
+  include Synchronizable
+
   has_many :stemmes
   has_many :afstemnings, through: :stemmes
   has_many :fra_aktør_aktørs, foreign_key: :fraaktør_id, class_name: "Oda::AktørAktør"
@@ -7,7 +9,7 @@ class Oda::Aktør < ApplicationRecord
   has_many :tilaktørs, through: :til_aktør_aktørs
 
   belongs_to :type, class_name: "Oda::Aktørtype"
-  belongs_to :periode, counter_cache: true
+  belongs_to :periode, optional: true, counter_cache: true
 
   scope :alphabetical, -> { order(:navn) }
   scope :chronological, -> { order(opdateringsdato: :desc) }

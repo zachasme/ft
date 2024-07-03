@@ -1,4 +1,6 @@
 class Oda::Afstemning < ApplicationRecord
+  include Synchronizable
+
   has_many :stemmes
   belongs_to :sagstrin
   belongs_to :møde

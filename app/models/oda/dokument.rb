@@ -1,4 +1,6 @@
 class Oda::Dokument < ApplicationRecord
+  include Synchronizable
+
   has_many :dokument_aktørs, class_name: "Oda::DokumentAktør"
   has_many :sag_dokuments, class_name: "Oda::SagDokument"
   has_many :sagstrin_dokuments, class_name: "Oda::SagstrinDokument"

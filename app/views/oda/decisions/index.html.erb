@@ -1,4 +1,7 @@
-<h1>Afstemninger</h1>
+<div class="flex gap align-baseline">
+  <h1>Afstemninger</h1>
+  <%= render partial: 'oda/synchronization', locals: { model: Oda::Afstemning } %>
+</div>
 
 <%= form_with method: :get do |form| %>
   <%= form.label :search, "Sag" %>

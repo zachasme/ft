@@ -14,6 +14,7 @@ svg {
 .gap { gap: 1em }
 .justify-space-between { justify-content: space-between }
 .align-center { align-items: center }
+.align-baseline { align-items: baseline }
 .margin-top { margin-top: 1em }
 .margin-top-double { margin-top: 2em }
 .pad { padding: 1em }

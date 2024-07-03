@@ -1,4 +1,7 @@
-<h1>Møder</h1>
+<div class="flex gap align-baseline">
+  <h1>Møder</h1>
+  <%= render partial: 'oda/synchronization', locals: { model: Oda::Møde } %>
+</div>
 
 <%= render partial: 'oda/pagination' %>
 

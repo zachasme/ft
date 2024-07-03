@@ -1,4 +1,6 @@
 class Oda::Stemme < ApplicationRecord
+  include Synchronizable
+
   belongs_to :aktør
   belongs_to :afstemning
 
