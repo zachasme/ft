@@ -19,6 +19,6 @@ class Oda::Dokument < ApplicationRecord
   belongs_to :type, class_name: "Oda::Dokumenttype"
 
   scope :reprinted, -> { joins(:omtryks) }
-  scope :chronological, -> { order(dato: :desc) }
+  scope :chronological, -> { order(opdateringsdato: :desc) }
   scope :matches, ->(search) { where("oda_dokuments.titel LIKE ?", "%#{search}%") if search.present? }
 end

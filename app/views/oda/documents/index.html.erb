@@ -17,7 +17,7 @@
 <table>
   <thead>
     <tr>
-      <th>Dato</th>
+      <th>Opdateringsdato</th>
       <th>Titel</th>
       <th>Kategori</th>
       <th>Status</th>
@@ -27,7 +27,7 @@
   <tbody>
     <% @page.records.each do |dokument| %>
       <tr>
-        <td><%= l dokument.dato, format: :long %></td>
+        <td><%= l dokument.opdateringsdato, format: :short %></td>
         <td>
           <%= link_to oda_document_path(dokument), title: dokument.titel do %>
             <% if params[:search] %>
