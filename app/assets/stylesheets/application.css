@@ -25,6 +25,11 @@ main {
   flex: 1;
 }
 
+nav a {
+  display: flex;
+  flex-direction: column;
+  font-size: min(calc(1vw + 0.3rem), 1rem)
+}
 svg {
   height: 1.5cap
 }
