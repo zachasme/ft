@@ -1,14 +1,14 @@
-<h1>
+<h1 class="margin-top-double">
   Sag: <%= @sag.nummer %>
   <small>(<%= @sag.type.typenavn %>)</small>
 </h1>
 
-<p><strong><%= @sag.titel %></strong></p>
-<p><%= @sag.resume %></p>
-<p><em><%= @sag.afstemningskonklusion %></em></p>
+<p class="margin-top"><strong><%= @sag.titel %></strong></p>
+<p class="margin-top"><%= @sag.resume %></p>
+<p class="margin-top"><em><%= @sag.afstemningskonklusion %></em></p>
 
-<h2>Sagstrin</h2>
-<table>
+<h2 class="margin-top-double">Sagstrin</h2>
+<table class="margin-top">
   <thead>
     <tr>
       <th>Dato</th>
@@ -49,8 +49,8 @@
   </tbody>
 </table>
 
-<h2>Dokumenter</h2>
-<table>
+<h2 class="margin-top-double">Dokumenter</h2>
+<table class="margin-top">
   <thead>
     <tr>
       <th>Bilag#</th>
@@ -71,8 +71,8 @@
   </tbody>
 </table>
 
-<h2>Emneord</h2>
-<ul>
+<h2 class="margin-top-double">Emneord</h2>
+<ul class="margin-top">
   <% @sag.emneords.each do |emneord| %>
     <li><%= link_to emneord.emneord, oda_subject_path(emneord) %></li>
   <% end %>

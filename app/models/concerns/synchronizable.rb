@@ -12,6 +12,8 @@ module Synchronizable
     end
 
     def synchronize
+      raise "restore backup before synchronization" if last_synchronization.nil?
+
       transaction do
         new_entities.each do |entity|
           entity.transform_keys! do |key|

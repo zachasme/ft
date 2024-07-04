@@ -1,22 +1,19 @@
-<h1>
-  Afstemning (nummer <%= @afstemning.nummer %>)
-</h1>
+<h1 class="margin-top-double">Afstemning (nummer <%= @afstemning.nummer %>)</h1>
 
 <% if @afstemning.sag %>
-  <p>Sag: <%= link_to @afstemning.sag.titel, oda_case_path(@afstemning.sag) if @afstemning.sag %></p>
+  <p class="margin-top">Sag: <%= link_to @afstemning.sag.titel, oda_case_path(@afstemning.sag) if @afstemning.sag %></p>
 <% end %>
-<p>Møde: <%= link_to @afstemning.møde.titel, oda_meeting_path(@afstemning.møde) if @afstemning.møde %></p>
 
-<p><strong><%= @afstemning.konklusion %></strong></p>
+<p class="margin-top">Møde: <%= link_to @afstemning.møde.titel, oda_meeting_path(@afstemning.møde) if @afstemning.møde %></p>
+
+<p class="margin-top"><strong><%= @afstemning.konklusion %></strong></p>
 
 <% if @afstemning.kommentar.present? %>
-  <p>(<%= @afstemning.kommentar %>)</p>
+  <p class="margin-top">(<%= @afstemning.kommentar %>)</p>
 <% end %>
 
-<table>
-  <caption>
-    Stemmer
-  </caption>
+<h2 class="margin-top-double">Stemmer <small>(<%= @afstemning.stemmes.count %>)</small></h2>
+<table class="margin-top">
   <thead>
     <tr>
       <th>Stemme</th>

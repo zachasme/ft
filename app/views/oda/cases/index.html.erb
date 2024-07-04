@@ -1,15 +1,15 @@
-<div class="flex gap align-baseline">
+<div class="flex gap align-baseline margin-top-double">
   <h1>Sager</h1>
   <%= render partial: 'oda/synchronization', locals: { model: Oda::Sag } %>
 </div>
 
-<menu>
+<menu class="margin-top">
   <li><%= link_to "L | Lovforslag", oda_cases_path(casetype_id: 3) %></li>
   <li><%= link_to "B | Beslutningsforslag", oda_cases_path(casetype_id: 5) %></li>
   <li><%= link_to "S | § 20-spørgsmål", oda_cases_path(casetype_id: 10) %></li>
 </menu>
 
-<%= form_with method: :get do |form| %>
+<%= form_with method: :get, class: "margin-top" do |form| %>
   <%= form.search_field :search, value: params[:search] %>
 
   <%= form.collection_select :casetype_id, Oda::Sagstype.all, :id, :typenavn, include_blank: "Alle sagstyper", selected: @casetype_id %>
@@ -19,7 +19,7 @@
 
 <%= render partial: 'oda/pagination' %>
 
-<table>
+<table class="margin-top">
   <thead>
     <tr>
       <th colspan="3">Sagsnr</th>

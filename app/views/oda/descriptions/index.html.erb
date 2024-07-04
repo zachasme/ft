@@ -1,15 +1,15 @@
-<div class="flex gap align-baseline">
+<div class="flex gap align-baseline margin-top-double">
   <h1>Entitet- & kollone-beskrivelser</h1>
   <%= render partial: 'oda/synchronization', locals: { model: Oda::EntitetBeskrivelse } %>
 </div>
 
-<ul>
-<% @entities.each do |entity| %>
-  <li><%= entity.entitetnavn %>: <%= entity.beskrivelse %></li>
-<% end %>
+<ul class="margin-top">
+  <% @entities.each do |entity| %>
+    <li><%= entity.entitetnavn %>: <%= entity.beskrivelse %></li>
+  <% end %>
 </ul>
 
-<table>
+<table class="margin-top">
   <thead>
     <tr>
       <th>Entitet</th>

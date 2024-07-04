@@ -1,9 +1,6 @@
-<h1>
-  <small>Møde:</small>
-  <%= @møde.titel %>
-</h1>
+<h1 class="margin-top-double"><%= @møde.titel %></h1>
 
-<dl>
+<dl class="margin-top">
   <dt>Periode</dt>
   <dd><%= link_to @møde.periode.titel, oda_period_path(@møde.periode) %></dd>
 
@@ -15,8 +12,8 @@
 </dl>
 
 <% unless @møde.dagsordenspunkts.empty? %>
-  <h2>Dagsordenspunkter</h2>
-  <ul>
+  <h2 class="margin-top-double">Dagsordenspunkter</h2>
+  <ul class="margin-top">
     <% @møde.dagsordenspunkts.each do |punkt| %>
       <li><%= punkt.nummer %>: <%= punkt.titel %></li>
     <% end %>
@@ -24,8 +21,8 @@
 <% end %>
 
 <% unless @møde.møde_aktørs.empty? %>
-  <h2>Aktører</h2>
-  <ul>
+  <h2 class="margin-top-double">Aktører</h2>
+  <ul class="margin-top">
     <% @møde.møde_aktørs.each do |møde_aktør| %>
       <li>
         <%= link_to oda_actor_path(møde_aktør.aktør) do %>

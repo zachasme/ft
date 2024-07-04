@@ -1,17 +1,19 @@
-<h1>
+<h1 class="margin-top-double">
   <small>Dokument:</small>
   <%= @dokument.titel %>
 </h1>
 
-<strong>Type:</strong> <%= @dokument.type.typenavn %>
-/
-<strong>Kategori:</strong> <%= @dokument.kategori.kategori %>
-/
-<strong>Status:</strong> <%= @dokument.status.status %>
+<p class="margin-top">
+  <strong>Type:</strong> <%= @dokument.type.typenavn %>
+  /
+  <strong>Kategori:</strong> <%= @dokument.kategori.kategori %>
+  /
+  <strong>Status:</strong> <%= @dokument.status.status %>
+</p>
 
 <% unless @dokument.omtryks.empty? %>
-  <h2>Omtryk</h2>
-  <ul>
+  <h2 class="margin-top-double">Omtryk</h2>
+  <ul class="margin-top">
     <% @dokument.omtryks.each do |omtryk| %>
       <li><%= l omtryk.dato, format: :long %>: <%= omtryk.begrundelse %></li>
     <% end %>
@@ -19,8 +21,8 @@
 <% end %>
 
 <% unless @dokument.dokument_aktørs.empty? %>
-  <h2>Aktører</h2>
-  <ul>
+  <h2 class="margin-top-double">Aktører</h2>
+  <ul class="margin-top">
     <% @dokument.dokument_aktørs.each do |dokument_aktør| %>
       <li>
         <%= dokument_aktør.rolle.rolle %>:
@@ -32,24 +34,24 @@
   </ul>
 <% end %>
 
-<h2>Sager</h2>
-<ul>
+<h2 class="margin-top-double">Sager</h2>
+<ul class="margin-top">
   <% @dokument.sags.each do |sag| %>
     <li><%= link_to sag.titel, oda_case_path(sag) %></li>
   <% end %>
 </ul>
 
 <% unless @dokument.sagstrin.empty? %>
-  <h3>Sagstrin</h3>
-  <ul>
+  <h3 class="margin-top-double">Sagstrin</h3>
+  <ul class="margin-top">
     <% @dokument.sagstrin.each do |sagstrin| %>
       <li><%= link_to sagstrin.titel, oda_case_path(sagstrin.sag_id) %></li>
     <% end %>
   </ul>
 <% end %>
 
-<h2>Filer</h2>
-<ul>
+<h2 class="margin-top-double">Filer</h2>
+<ul class="margin-top">
   <% @dokument.fils.each do |fil| %>
     <li>
       <%= link_to fil.filurl do %>
@@ -60,8 +62,8 @@
 </ul>
 
 <% unless @dokument.emneords.empty? %>
-  <h2>Emneord</h2>
-  <ul>
+  <h2 class="margin-top-double">Emneord</h2>
+  <ul class="margin-top">
     <% @dokument.emneords.each do |emneord| %>
       <li><%= link_to emneord.emneord, oda_subject_path(emneord) %></li>
     <% end %>

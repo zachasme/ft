@@ -1,9 +1,9 @@
-<div class="flex gap align-baseline">
+<div class="flex gap align-baseline margin-top-double">
   <h1>Aktører</h1>
   <%= render partial: 'oda/synchronization', locals: { model: Oda::Aktør } %>
 </div>
 
-<%= form_with method: :get do |form| %>
+<%= form_with method: :get, class: "margin-top" do |form| %>
   <%= form.search_field :search, value: params[:search] %>
 
   <%= form.collection_select :actortype_id, Oda::Aktørtype.all, :id, :typenavn, include_blank: "Alle aktørtyper", selected: @actortype_id %>
@@ -13,7 +13,7 @@
 
 <%= render partial: 'oda/pagination' %>
 
-<table>
+<table class="margin-top">
   <thead>
     <tr>
       <th>Navn</th>
