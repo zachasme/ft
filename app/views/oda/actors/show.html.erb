@@ -7,6 +7,17 @@
 </header>
 
 <div class="centered">
+  <% if @aktør.picture %>
+    <div class="margin-top">
+      <%= image_tag @aktør.picture, style: "width:100%" %>
+    </div>
+  <% end %>
+
+  <%= @aktør.email %>
+  <%= @aktør.phone %>
+   
+  <p><%= @aktør.member_data %></p>
+
   <h2 class="margin-top-double">Relationer</h2>
   <ul class="margin-top">
     <% @aktør.fra_aktør_aktørs.each do |aktøraktør| %>
@@ -43,8 +54,6 @@
 
   <% unless @page.recordset.records_count.zero? %>
     <h2 class="margin-top-double">Stemmer</h2>
-
-    <%= render partial: 'oda/pagination' %>
 
     <ul>
       <% @page.records.each do |stemme| %>

@@ -15,4 +15,18 @@ class Oda::Aktør < ApplicationRecord
   scope :chronological, -> { order(opdateringsdato: :desc) }
   scope :matches, ->(search) { where("oda_aktørs.navn Like ?", "%#{search}%") if search.present? }
   scope :actortype, ->(id) { joins(:type).where(type: { id: }) }
+
+  def picture
+    nokogiri.css("pictureMiRes").first.content
+  rescue
+    nil
+  end
+
+  def email = nokogiri.css("email").first&.content
+  def phone = nokogiri.css("mobilePhone, ministerPhone, phoneFolketinget").first&.content
+  def member_data = nokogiri.css("memberData").first&.content&.html_safe
+
+  def nokogiri
+    @nokogiri ||= Nokogiri.XML(biografi)
+  end
 end
