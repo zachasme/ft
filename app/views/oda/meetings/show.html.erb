@@ -1,36 +1,44 @@
-<h1 class="margin-top-double"><%= @møde.titel %></h1>
+<% content_for(:title) { @møde.titel } %>
 
-<dl class="margin-top">
-  <dt>Periode</dt>
-  <dd><%= link_to @møde.periode.titel, oda_period_path(@møde.periode) %></dd>
+<header class="margin-top-double text-align-center">
+  <%= link_to "← Møder", oda_meetings_path %>
+  <h1><%= content_for :title %></h1>
+  <p>Sidst opdateret for <%= time_ago_in_words @møde.opdateringsdato %> siden</p>
+</header>
 
-  <dt>Type</dt>
-  <dd><%= @møde.type.typenavn %></dd>
+<div class="centered">
+  <dl class="margin-top">
+    <dt>Periode</dt>
+    <dd><%= link_to @møde.periode.titel, oda_period_path(@møde.periode) %></dd>
 
-  <dt>Status</dt>
-  <dd><%= @møde.status.status %></dd>
-</dl>
+    <dt>Type</dt>
+    <dd><%= @møde.type.typenavn %></dd>
 
-<% unless @møde.dagsordenspunkts.empty? %>
-  <h2 class="margin-top-double">Dagsordenspunkter</h2>
-  <ul class="margin-top">
-    <% @møde.dagsordenspunkts.each do |punkt| %>
-      <li><%= punkt.nummer %>: <%= punkt.titel %></li>
-    <% end %>
-  </ul>
-<% end %>
+    <dt>Status</dt>
+    <dd><%= @møde.status.status %></dd>
+  </dl>
 
-<% unless @møde.møde_aktørs.empty? %>
-  <h2 class="margin-top-double">Aktører</h2>
-  <ul class="margin-top">
-    <% @møde.møde_aktørs.each do |møde_aktør| %>
-      <li>
-        <%= link_to oda_actor_path(møde_aktør.aktør) do %>
-          <%= møde_aktør.aktør.navn %>
-        <% end %>
-      </li>
-    <% end %>
-  </ul>
-<% end %>
+  <% unless @møde.dagsordenspunkts.empty? %>
+    <h2 class="margin-top-double">Dagsordenspunkter</h2>
+    <ul class="margin-top">
+      <% @møde.dagsordenspunkts.each do |punkt| %>
+        <li><%= punkt.nummer %>: <%= punkt.titel %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <% unless @møde.møde_aktørs.empty? %>
+    <h2 class="margin-top-double">Aktører</h2>
+    <ul class="margin-top">
+      <% @møde.møde_aktørs.each do |møde_aktør| %>
+        <li>
+          <%= link_to oda_actor_path(møde_aktør.aktør) do %>
+            <%= møde_aktør.aktør.navn %>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+</div>
 
 <%= json_details @møde %>

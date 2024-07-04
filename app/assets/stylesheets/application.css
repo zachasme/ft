@@ -1,17 +1,28 @@
 /* Application styles */
 
+* {
+  box-sizing: border-box;
+}
+
 :root {
   --space: 1rem;
   --space-double: calc(var(--space) * 2);
 }
 
-h1, h2, h3, p, ol, ul, menu, details {
+body, h1, h2, h3, p, ol, ul, menu, details {
   margin: 0;
 }
 
 body { 
   padding: var(--space);
   font-family: system-ui;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
 }
 
 svg {
@@ -22,12 +33,20 @@ svg {
 .flex-wrap { flex-wrap: wrap }
 .gap { gap: var(--space) }
 .justify-space-between { justify-content: space-between }
+.justify-center { justify-content: center }
 .align-center { align-items: center }
 .align-baseline { align-items: baseline }
 .margin-top { margin-top: var(--space) }
 .margin-top-double { margin-top: var(--space-double) }
 .pad { padding: var(--space) }
 .translucent { opacity: .5 }
+.overflow-x-auto { overflow-x: auto }
+.text-align-center { text-align: center }
+
+.centered {
+  max-width: 60ch;
+  margin-inline: auto;
+}
 
 summary {
   cursor: pointer;

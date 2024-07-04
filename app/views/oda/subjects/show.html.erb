@@ -1,6 +1,12 @@
-<h1 class="margin-top-double">Emneord: <%= @emneord.emneord %></h1>
+<% content_for(:title) { @emneord.emneord } %>
 
-<div class="flex flex-wrap gap margin-top">
+<header class="margin-top-double text-align-center">
+  <%= link_to "← Emneord", oda_subjects_path %>
+  <h1><%= content_for :title %></h1>
+  <p>Sidst opdateret for <%= time_ago_in_words @emneord.opdateringsdato %> siden</p>
+</header>
+
+<div class="flex flex-wrap gap margin-top justify-center">
   <div>
     <h2>Sager</h2>
     <ul class="margin-top">

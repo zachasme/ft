@@ -1,29 +1,35 @@
-<div class="flex gap align-baseline margin-top-double">
-  <h1>Entitet- & kollone-beskrivelser</h1>
+<% content_for(:title) { "Entitet- & kollone-beskrivelser" } %>
+
+<header class="margin-top-double text-align-center">
+  <h1><%= content_for :title %></h1>
   <%= render partial: 'oda/synchronization', locals: { model: Oda::EntitetBeskrivelse } %>
+</header>
+
+<div clasS="centered">
+  <ul class="margin-top">
+    <% @entities.each do |entity| %>
+      <li><%= entity.entitetnavn %>: <%= entity.beskrivelse %></li>
+    <% end %>
+  </ul>
 </div>
 
-<ul class="margin-top">
-  <% @entities.each do |entity| %>
-    <li><%= entity.entitetnavn %>: <%= entity.beskrivelse %></li>
-  <% end %>
-</ul>
-
-<table class="margin-top">
-  <thead>
-    <tr>
-      <th>Entitet</th>
-      <th>Kollone</th>
-      <th>Beskrivelse</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @columns.each do |column| %>
+<div class="overflow-x-auto">
+  <table class="margin-top">
+    <thead>
       <tr>
-        <td><%= column.entitetnavn %></td>
-        <td><%= column.kollonenavn %></td>
-        <td><%= column.beskrivelse %></td>
+        <th>Entitet</th>
+        <th>Kollone</th>
+        <th>Beskrivelse</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @columns.each do |column| %>
+        <tr>
+          <td><%= column.entitetnavn %></td>
+          <td><%= column.kollonenavn %></td>
+          <td><%= column.beskrivelse %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

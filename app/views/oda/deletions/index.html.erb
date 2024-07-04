@@ -1,27 +1,29 @@
-<div class="flex gap align-baseline margin-top-double">
-  <h1>Slettet</h1>
+<% content_for(:title) { "Slettet" } %>
+
+<header class="margin-top-double text-align-center">
+  <h1><%= content_for :title %></h1>
   <%= render partial: 'oda/synchronization', locals: { model: Oda::Slettet } %>
-</div>
+</header>
 
-<%= render partial: 'oda/pagination' %>
-
-<table class="margin-top">
-  <thead>
-    <tr>
-      <th>Datatype</th>
-      <th>Objekt ID</th>
-      <th>Dato</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @page.records.each do |slettet| %>
+<div class="overflow-x-auto">
+  <table class="margin-top">
+    <thead>
       <tr>
-        <td><%= slettet.slettetmap.datatype %></td>
-        <td><%= slettet.objekt_id %></td>
-        <td><%= l slettet.opdateringsdato, format: :short %></td>
+        <th>Datatype</th>
+        <th>Objekt ID</th>
+        <th>Dato</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @page.records.each do |slettet| %>
+        <tr>
+          <td><%= slettet.slettetmap.datatype %></td>
+          <td><%= slettet.objekt_id %></td>
+          <td><%= l slettet.opdateringsdato, format: :short %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 
 <%= render partial: 'oda/pagination' %>

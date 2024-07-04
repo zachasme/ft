@@ -1,4 +1,4 @@
-<p class="margin-top">
+<p class="centered text-align-center margin-top">
   Side <%= @page.number %> af <%= @page.recordset.page_count %> (<%= @page.recordset.records_count %> i alt).
   <% unless @page.last? %>
     <%= link_to "Næste side", url_for(request.parameters.merge( page: @page.next_param, search: params[:search])) %>

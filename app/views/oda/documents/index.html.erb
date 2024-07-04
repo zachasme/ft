@@ -1,16 +1,22 @@
-<div class="flex gap align-baseline margin-top-double">
-  <h1>Dokumenter</h1>
-  <%= render partial: 'oda/synchronization', locals: { model: Oda::Dokument } %>
-</div>
+<% content_for(:title) { "Dokumenter" } %>
 
-<%= form_with method: :get, class: "margin-top" do |form| %>
+<header class="centered margin-top-double text-align-center">
+  <h1><%= content_for :title %></h1>
+  <%= render partial: 'oda/synchronization', locals: { model: Oda::Dokument } %>
+</header>
+
+<%= form_with method: :get, class: "centered margin-top-double text-align-center" do |form| %>
   <div>
     <%= form.label :category_id, "Kategori" %>
     <%= form.collection_select :category_id, Oda::Dokumentkategori.alphabetical, :id, :kategori, include_blank: "Alle kategorier", selected: @category_id %>
+  </div>
 
+  <div>
     <%= form.label :type_id, "Type" %>
     <%= form.collection_select :type_id, Oda::Dokumenttype.alphabetical, :id, :typenavn, include_blank: "Alle typer", selected: @type_id %>
+  </div>
 
+  <div>
     <%= form.label :status_id, "Status" %>
     <%= form.collection_select :status_id, Oda::Dokumentstatus.alphabetical, :id, :status, include_blank: "Alle statuser", selected: @status_id %>
   </div>
@@ -26,37 +32,37 @@
   </div>
 <% end %>
 
-<%= render partial: 'oda/pagination' %>
-
-<table class="margin-top">
-  <thead>
-    <tr>
-      <th>Opdateringsdato</th>
-      <th>Titel</th>
-      <th>Kategori</th>
-      <th>Status</th>
-      <th>Type</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @page.records.each do |dokument| %>
+<div class="margin-top overflow-x-auto">
+  <table>
+    <thead>
       <tr>
-        <td><%= l dokument.opdateringsdato, format: :short %></td>
-        <td>
-          <%= link_to oda_document_path(dokument), title: dokument.titel do %>
-            <% if params[:search] %>
-              <%= highlight(excerpt(dokument.titel, params[:search], radius: 30), params[:search]) %>
-            <% else %>
-              <%= truncate(dokument.titel, length: 60) %>
-            <% end %>
-          <% end %>
-        </td>
-        <td><%= dokument.kategori.kategori %></td>
-        <td><%= dokument.status.status %></td>
-        <td><%= dokument.type.typenavn %></td>
+        <th>Opdateringsdato</th>
+        <th>Titel</th>
+        <th>Kategori</th>
+        <th>Status</th>
+        <th>Type</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @page.records.each do |dokument| %>
+        <tr>
+          <td><%= l dokument.opdateringsdato, format: :short %></td>
+          <td>
+            <%= link_to oda_document_path(dokument), title: dokument.titel do %>
+              <% if params[:search] %>
+                <%= highlight(excerpt(dokument.titel, params[:search], radius: 30), params[:search]) %>
+              <% else %>
+                <%= truncate(dokument.titel, length: 60) %>
+              <% end %>
+            <% end %>
+          </td>
+          <td><%= dokument.kategori.kategori %></td>
+          <td><%= dokument.status.status %></td>
+          <td><%= dokument.type.typenavn %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 
 <%= render partial: 'oda/pagination' %>

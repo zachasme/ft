@@ -1,8 +1,12 @@
-<h1 class="margin-top-double">
-  <%= @periode.titel %>
-</h1>
+<% content_for(:title) { "#{@periode.typenavn} #{@periode.titel}" } %>
 
-<div class="flex flex-wrap gap margin-top">
+<header class="margin-top-double text-align-center">
+  <%= link_to "← Perioder", oda_periods_path %>
+  <h1><%= content_for :title %></h1>
+  <p>Sidst opdateret for <%= time_ago_in_words @periode.opdateringsdato %> siden</p>
+</header>
+
+<div class="flex flex-wrap gap margin-top justify-center">
   <% unless @aktørs.empty? %>
     <div>
       <h2>Aktører (<%= @aktørs.size%>)</h2>

@@ -1,81 +1,96 @@
-<h1 class="margin-top-double">
-  Sag: <%= @sag.nummer %>
-  <small>(<%= @sag.type.typenavn %>)</small>
-</h1>
+<% content_for(:title) { "Sag #{@sag.nummer}" } %>
 
-<p class="margin-top"><strong><%= @sag.titel %></strong></p>
-<p class="margin-top"><%= @sag.resume %></p>
-<p class="margin-top"><em><%= @sag.afstemningskonklusion %></em></p>
+<header class="margin-top-double text-align-center">
+  <%= link_to "← Sager", oda_cases_path %>
+  <h1><%= content_for :title %></h1>
+  <p>Sidst opdateret for <%= time_ago_in_words @sag.opdateringsdato %> siden</p>
+</header>
 
-<h2 class="margin-top-double">Sagstrin</h2>
-<table class="margin-top">
-  <thead>
-    <tr>
-      <th>Dato</th>
-      <th>Type</th>
-      <th>Status</th>
-      <th>Sambehandling(er)</th>
-      <th>Afstemning</th>
-      <th>Dokumenter</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @sagstrin.each do |sagstrin| %>
+<div class="centered">
+  <h2 class="margin-top"><%= @sag.titel %></h2>
+  <p class="margin-top"><%= @sag.resume %></p>
+  <p class="margin-top"><em><%= @sag.afstemningskonklusion %></em></p>
+
+  <h2 class="margin-top-double">Sagstrin</h2>
+</div>
+
+<div class="margin-top overflow-x-auto">
+  <table>
+    <thead>
       <tr>
-        <td><strong><%= l sagstrin.dato.to_date, format: :short if sagstrin.dato %></strong></td>
-        <td><%= sagstrin.type.typenavn %></td>
-        <td><%= sagstrin.status.status %></td>
-        <td>
-          <ul>
-            <% sagstrin.sambehandlinger.each do |sambehandling| %>
-              <li><%= link_to sambehandling.titelkort, oda_case_path(sambehandling.id) %></li>
+        <th>Dato</th>
+        <th>Type</th>
+        <th>Status</th>
+        <th>Sambehandling(er)</th>
+        <th>Afstemning</th>
+        <th>Dokumenter</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @sagstrin.each do |sagstrin| %>
+        <tr>
+          <td><strong><%= l sagstrin.dato.to_date, format: :short if sagstrin.dato %></strong></td>
+          <td><%= sagstrin.type.typenavn %></td>
+          <td><%= sagstrin.status.status %></td>
+          <td>
+            <ul>
+              <% sagstrin.sambehandlinger.each do |sambehandling| %>
+                <li><%= link_to sambehandling.titelkort, oda_case_path(sambehandling.id) %></li>
+              <% end %>
+              </ul>
+          </td>
+          <td>
+            <% if sagstrin.afstemning %>
+              <%= link_to "Afstemning", oda_decision_path(sagstrin.afstemning) %>
             <% end %>
+          </td>
+          <td>
+            <ul>
+              <% sagstrin.dokuments.each do |dokument| %>
+                <li><%= link_to truncate(dokument.titel), oda_document_path(dokument), title: dokument.titel %></li>
+              <% end %>
             </ul>
-        </td>
-        <td>
-          <% if sagstrin.afstemning %>
-            <%= link_to "Afstemning", oda_decision_path(sagstrin.afstemning) %>
-          <% end %>
-        </td>
-        <td>
-          <ul>
-            <% sagstrin.dokuments.each do |dokument| %>
-              <li><%= link_to truncate(dokument.titel), oda_document_path(dokument), title: dokument.titel %></li>
-            <% end %>
-          </ul>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 
-<h2 class="margin-top-double">Dokumenter</h2>
-<table class="margin-top">
-  <thead>
-    <tr>
-      <th>Bilag#</th>
-      <th>Dokument</th>
-      <th>Frigivelsesdato</th>
-      <th>Rolle</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @sag_dokuments.each do |sag_dokument| %>
+<div class="centered">
+  <h2 class="margin-top-double">Dokumenter</h2>
+</div>
+
+<div class="margin-top overflow-x-auto">
+  <table>
+    <thead>
       <tr>
-        <td><%= sag_dokument.bilagsnummer %></td>
-        <td><%= link_to truncate(sag_dokument.dokument.titel), oda_document_path(sag_dokument.dokument), title: sag_dokument.dokument.titel if sag_dokument.dokument %></td>
-        <td><%= l sag_dokument.frigivelsesdato.to_date, format: :long if sag_dokument.frigivelsesdato %></td>
-        <td><%= sag_dokument.rolle.rolle %></td>
+        <th>Bilag#</th>
+        <th>Dokument</th>
+        <th>Frigivelsesdato</th>
+        <th>Rolle</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @sag_dokuments.each do |sag_dokument| %>
+        <tr>
+          <td><%= sag_dokument.bilagsnummer %></td>
+          <td><%= link_to truncate(sag_dokument.dokument.titel), oda_document_path(sag_dokument.dokument), title: sag_dokument.dokument.titel if sag_dokument.dokument %></td>
+          <td><%= l sag_dokument.frigivelsesdato.to_date, format: :long if sag_dokument.frigivelsesdato %></td>
+          <td><%= sag_dokument.rolle.rolle %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 
-<h2 class="margin-top-double">Emneord</h2>
-<ul class="margin-top">
-  <% @sag.emneords.each do |emneord| %>
-    <li><%= link_to emneord.emneord, oda_subject_path(emneord) %></li>
-  <% end %>
-</ul>
+<div class="centered">
+  <h2 class="margin-top-double">Emneord</h2>
+  <ul class="margin-top">
+    <% @sag.emneords.each do |emneord| %>
+      <li><%= link_to emneord.emneord, oda_subject_path(emneord) %></li>
+    <% end %>
+  </ul>
+</div>
 
 <%= json_details @sag %>

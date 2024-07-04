@@ -1,33 +1,44 @@
-<h1 class="margin-top-double">Afstemning (nummer <%= @afstemning.nummer %>)</h1>
+<% content_for(:title) { "Afstemning ##{@afstemning.nummer}" } %>
 
-<% if @afstemning.sag %>
-  <p class="margin-top">Sag: <%= link_to @afstemning.sag.titel, oda_case_path(@afstemning.sag) if @afstemning.sag %></p>
-<% end %>
+<header class="margin-top-double text-align-center">
+  <%= link_to "← Afstemninger", oda_decisions_path %>
+  <h1><%= content_for :title %></h1>
+  <p>Sidst opdateret for <%= time_ago_in_words @afstemning.opdateringsdato %> siden</p>
+</header>
 
-<p class="margin-top">Møde: <%= link_to @afstemning.møde.titel, oda_meeting_path(@afstemning.møde) if @afstemning.møde %></p>
+<div class="centered">
+  <% if @afstemning.sag %>
+    <p class="margin-top">Sag: <%= link_to @afstemning.sag.titel, oda_case_path(@afstemning.sag) if @afstemning.sag %></p>
+  <% end %>
 
-<p class="margin-top"><strong><%= @afstemning.konklusion %></strong></p>
+  <p class="margin-top">Møde: <%= link_to @afstemning.møde.titel, oda_meeting_path(@afstemning.møde) if @afstemning.møde %></p>
 
-<% if @afstemning.kommentar.present? %>
-  <p class="margin-top">(<%= @afstemning.kommentar %>)</p>
-<% end %>
+  <p class="margin-top"><strong><%= @afstemning.konklusion %></strong></p>
 
-<h2 class="margin-top-double">Stemmer <small>(<%= @afstemning.stemmes.count %>)</small></h2>
-<table class="margin-top">
-  <thead>
-    <tr>
-      <th>Stemme</th>
-      <th>Aktør</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @afstemning.stemmes.each do |stemme| %>
+  <% if @afstemning.kommentar.present? %>
+    <p class="margin-top">(<%= @afstemning.kommentar %>)</p>
+  <% end %>
+
+  <h2 class="margin-top-double">Stemmer <small>(<%= @afstemning.stemmes.count %>)</small></h2>
+</div>
+
+<div class="margin-top overflow-x-auto">
+  <table>
+    <thead>
       <tr>
-        <td style="color:<%= stemme.type.typenavn == "For" ? 'green' : 'red' %>"><%= stemme.type.typenavn %></td>
-        <td><%= link_to stemme.aktør.navn, oda_actor_path(stemme.aktør) %></td>
+        <th>Stemme</th>
+        <th>Aktør</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @afstemning.stemmes.each do |stemme| %>
+        <tr>
+          <td style="color:<%= stemme.type.typenavn == "For" ? 'green' : 'red' %>"><%= stemme.type.typenavn %></td>
+          <td><%= link_to stemme.aktør.navn, oda_actor_path(stemme.aktør) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 
 <%= json_details @afstemning %>

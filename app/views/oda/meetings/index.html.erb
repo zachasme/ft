@@ -1,29 +1,31 @@
-<div class="flex gap align-baseline margin-top-double">
-  <h1>Møder</h1>
+<% content_for(:title) { "Møder" } %>
+
+<header class="margin-top-double text-align-center">
+  <h1><%= content_for :title %></h1>
   <%= render partial: 'oda/synchronization', locals: { model: Oda::Møde } %>
-</div>
+</header>
 
-<%= render partial: 'oda/pagination' %>
-
-<table class="margin-top">
-  <thead>
-    <tr>
-      <th>Dato</th>
-      <th>Titel</th>
-      <th>Status</th>
-      <th>Type</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @page.records.each do |møde| %>
+<div class="overflow-x-auto">
+  <table class="margin-top">
+    <thead>
       <tr>
-        <td><%= l møde.dato, format: :long %></td>
-        <td><%= link_to møde.titel, oda_meeting_path(møde) %></td>
-        <td><%= møde.status.status %></td>
-        <td><%= møde.type.typenavn %></td>
+        <th>Dato</th>
+        <th>Titel</th>
+        <th>Status</th>
+        <th>Type</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @page.records.each do |møde| %>
+        <tr>
+          <td><%= l møde.dato, format: :long %></td>
+          <td><%= link_to møde.titel, oda_meeting_path(møde) %></td>
+          <td><%= møde.status.status %></td>
+          <td><%= møde.type.typenavn %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 
 <%= render partial: 'oda/pagination' %>

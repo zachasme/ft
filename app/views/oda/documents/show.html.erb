@@ -1,8 +1,12 @@
-<h1 class="margin-top-double">
-  <small>Dokument:</small>
-  <%= @dokument.titel %>
-</h1>
+<% content_for(:title) { @dokument.titel } %>
 
+<header class="margin-top-double text-align-center">
+  <%= link_to "← Dokumenter", oda_documents_path %>
+  <h1><%= content_for :title %></h1>
+  <p>Sidst opdateret for <%= time_ago_in_words @dokument.opdateringsdato %> siden</p>
+</header>
+
+<div class="centered">
 <p class="margin-top">
   <strong>Type:</strong> <%= @dokument.type.typenavn %>
   /
@@ -69,5 +73,6 @@
     <% end %>
   </ul>
 <% end %>
+</div>
 
 <%= json_details @dokument %>

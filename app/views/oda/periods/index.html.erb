@@ -1,36 +1,35 @@
-<div class="flex gap align-baseline margin-top-double">
-  <h1>
-    Perioder
-    <small>(samlinger)</small>
-  </h1>
+<% content_for(:title) { "Perioder" } %>
+
+<header class="margin-top-double text-align-center">
+  <h1><%= content_for :title %></h1>
   <%= render partial: 'oda/synchronization', locals: { model: Oda::Periode } %>
-</div>
+</header>
 
-<%= render partial: 'oda/pagination' %>
-
-<table class="margin-top">
-  <thead>
-    <tr>
-      <th>Kode</th>
-      <th>Type</th>
-      <th>Start</th>
-      <th>Slut</th>
-      <th>Titel</th>
-      <th>Aktører / Møder / Sager</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @page.records.each do |periode| %>
+<div class="overflow-x-auto">
+  <table class="margin-top">
+    <thead>
       <tr>
-        <td><%= link_to periode.kode, oda_period_path(periode) %></td>
-        <td><%= periode.typenavn %></td>
-        <td><%= l periode.startdato.to_date %></td>
-        <td><%= l periode.slutdato.to_date %></td>
-        <td><%= periode.titel %></td>
-        <td><%= periode.aktørs_count %> / <%= periode.mødes_count %> / <%= periode.sags_count %></td>
+        <th>Kode</th>
+        <th>Type</th>
+        <th>Start</th>
+        <th>Slut</th>
+        <th>Titel</th>
+        <th>Aktører / Møder / Sager</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @page.records.each do |periode| %>
+        <tr>
+          <td><%= link_to periode.kode, oda_period_path(periode) %></td>
+          <td><%= periode.typenavn %></td>
+          <td><%= l periode.startdato.to_date %></td>
+          <td><%= l periode.slutdato.to_date %></td>
+          <td><%= periode.titel %></td>
+          <td><%= periode.aktørs_count %> / <%= periode.mødes_count %> / <%= periode.sags_count %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 
 <%= render partial: 'oda/pagination' %>

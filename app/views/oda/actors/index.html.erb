@@ -1,9 +1,11 @@
-<div class="flex gap align-baseline margin-top-double">
-  <h1>Aktører</h1>
-  <%= render partial: 'oda/synchronization', locals: { model: Oda::Aktør } %>
-</div>
+<% content_for(:title) { "Aktører" } %>
 
-<%= form_with method: :get, class: "margin-top" do |form| %>
+<header class="margin-top-double text-align-center">
+  <h1><%= content_for :title %></h1>
+  <%= render partial: 'oda/synchronization', locals: { model: Oda::Aktør } %>
+</header>
+
+<%= form_with method: :get, class: "centered margin-top text-align-center" do |form| %>
   <%= form.search_field :search, value: params[:search] %>
 
   <%= form.collection_select :actortype_id, Oda::Aktørtype.all, :id, :typenavn, include_blank: "Alle aktørtyper", selected: @actortype_id %>
@@ -11,35 +13,35 @@
   <%= form.submit "Søg" %>
 <% end %>
 
-<%= render partial: 'oda/pagination' %>
-
-<table class="margin-top">
-  <thead>
-    <tr>
-      <th>Navn</th>
-      <th>Type</th>
-      <th>Periode</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @page.records.each do |aktør| %>
+<div class="overflow-x-auto">
+  <table class="margin-top">
+    <thead>
       <tr>
-        <td>
-          <%= link_to oda_actor_path(aktør) do %>
-            <% if params[:search] %>
-              <%= highlight(excerpt(aktør.navn, params[:search], radius: 30), params[:search]) %>
-            <% else %>
-              <%= truncate(aktør.navn, length: 60) %>
-            <% end %>
-          <% end %>
-        </td>
-        <td><%= aktør.type.typenavn %></td>
-        <td>
-          <%= link_to aktør.periode.titel, oda_period_path(aktør.periode) if aktør.periode %>
-        </td>
+        <th>Navn</th>
+        <th>Type</th>
+        <th>Periode</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @page.records.each do |aktør| %>
+        <tr>
+          <td>
+            <%= link_to oda_actor_path(aktør) do %>
+              <% if params[:search] %>
+                <%= highlight(excerpt(aktør.navn, params[:search], radius: 30), params[:search]) %>
+              <% else %>
+                <%= truncate(aktør.navn, length: 60) %>
+              <% end %>
+            <% end %>
+          </td>
+          <td><%= aktør.type.typenavn %></td>
+          <td>
+            <%= link_to aktør.periode.titel, oda_period_path(aktør.periode) if aktør.periode %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 
 <%= render partial: 'oda/pagination' %>

@@ -1,15 +1,17 @@
-<div class="flex gap align-baseline margin-top-double">
-  <h1>Sager</h1>
-  <%= render partial: 'oda/synchronization', locals: { model: Oda::Sag } %>
-</div>
+<% content_for(:title) { "Sager" } %>
 
-<menu class="margin-top">
+<header class="margin-top-double text-align-center">
+  <h1><%= content_for :title %></h1>
+  <%= render partial: 'oda/synchronization', locals: { model: Oda::Sag } %>
+</header>
+
+<menu class="centered margin-top">
   <li><%= link_to "L | Lovforslag", oda_cases_path(casetype_id: 3) %></li>
   <li><%= link_to "B | Beslutningsforslag", oda_cases_path(casetype_id: 5) %></li>
   <li><%= link_to "S | § 20-spørgsmål", oda_cases_path(casetype_id: 10) %></li>
 </menu>
 
-<%= form_with method: :get, class: "margin-top" do |form| %>
+<%= form_with method: :get, class: "centered margin-top text-align-center" do |form| %>
   <%= form.search_field :search, value: params[:search] %>
 
   <%= form.collection_select :casetype_id, Oda::Sagstype.all, :id, :typenavn, include_blank: "Alle sagstyper", selected: @casetype_id %>
@@ -17,39 +19,39 @@
   <%= form.submit "Søg" %>
 <% end %>
 
-<%= render partial: 'oda/pagination' %>
-
-<table class="margin-top">
-  <thead>
-    <tr>
-      <th colspan="3">Sagsnr</th>
-      <th>Titel (kort)</th>
-      <th>Opdateret</th>
-      <th>Status</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @page.records.each do |sag| %>
+<div class="overflow-x-auto">
+  <table class="margin-top">
+    <thead>
       <tr>
-        <td><%= sag.periode.kode %></td>
-        <td><%= sag.nummerprefix %></td>
-        <td><%= sag.nummernumerisk %></td>
-        <td>
-          <%= link_to oda_case_path(sag), title: sag.titel do %>
-            <% if params[:search].present? %>
-              <%= highlight(excerpt(sag.titel, params[:search], radius: 30), params[:search]) %>
-            <% else %>
-              <%= truncate(sag.titel, length: 60) %>
-            <% end %>
-          <% end %>
-        </td>
-        <td>
-          <strong><%= l sag.opdateringsdato, format: :short %></strong>
-        </td>
-        <td><%= sag.status.status %></td>
+        <th colspan="3">Sagsnr</th>
+        <th>Titel (kort)</th>
+        <th>Opdateret</th>
+        <th>Status</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @page.records.each do |sag| %>
+        <tr>
+          <td><%= sag.periode.kode %></td>
+          <td><%= sag.nummerprefix %></td>
+          <td><%= sag.nummernumerisk %></td>
+          <td>
+            <%= link_to oda_case_path(sag), title: sag.titel do %>
+              <% if params[:search].present? %>
+                <%= highlight(excerpt(sag.titel, params[:search], radius: 30), params[:search]) %>
+              <% else %>
+                <%= truncate(sag.titel, length: 60) %>
+              <% end %>
+            <% end %>
+          </td>
+          <td>
+            <strong><%= l sag.opdateringsdato, format: :short %></strong>
+          </td>
+          <td><%= sag.status.status %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 
 <%= render partial: 'oda/pagination' %>
