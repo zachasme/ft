@@ -1,6 +1,6 @@
 class Oda::SagAktør < ApplicationRecord
   include Synchronizable
 
-  belongs_to :sag, class_name: "Oda::Sag"
-  belongs_to :aktør, class_name: "Oda::Aktør"
+  belongs_to :sag
+  belongs_to :aktør
 end

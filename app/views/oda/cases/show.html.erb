@@ -11,6 +11,13 @@
   <p class="margin-top"><%= @sag.resume.html_safe %></p>
   <p class="margin-top"><em><%= @sag.afstemningskonklusion %></em></p>
 
+  <% if @sag.deltundersag %>
+    <p class="margin-top">Delt under <%= link_to @sag.deltundersag.titelkort, oda_case_path(@sag.deltundersag) %></p>
+  <% end %>
+  <% if @sag.fremsatundersag %>
+    <p class="margin-top">Fremsat under <%= link_to @sag.fremsatundersag.titelkort, oda_case_path(@sag.fremsatundersag) %></p>
+  <% end %>
+
   <h2 class="margin-top-double">Sagstrin</h2>
 </div>
 

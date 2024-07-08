@@ -18,11 +18,13 @@
     <dd><%= @møde.status.status %></dd>
   </dl>
 
-  <% unless @møde.dagsordenspunkts.empty? %>
-    <h2 class="margin-top-double">Dagsordenspunkter</h2>
+  <% unless @dagsordenspunkts.empty? %>
+    <h2 class="margin-top-double">Dagsorden</h2>
     <ul class="margin-top">
-      <% @møde.dagsordenspunkts.each do |punkt| %>
-        <li><%= punkt.nummer %>: <%= punkt.titel %></li>
+      <% @dagsordenspunkts.each do |punkt| %>
+        <li>
+          <%= punkt.nummer %>: <%= punkt.titel %> <%= "(#{punkt.kommentar})" if punkt.kommentar.present? %>
+        </li>
       <% end %>
     </ul>
   <% end %>

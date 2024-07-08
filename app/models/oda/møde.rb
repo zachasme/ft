@@ -1,11 +1,11 @@
 class Oda::Møde < ApplicationRecord
   include Synchronizable
 
+  belongs_to :periode, counter_cache: true
   belongs_to :type, class_name: "Oda::Mødetype"
   belongs_to :status, class_name: "Oda::Mødestatus"
-  belongs_to :periode, class_name: "Oda::Periode", counter_cache: true
 
-  has_many :møde_aktørs, class_name: "Oda::MødeAktør"
+  has_many :møde_aktørs
   has_many :dagsordenspunkts
 
   scope :chronological, -> { order(dato: :desc) }
