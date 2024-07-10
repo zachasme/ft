@@ -9,7 +9,7 @@
 <div class="centered">
   <% if @aktør.picture %>
     <div class="margin-top">
-      <%= image_tag @aktør.picture, style: "width:100%" %>
+      <%= link_to "Link til foto", image_path(@aktør.picture) %>
     </div>
   <% end %>
 
