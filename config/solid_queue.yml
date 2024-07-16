@@ -9,7 +9,7 @@ default: &default
           schedule: every 10 minutes
   workers:
     - queues: "*"
-      threads: 3
+      threads: 1
       processes: 1
       polling_interval: 0.1
 
