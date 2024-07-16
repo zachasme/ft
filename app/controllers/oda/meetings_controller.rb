@@ -13,10 +13,10 @@ class Oda::MeetingsController < ApplicationController
         :type,
         :status,
         :periode,
-        møde_aktørs: :aktør
+        møde_aktører: :aktør
       )
       .find(params[:id])
 
-    @dagsordenspunkts = @møde.dagsordenspunkts.all
+    @dagsordenspunkter = @møde.dagsordenspunkter.all
   end
 end

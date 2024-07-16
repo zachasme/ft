@@ -1,9 +1,9 @@
 class Oda::Periode < ApplicationRecord
   include Synchronizable
 
-  has_many :aktørs
-  has_many :mødes
-  has_many :sags
+  has_many :aktører
+  has_many :møder
+  has_many :sager
 
   scope :samlinger, -> { where(typenavn: "samling") }
   scope :chronological, -> { order(kode: :desc) }

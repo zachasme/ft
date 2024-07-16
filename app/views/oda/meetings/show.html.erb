@@ -18,10 +18,10 @@
     <dd><%= @møde.status.status %></dd>
   </dl>
 
-  <% unless @dagsordenspunkts.empty? %>
+  <% unless @dagsordenspunkter.empty? %>
     <h2 class="margin-top-double">Dagsorden</h2>
     <ul class="margin-top">
-      <% @dagsordenspunkts.each do |punkt| %>
+      <% @dagsordenspunkter.each do |punkt| %>
         <li>
           <%= punkt.nummer %>: <%= punkt.titel %> <%= "(#{punkt.kommentar})" if punkt.kommentar.present? %>
         </li>
@@ -29,10 +29,10 @@
     </ul>
   <% end %>
 
-  <% unless @møde.møde_aktørs.empty? %>
+  <% unless @møde.møde_aktører.empty? %>
     <h2 class="margin-top-double">Aktører</h2>
     <ul class="margin-top">
-      <% @møde.møde_aktørs.each do |møde_aktør| %>
+      <% @møde.møde_aktører.each do |møde_aktør| %>
         <li>
           <%= link_to oda_actor_path(møde_aktør.aktør) do %>
             <%= møde_aktør.aktør.navn %>

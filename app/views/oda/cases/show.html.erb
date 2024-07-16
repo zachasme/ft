@@ -53,7 +53,7 @@
           </td>
           <td>
             <ul>
-              <% sagstrin.dokuments.each do |dokument| %>
+              <% sagstrin.dokumenter.each do |dokument| %>
                 <li><%= link_to truncate(dokument.titel), oda_document_path(dokument), title: dokument.titel %></li>
               <% end %>
             </ul>
@@ -79,7 +79,7 @@
       </tr>
     </thead>
     <tbody>
-      <% @sag_dokuments.each do |sag_dokument| %>
+      <% @sag_dokumenter.each do |sag_dokument| %>
         <tr>
           <td><%= sag_dokument.bilagsnummer %></td>
           <td><%= link_to truncate(sag_dokument.dokument.titel), oda_document_path(sag_dokument.dokument), title: sag_dokument.dokument.titel if sag_dokument.dokument %></td>
@@ -94,7 +94,7 @@
 <div class="centered">
   <h2 class="margin-top-double">Emneord</h2>
   <ul class="margin-top">
-    <% @sag.emneords.each do |emneord| %>
+    <% @sag.emneord.each do |emneord| %>
       <li><%= link_to emneord.emneord, oda_subject_path(emneord) %></li>
     <% end %>
   </ul>

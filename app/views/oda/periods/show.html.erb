@@ -7,33 +7,33 @@
 </header>
 
 <div class="flex flex-wrap gap margin-top justify-center">
-  <% unless @aktørs.empty? %>
+  <% unless @aktører.empty? %>
     <div>
-      <h2>Aktører (<%= @aktørs.size%>)</h2>
+      <h2>Aktører (<%= @aktører.size%>)</h2>
       <ul class="margin-top">
-        <% @aktørs.each do |aktør| %>
+        <% @aktører.each do |aktør| %>
           <li><%= link_to truncate(aktør.navn), oda_actor_path(aktør), title: aktør.navn %></li>
         <% end %>
       </ul>
     </div>
   <% end %>
 
-  <% unless @sags.empty? %>
+  <% unless @sager.empty? %>
     <div>
-      <h2>Sager (<%= @sags.size%>)</h2>
+      <h2>Sager (<%= @sager.size%>)</h2>
       <ul class="margin-top">
-        <% @sags.each do |sag| %>
+        <% @sager.each do |sag| %>
           <li><%= link_to truncate(sag.titelkort), oda_case_path(sag), title: sag.titel %></li>
         <% end %>
       </ul>
     </div>
   <% end %>
 
-  <% unless @mødes.empty? %>
+  <% unless @møder.empty? %>
     <div>
-      <h2>Møder (<%= @mødes.size%>)</h2>
+      <h2>Møder (<%= @møder.size%>)</h2>
       <ul class="margin-top">
-        <% @mødes.each do |møde| %>
+        <% @møder.each do |møde| %>
           <li><%= link_to truncate(møde.titel), oda_meeting_path(møde), title: møde.titel %></li>
         <% end %>
       </ul>

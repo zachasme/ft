@@ -10,7 +10,7 @@
   <div>
     <h2>Sager</h2>
     <ul class="margin-top">
-      <% @emneord.sags.each do |sag| %>
+      <% @emneord.sager.each do |sag| %>
         <li><%= link_to truncate(sag.titelkort), oda_case_path(sag), title: sag.titel %></li>
       <% end %>
     </ul>
@@ -19,7 +19,7 @@
   <div>
     <h2>Dokumenter</h2>
     <ul class="margin-top">
-      <% @emneord.dokuments.each do |dokument| %>
+      <% @emneord.dokumenter.each do |dokument| %>
         <li><%= link_to truncate(dokument.titel), oda_document_path(dokument), title: dokument.titel %></li>
       <% end %>
     </ul>

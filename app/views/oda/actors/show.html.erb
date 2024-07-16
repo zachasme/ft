@@ -20,7 +20,7 @@
 
   <h2 class="margin-top-double">Relationer</h2>
   <ul class="margin-top">
-    <% @aktør.fra_aktør_aktørs.each do |aktøraktør| %>
+    <% @aktør.fra_aktør_aktører.each do |aktøraktør| %>
       <li>
         <%= link_to aktøraktør.tilaktør.navn, oda_actor_path(aktøraktør.tilaktør) %>
         <%= aktøraktør.rolle.rolle %> 
@@ -37,7 +37,7 @@
 
   <h2 class="margin-top-double">Relationer (anden retning)</h2>    
   <ul class="margin-top">
-    <% @aktør.til_aktør_aktørs.each do |aktøraktør| %>
+    <% @aktør.til_aktør_aktører.each do |aktøraktør| %>
       <li>
         <%= link_to aktøraktør.fraaktør.navn, oda_actor_path(aktøraktør.fraaktør) %>
         <%= aktøraktør.rolle.rolle %> 

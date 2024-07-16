@@ -1,7 +1,7 @@
 class Oda::SubjectsController < ApplicationController
   def index
     records = Oda::Emneord
-      .by_emneord_sags_count
+      .by_emneord_sager_count
       .includes(:type)
       .matches(params[:search])
 
@@ -13,7 +13,7 @@ class Oda::SubjectsController < ApplicationController
 
   def show
     @emneord = Oda::Emneord
-      .includes(:sags, :dokuments)
+      .includes(:sager, :dokumenter)
       .find(params[:id])
   end
 end

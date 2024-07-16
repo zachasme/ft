@@ -5,21 +5,21 @@ class Oda::Dokument < ApplicationRecord
   belongs_to :status, class_name: "Oda::Dokumentstatus"
   belongs_to :type, class_name: "Oda::Dokumenttype"
 
-  has_many :fils
-  has_many :omtryks
-  has_many :sag_dokuments
-  has_many :dokument_aktørs
-  has_many :emneord_dokuments
-  has_many :sagstrin_dokuments
+  has_many :filer
+  has_many :omtryk
+  has_many :sag_dokumenter
+  has_many :dokument_aktører
+  has_many :emneord_dokumenter
+  has_many :sagstrin_dokumenter
 
-  has_many :aktørs,   through: :dokument_aktørs,    source: :aktør
-  has_many :emneords, through: :emneord_dokuments,  source: :emneord
-  has_many :sags,     through: :sag_dokuments,      source: :sag
-  has_many :sagstrin, through: :sagstrin_dokuments, source: :sagstrin
+  has_many :aktører,  through: :dokument_aktører,    source: :aktør
+  has_many :emneord,  through: :emneord_dokumenter,  source: :emneord
+  has_many :sager,    through: :sag_dokumenter,      source: :sag
+  has_many :sagstrin, through: :sagstrin_dokumenter, source: :sagstrin
 
-  scope :reprinted, -> { joins(:omtryks) }
+  scope :reprinted, -> { joins(:omtryk) }
   scope :chronological, -> { order(opdateringsdato: :desc) }
-  scope :matches, ->(search) { where("oda_dokuments.titel LIKE ?", "%#{search}%") if search.present? }
+  scope :matches, ->(search) { where("oda_dokumenter.titel LIKE ?", "%#{search}%") if search.present? }
 
   scope :with_category, ->(id) { where(kategori_id: id) }
   scope :with_status, ->(id) { where(status_id: id) }

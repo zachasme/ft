@@ -10,8 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_06_28_122552) do
-  create_table "oda_afstemnings", force: :cascade do |t|
+ActiveRecord::Schema[8.0].define(version: 2024_07_16_094427) do
+  create_table "oda_afstemninger", force: :cascade do |t|
     t.string "kommentar"
     t.string "konklusion"
     t.integer "møde_id"
@@ -20,38 +20,38 @@ ActiveRecord::Schema[8.0].define(version: 2024_06_28_122552) do
     t.integer "sagstrin_id"
     t.integer "type_id"
     t.boolean "vedtaget"
-    t.index ["møde_id"], name: "index_oda_afstemnings_on_møde_id"
-    t.index ["opdateringsdato"], name: "index_oda_afstemnings_on_opdateringsdato"
-    t.index ["sagstrin_id"], name: "index_oda_afstemnings_on_sagstrin_id"
-    t.index ["type_id"], name: "index_oda_afstemnings_on_type_id"
+    t.index ["møde_id"], name: "index_oda_afstemninger_on_møde_id"
+    t.index ["opdateringsdato"], name: "index_oda_afstemninger_on_opdateringsdato"
+    t.index ["sagstrin_id"], name: "index_oda_afstemninger_on_sagstrin_id"
+    t.index ["type_id"], name: "index_oda_afstemninger_on_type_id"
   end
 
-  create_table "oda_afstemningstypes", force: :cascade do |t|
+  create_table "oda_afstemningstyper", force: :cascade do |t|
     t.datetime "opdateringsdato"
     t.string "typenavn"
-    t.index ["opdateringsdato"], name: "index_oda_afstemningstypes_on_opdateringsdato"
+    t.index ["opdateringsdato"], name: "index_oda_afstemningstyper_on_opdateringsdato"
   end
 
-  create_table "oda_aktør_aktør_rolles", force: :cascade do |t|
+  create_table "oda_aktør_aktør_roller", force: :cascade do |t|
     t.datetime "opdateringsdato"
     t.string "rolle"
-    t.index ["opdateringsdato"], name: "index_oda_aktør_aktør_rolles_on_opdateringsdato"
+    t.index ["opdateringsdato"], name: "index_oda_aktør_aktør_roller_on_opdateringsdato"
   end
 
-  create_table "oda_aktør_aktørs", force: :cascade do |t|
+  create_table "oda_aktør_aktører", force: :cascade do |t|
     t.integer "fraaktør_id"
     t.datetime "opdateringsdato"
     t.integer "rolle_id"
     t.datetime "slutdato"
     t.datetime "startdato"
     t.integer "tilaktør_id"
-    t.index ["fraaktør_id"], name: "index_oda_aktør_aktørs_on_fraaktør_id"
-    t.index ["opdateringsdato"], name: "index_oda_aktør_aktørs_on_opdateringsdato"
-    t.index ["rolle_id"], name: "index_oda_aktør_aktørs_on_rolle_id"
-    t.index ["tilaktør_id"], name: "index_oda_aktør_aktørs_on_tilaktør_id"
+    t.index ["fraaktør_id"], name: "index_oda_aktør_aktører_on_fraaktør_id"
+    t.index ["opdateringsdato"], name: "index_oda_aktør_aktører_on_opdateringsdato"
+    t.index ["rolle_id"], name: "index_oda_aktør_aktører_on_rolle_id"
+    t.index ["tilaktør_id"], name: "index_oda_aktør_aktører_on_tilaktør_id"
   end
 
-  create_table "oda_aktørs", force: :cascade do |t|
+  create_table "oda_aktører", force: :cascade do |t|
     t.string "biografi"
     t.string "efternavn"
     t.string "fornavn"
@@ -62,37 +62,37 @@ ActiveRecord::Schema[8.0].define(version: 2024_06_28_122552) do
     t.datetime "slutdato"
     t.datetime "startdato"
     t.integer "type_id"
-    t.index ["navn"], name: "index_oda_aktørs_on_navn"
-    t.index ["opdateringsdato"], name: "index_oda_aktørs_on_opdateringsdato"
-    t.index ["periode_id"], name: "index_oda_aktørs_on_periode_id"
-    t.index ["type_id"], name: "index_oda_aktørs_on_type_id"
+    t.index ["navn"], name: "index_oda_aktører_on_navn"
+    t.index ["opdateringsdato"], name: "index_oda_aktører_on_opdateringsdato"
+    t.index ["periode_id"], name: "index_oda_aktører_on_periode_id"
+    t.index ["type_id"], name: "index_oda_aktører_on_type_id"
   end
 
-  create_table "oda_aktørtypes", force: :cascade do |t|
+  create_table "oda_aktørtyper", force: :cascade do |t|
     t.datetime "opdateringsdato"
     t.string "typenavn"
   end
 
-  create_table "oda_dagsordenspunkt_dokuments", force: :cascade do |t|
+  create_table "oda_dagsordenspunkt_dokumenter", force: :cascade do |t|
     t.integer "dagsordenspunkt_id"
     t.integer "dokument_id"
     t.string "note"
     t.datetime "opdateringsdato"
-    t.index ["dagsordenspunkt_id"], name: "index_oda_dagsordenspunkt_dokuments_on_dagsordenspunkt_id"
-    t.index ["dokument_id"], name: "index_oda_dagsordenspunkt_dokuments_on_dokument_id"
-    t.index ["opdateringsdato"], name: "index_oda_dagsordenspunkt_dokuments_on_opdateringsdato"
+    t.index ["dagsordenspunkt_id"], name: "index_oda_dagsordenspunkt_dokumenter_on_dagsordenspunkt_id"
+    t.index ["dokument_id"], name: "index_oda_dagsordenspunkt_dokumenter_on_dokument_id"
+    t.index ["opdateringsdato"], name: "index_oda_dagsordenspunkt_dokumenter_on_opdateringsdato"
   end
 
-  create_table "oda_dagsordenspunkt_sags", force: :cascade do |t|
+  create_table "oda_dagsordenspunkt_sager", force: :cascade do |t|
     t.integer "dagsordenspunkt_id"
     t.datetime "opdateringsdato"
     t.integer "sag_id"
-    t.index ["dagsordenspunkt_id"], name: "index_oda_dagsordenspunkt_sags_on_dagsordenspunkt_id"
-    t.index ["opdateringsdato"], name: "index_oda_dagsordenspunkt_sags_on_opdateringsdato"
-    t.index ["sag_id"], name: "index_oda_dagsordenspunkt_sags_on_sag_id"
+    t.index ["dagsordenspunkt_id"], name: "index_oda_dagsordenspunkt_sager_on_dagsordenspunkt_id"
+    t.index ["opdateringsdato"], name: "index_oda_dagsordenspunkt_sager_on_opdateringsdato"
+    t.index ["sag_id"], name: "index_oda_dagsordenspunkt_sager_on_sag_id"
   end
 
-  create_table "oda_dagsordenspunkts", force: :cascade do |t|
+  create_table "oda_dagsordenspunkter", force: :cascade do |t|
     t.string "forhandling"
     t.string "forhandlingskode"
     t.string "kommentar"
@@ -104,36 +104,30 @@ ActiveRecord::Schema[8.0].define(version: 2024_06_28_122552) do
     t.integer "sagstrin_id"
     t.integer "super_id"
     t.string "titel"
-    t.index ["møde_id"], name: "index_oda_dagsordenspunkts_on_møde_id"
-    t.index ["opdateringsdato"], name: "index_oda_dagsordenspunkts_on_opdateringsdato"
-    t.index ["sagstrin_id"], name: "index_oda_dagsordenspunkts_on_sagstrin_id"
-    t.index ["super_id"], name: "index_oda_dagsordenspunkts_on_super_id"
+    t.index ["møde_id"], name: "index_oda_dagsordenspunkter_on_møde_id"
+    t.index ["opdateringsdato"], name: "index_oda_dagsordenspunkter_on_opdateringsdato"
+    t.index ["sagstrin_id"], name: "index_oda_dagsordenspunkter_on_sagstrin_id"
+    t.index ["super_id"], name: "index_oda_dagsordenspunkter_on_super_id"
   end
 
-  create_table "oda_dokument_aktør_rolles", force: :cascade do |t|
+  create_table "oda_dokument_aktør_roller", force: :cascade do |t|
     t.datetime "opdateringsdato"
     t.string "rolle"
-    t.index ["opdateringsdato"], name: "index_oda_dokument_aktør_rolles_on_opdateringsdato"
+    t.index ["opdateringsdato"], name: "index_oda_dokument_aktør_roller_on_opdateringsdato"
   end
 
-  create_table "oda_dokument_aktørs", force: :cascade do |t|
+  create_table "oda_dokument_aktører", force: :cascade do |t|
     t.integer "aktør_id"
     t.integer "dokument_id"
     t.datetime "opdateringsdato"
     t.integer "rolle_id"
-    t.index ["aktør_id"], name: "index_oda_dokument_aktørs_on_aktør_id"
-    t.index ["dokument_id"], name: "index_oda_dokument_aktørs_on_dokument_id"
-    t.index ["opdateringsdato"], name: "index_oda_dokument_aktørs_on_opdateringsdato"
-    t.index ["rolle_id"], name: "index_oda_dokument_aktørs_on_rolle_id"
+    t.index ["aktør_id"], name: "index_oda_dokument_aktører_on_aktør_id"
+    t.index ["dokument_id"], name: "index_oda_dokument_aktører_on_dokument_id"
+    t.index ["opdateringsdato"], name: "index_oda_dokument_aktører_on_opdateringsdato"
+    t.index ["rolle_id"], name: "index_oda_dokument_aktører_on_rolle_id"
   end
 
-  create_table "oda_dokumentkategoris", force: :cascade do |t|
-    t.string "kategori"
-    t.datetime "opdateringsdato"
-    t.index ["opdateringsdato"], name: "index_oda_dokumentkategoris_on_opdateringsdato"
-  end
-
-  create_table "oda_dokuments", force: :cascade do |t|
+  create_table "oda_dokumenter", force: :cascade do |t|
     t.integer "dagsordenudgavenummer"
     t.datetime "dato"
     t.datetime "frigivelsesdato"
@@ -151,71 +145,77 @@ ActiveRecord::Schema[8.0].define(version: 2024_06_28_122552) do
     t.integer "status_id"
     t.string "titel", collation: "nocase"
     t.integer "type_id"
-    t.index ["dato"], name: "index_oda_dokuments_on_dato"
-    t.index ["kategori_id"], name: "index_oda_dokuments_on_kategori_id"
-    t.index ["opdateringsdato"], name: "index_oda_dokuments_on_opdateringsdato"
-    t.index ["spørgsmåls_id"], name: "index_oda_dokuments_on_spørgsmåls_id"
-    t.index ["status_id"], name: "index_oda_dokuments_on_status_id"
-    t.index ["titel"], name: "index_oda_dokuments_on_titel"
-    t.index ["type_id"], name: "index_oda_dokuments_on_type_id"
+    t.index ["dato"], name: "index_oda_dokumenter_on_dato"
+    t.index ["kategori_id"], name: "index_oda_dokumenter_on_kategori_id"
+    t.index ["opdateringsdato"], name: "index_oda_dokumenter_on_opdateringsdato"
+    t.index ["spørgsmåls_id"], name: "index_oda_dokumenter_on_spørgsmåls_id"
+    t.index ["status_id"], name: "index_oda_dokumenter_on_status_id"
+    t.index ["titel"], name: "index_oda_dokumenter_on_titel"
+    t.index ["type_id"], name: "index_oda_dokumenter_on_type_id"
   end
 
-  create_table "oda_dokumentstatuses", force: :cascade do |t|
+  create_table "oda_dokumentkategorier", force: :cascade do |t|
+    t.string "kategori"
+    t.datetime "opdateringsdato"
+    t.index ["opdateringsdato"], name: "index_oda_dokumentkategorier_on_opdateringsdato"
+  end
+
+  create_table "oda_dokumentstatuser", force: :cascade do |t|
     t.datetime "opdateringsdato"
     t.string "status"
-    t.index ["opdateringsdato"], name: "index_oda_dokumentstatuses_on_opdateringsdato"
+    t.index ["opdateringsdato"], name: "index_oda_dokumentstatuser_on_opdateringsdato"
   end
 
-  create_table "oda_dokumenttypes", force: :cascade do |t|
+  create_table "oda_dokumenttyper", force: :cascade do |t|
     t.datetime "opdateringsdato"
     t.string "typenavn"
-    t.index ["opdateringsdato"], name: "index_oda_dokumenttypes_on_opdateringsdato"
+    t.index ["opdateringsdato"], name: "index_oda_dokumenttyper_on_opdateringsdato"
   end
 
-  create_table "oda_emneord_dokuments", force: :cascade do |t|
-    t.integer "dokument_id"
-    t.integer "emneord_id"
-    t.datetime "opdateringsdato"
-    t.index ["dokument_id"], name: "index_oda_emneord_dokuments_on_dokument_id"
-    t.index ["emneord_id"], name: "index_oda_emneord_dokuments_on_emneord_id"
-    t.index ["opdateringsdato"], name: "index_oda_emneord_dokuments_on_opdateringsdato"
-  end
-
-  create_table "oda_emneord_sags", force: :cascade do |t|
-    t.integer "emneord_id"
-    t.datetime "opdateringsdato"
-    t.integer "sag_id"
-    t.index ["emneord_id"], name: "index_oda_emneord_sags_on_emneord_id"
-    t.index ["opdateringsdato"], name: "index_oda_emneord_sags_on_opdateringsdato"
-    t.index ["sag_id"], name: "index_oda_emneord_sags_on_sag_id"
-  end
-
-  create_table "oda_emneords", force: :cascade do |t|
+  create_table "oda_emneord", force: :cascade do |t|
     t.string "emneord", collation: "nocase"
     t.datetime "opdateringsdato"
     t.integer "type_id"
-    t.integer "emneord_sags_count", default: 0
-    t.integer "emneord_dokuments_count", default: 0
-    t.index ["emneord"], name: "index_oda_emneords_on_emneord"
-    t.index ["emneord_sags_count"], name: "index_oda_emneords_on_emneord_sags_count"
-    t.index ["opdateringsdato"], name: "index_oda_emneords_on_opdateringsdato"
-    t.index ["type_id"], name: "index_oda_emneords_on_type_id"
+    t.integer "emneord_sager_count", default: 0
+    t.integer "emneord_dokumenter_count", default: 0
+    t.index ["emneord"], name: "index_oda_emneord_on_emneord"
+    t.index ["emneord_sager_count"], name: "index_oda_emneord_on_emneord_sager_count"
+    t.index ["opdateringsdato"], name: "index_oda_emneord_on_opdateringsdato"
+    t.index ["type_id"], name: "index_oda_emneord_on_type_id"
   end
 
-  create_table "oda_emneordstypes", force: :cascade do |t|
+  create_table "oda_emneord_dokumenter", force: :cascade do |t|
+    t.integer "dokument_id"
+    t.integer "emneord_id"
+    t.datetime "opdateringsdato"
+    t.index ["dokument_id"], name: "index_oda_emneord_dokumenter_on_dokument_id"
+    t.index ["emneord_id"], name: "index_oda_emneord_dokumenter_on_emneord_id"
+    t.index ["opdateringsdato"], name: "index_oda_emneord_dokumenter_on_opdateringsdato"
+  end
+
+  create_table "oda_emneord_sager", force: :cascade do |t|
+    t.integer "emneord_id"
+    t.datetime "opdateringsdato"
+    t.integer "sag_id"
+    t.index ["emneord_id"], name: "index_oda_emneord_sager_on_emneord_id"
+    t.index ["opdateringsdato"], name: "index_oda_emneord_sager_on_opdateringsdato"
+    t.index ["sag_id"], name: "index_oda_emneord_sager_on_sag_id"
+  end
+
+  create_table "oda_emneordstyper", force: :cascade do |t|
     t.datetime "opdateringsdato"
     t.string "typenavn"
-    t.index ["opdateringsdato"], name: "index_oda_emneordstypes_on_opdateringsdato"
+    t.index ["opdateringsdato"], name: "index_oda_emneordstyper_on_opdateringsdato"
   end
 
-  create_table "oda_entitet_beskrivelses", force: :cascade do |t|
+  create_table "oda_entitet_beskrivelser", force: :cascade do |t|
     t.string "entitetnavn"
     t.string "beskrivelse"
     t.datetime "opdateringsdato"
-    t.index ["opdateringsdato"], name: "index_oda_entitet_beskrivelses_on_opdateringsdato"
+    t.index ["opdateringsdato"], name: "index_oda_entitet_beskrivelser_on_opdateringsdato"
   end
 
-  create_table "oda_fils", force: :cascade do |t|
+  create_table "oda_filer", force: :cascade do |t|
     t.integer "dokument_id"
     t.string "filurl"
     t.string "format"
@@ -223,8 +223,8 @@ ActiveRecord::Schema[8.0].define(version: 2024_06_28_122552) do
     t.string "titel"
     t.string "variantkode"
     t.datetime "versionsdato"
-    t.index ["dokument_id"], name: "index_oda_fils_on_dokument_id"
-    t.index ["opdateringsdato"], name: "index_oda_fils_on_opdateringsdato"
+    t.index ["dokument_id"], name: "index_oda_filer_on_dokument_id"
+    t.index ["opdateringsdato"], name: "index_oda_filer_on_opdateringsdato"
   end
 
   create_table "oda_id_maps", force: :cascade do |t|
@@ -232,24 +232,24 @@ ActiveRecord::Schema[8.0].define(version: 2024_06_28_122552) do
     t.string "entity"
   end
 
-  create_table "oda_kollone_beskrivelses", force: :cascade do |t|
+  create_table "oda_kollone_beskrivelser", force: :cascade do |t|
     t.string "entitetnavn"
     t.string "kollonenavn"
     t.string "beskrivelse"
     t.datetime "opdateringsdato"
-    t.index ["opdateringsdato"], name: "index_oda_kollone_beskrivelses_on_opdateringsdato"
+    t.index ["opdateringsdato"], name: "index_oda_kollone_beskrivelser_on_opdateringsdato"
   end
 
-  create_table "oda_møde_aktørs", force: :cascade do |t|
+  create_table "oda_møde_aktører", force: :cascade do |t|
     t.integer "aktør_id"
     t.integer "møde_id"
     t.datetime "opdateringsdato"
-    t.index ["aktør_id"], name: "index_oda_møde_aktørs_on_aktør_id"
-    t.index ["møde_id"], name: "index_oda_møde_aktørs_on_møde_id"
-    t.index ["opdateringsdato"], name: "index_oda_møde_aktørs_on_opdateringsdato"
+    t.index ["aktør_id"], name: "index_oda_møde_aktører_on_aktør_id"
+    t.index ["møde_id"], name: "index_oda_møde_aktører_on_møde_id"
+    t.index ["opdateringsdato"], name: "index_oda_møde_aktører_on_opdateringsdato"
   end
 
-  create_table "oda_mødes", force: :cascade do |t|
+  create_table "oda_møder", force: :cascade do |t|
     t.string "dagsordenurl"
     t.datetime "dato"
     t.string "lokale"
@@ -261,85 +261,85 @@ ActiveRecord::Schema[8.0].define(version: 2024_06_28_122552) do
     t.integer "status_id"
     t.string "titel"
     t.integer "type_id"
-    t.index ["dato"], name: "index_oda_mødes_on_dato"
-    t.index ["opdateringsdato"], name: "index_oda_mødes_on_opdateringsdato"
-    t.index ["periode_id"], name: "index_oda_mødes_on_periode_id"
-    t.index ["status_id"], name: "index_oda_mødes_on_status_id"
-    t.index ["type_id"], name: "index_oda_mødes_on_type_id"
+    t.index ["dato"], name: "index_oda_møder_on_dato"
+    t.index ["opdateringsdato"], name: "index_oda_møder_on_opdateringsdato"
+    t.index ["periode_id"], name: "index_oda_møder_on_periode_id"
+    t.index ["status_id"], name: "index_oda_møder_on_status_id"
+    t.index ["type_id"], name: "index_oda_møder_on_type_id"
   end
 
-  create_table "oda_mødestatuses", force: :cascade do |t|
+  create_table "oda_mødestatuser", force: :cascade do |t|
     t.datetime "opdateringsdato"
     t.string "status"
-    t.index ["opdateringsdato"], name: "index_oda_mødestatuses_on_opdateringsdato"
+    t.index ["opdateringsdato"], name: "index_oda_mødestatuser_on_opdateringsdato"
   end
 
-  create_table "oda_mødetypes", force: :cascade do |t|
+  create_table "oda_mødetyper", force: :cascade do |t|
     t.datetime "opdateringsdato"
     t.string "typenavn"
-    t.index ["opdateringsdato"], name: "index_oda_mødetypes_on_opdateringsdato"
+    t.index ["opdateringsdato"], name: "index_oda_mødetyper_on_opdateringsdato"
   end
 
-  create_table "oda_omtryks", force: :cascade do |t|
+  create_table "oda_omtryk", force: :cascade do |t|
     t.string "begrundelse"
     t.datetime "dato"
     t.integer "dokument_id"
     t.datetime "opdateringsdato"
-    t.index ["dokument_id"], name: "index_oda_omtryks_on_dokument_id"
-    t.index ["opdateringsdato"], name: "index_oda_omtryks_on_opdateringsdato"
+    t.index ["dokument_id"], name: "index_oda_omtryk_on_dokument_id"
+    t.index ["opdateringsdato"], name: "index_oda_omtryk_on_opdateringsdato"
   end
 
-  create_table "oda_periodes", force: :cascade do |t|
+  create_table "oda_perioder", force: :cascade do |t|
     t.string "kode"
     t.datetime "opdateringsdato"
     t.datetime "slutdato"
     t.datetime "startdato"
     t.string "titel"
     t.string "typenavn"
-    t.integer "aktørs_count", default: 0
-    t.integer "mødes_count", default: 0
-    t.integer "sags_count", default: 0
-    t.index ["kode"], name: "index_oda_periodes_on_kode"
-    t.index ["opdateringsdato"], name: "index_oda_periodes_on_opdateringsdato"
+    t.integer "aktører_count", default: 0
+    t.integer "møder_count", default: 0
+    t.integer "sager_count", default: 0
+    t.index ["kode"], name: "index_oda_perioder_on_kode"
+    t.index ["opdateringsdato"], name: "index_oda_perioder_on_opdateringsdato"
   end
 
-  create_table "oda_sag_aktør_rolles", force: :cascade do |t|
+  create_table "oda_sag_aktør_roller", force: :cascade do |t|
     t.datetime "opdateringsdato"
     t.string "rolle"
-    t.index ["opdateringsdato"], name: "index_oda_sag_aktør_rolles_on_opdateringsdato"
+    t.index ["opdateringsdato"], name: "index_oda_sag_aktør_roller_on_opdateringsdato"
   end
 
-  create_table "oda_sag_aktørs", force: :cascade do |t|
+  create_table "oda_sag_aktører", force: :cascade do |t|
     t.integer "aktør_id"
     t.datetime "opdateringsdato"
     t.integer "rolle_id"
     t.integer "sag_id"
-    t.index ["aktør_id"], name: "index_oda_sag_aktørs_on_aktør_id"
-    t.index ["opdateringsdato"], name: "index_oda_sag_aktørs_on_opdateringsdato"
-    t.index ["rolle_id"], name: "index_oda_sag_aktørs_on_rolle_id"
-    t.index ["sag_id"], name: "index_oda_sag_aktørs_on_sag_id"
+    t.index ["aktør_id"], name: "index_oda_sag_aktører_on_aktør_id"
+    t.index ["opdateringsdato"], name: "index_oda_sag_aktører_on_opdateringsdato"
+    t.index ["rolle_id"], name: "index_oda_sag_aktører_on_rolle_id"
+    t.index ["sag_id"], name: "index_oda_sag_aktører_on_sag_id"
   end
 
-  create_table "oda_sag_dokument_rolles", force: :cascade do |t|
+  create_table "oda_sag_dokument_roller", force: :cascade do |t|
     t.datetime "opdateringsdato"
     t.string "rolle"
-    t.index ["opdateringsdato"], name: "index_oda_sag_dokument_rolles_on_opdateringsdato"
+    t.index ["opdateringsdato"], name: "index_oda_sag_dokument_roller_on_opdateringsdato"
   end
 
-  create_table "oda_sag_dokuments", force: :cascade do |t|
+  create_table "oda_sag_dokumenter", force: :cascade do |t|
     t.string "bilagsnummer"
     t.integer "dokument_id"
     t.datetime "frigivelsesdato"
     t.datetime "opdateringsdato"
     t.integer "rolle_id"
     t.integer "sag_id"
-    t.index ["dokument_id"], name: "index_oda_sag_dokuments_on_dokument_id"
-    t.index ["opdateringsdato"], name: "index_oda_sag_dokuments_on_opdateringsdato"
-    t.index ["rolle_id"], name: "index_oda_sag_dokuments_on_rolle_id"
-    t.index ["sag_id"], name: "index_oda_sag_dokuments_on_sag_id"
+    t.index ["dokument_id"], name: "index_oda_sag_dokumenter_on_dokument_id"
+    t.index ["opdateringsdato"], name: "index_oda_sag_dokumenter_on_opdateringsdato"
+    t.index ["rolle_id"], name: "index_oda_sag_dokumenter_on_rolle_id"
+    t.index ["sag_id"], name: "index_oda_sag_dokumenter_on_sag_id"
   end
 
-  create_table "oda_sags", force: :cascade do |t|
+  create_table "oda_sager", force: :cascade do |t|
     t.string "afgørelse"
     t.datetime "afgørelsesdato"
     t.string "afgørelsesresultatkode"
@@ -368,56 +368,30 @@ ActiveRecord::Schema[8.0].define(version: 2024_06_28_122552) do
     t.string "titel", collation: "nocase"
     t.string "titelkort"
     t.integer "type_id"
-    t.index ["deltundersag_id"], name: "index_oda_sags_on_deltundersag_id"
-    t.index ["fremsatundersag_id"], name: "index_oda_sags_on_fremsatundersag_id"
-    t.index ["kategori_id"], name: "index_oda_sags_on_kategori_id"
-    t.index ["nummernumerisk"], name: "index_oda_sags_on_nummernumerisk"
-    t.index ["opdateringsdato"], name: "index_oda_sags_on_opdateringsdato"
-    t.index ["periode_id"], name: "index_oda_sags_on_periode_id"
-    t.index ["status_id"], name: "index_oda_sags_on_status_id"
-    t.index ["titel"], name: "index_oda_sags_on_titel"
-    t.index ["type_id"], name: "index_oda_sags_on_type_id"
+    t.index ["deltundersag_id"], name: "index_oda_sager_on_deltundersag_id"
+    t.index ["fremsatundersag_id"], name: "index_oda_sager_on_fremsatundersag_id"
+    t.index ["kategori_id"], name: "index_oda_sager_on_kategori_id"
+    t.index ["nummernumerisk"], name: "index_oda_sager_on_nummernumerisk"
+    t.index ["opdateringsdato"], name: "index_oda_sager_on_opdateringsdato"
+    t.index ["periode_id"], name: "index_oda_sager_on_periode_id"
+    t.index ["status_id"], name: "index_oda_sager_on_status_id"
+    t.index ["titel"], name: "index_oda_sager_on_titel"
+    t.index ["type_id"], name: "index_oda_sager_on_type_id"
   end
 
-  create_table "oda_sagskategoris", force: :cascade do |t|
+  create_table "oda_sagskategorier", force: :cascade do |t|
     t.string "kategori"
     t.datetime "opdateringsdato"
-    t.index ["opdateringsdato"], name: "index_oda_sagskategoris_on_opdateringsdato"
+    t.index ["opdateringsdato"], name: "index_oda_sagskategorier_on_opdateringsdato"
   end
 
-  create_table "oda_sagsstatuses", force: :cascade do |t|
+  create_table "oda_sagsstatuser", force: :cascade do |t|
     t.datetime "opdateringsdato"
     t.string "status"
-    t.index ["opdateringsdato"], name: "index_oda_sagsstatuses_on_opdateringsdato"
+    t.index ["opdateringsdato"], name: "index_oda_sagsstatuser_on_opdateringsdato"
   end
 
-  create_table "oda_sagstrin_aktør_rolles", force: :cascade do |t|
-    t.datetime "opdateringsdato"
-    t.string "rolle"
-    t.index ["opdateringsdato"], name: "index_oda_sagstrin_aktør_rolles_on_opdateringsdato"
-  end
-
-  create_table "oda_sagstrin_aktørs", force: :cascade do |t|
-    t.integer "aktør_id"
-    t.datetime "opdateringsdato"
-    t.integer "rolle_id"
-    t.integer "sagstrin_id"
-    t.index ["aktør_id"], name: "index_oda_sagstrin_aktørs_on_aktør_id"
-    t.index ["opdateringsdato"], name: "index_oda_sagstrin_aktørs_on_opdateringsdato"
-    t.index ["rolle_id"], name: "index_oda_sagstrin_aktørs_on_rolle_id"
-    t.index ["sagstrin_id"], name: "index_oda_sagstrin_aktørs_on_sagstrin_id"
-  end
-
-  create_table "oda_sagstrin_dokuments", force: :cascade do |t|
-    t.integer "dokument_id"
-    t.datetime "opdateringsdato"
-    t.integer "sagstrin_id"
-    t.index ["dokument_id"], name: "index_oda_sagstrin_dokuments_on_dokument_id"
-    t.index ["opdateringsdato"], name: "index_oda_sagstrin_dokuments_on_opdateringsdato"
-    t.index ["sagstrin_id"], name: "index_oda_sagstrin_dokuments_on_sagstrin_id"
-  end
-
-  create_table "oda_sagstrins", force: :cascade do |t|
+  create_table "oda_sagstrin", force: :cascade do |t|
     t.datetime "dato"
     t.string "folketingstidende"
     t.string "folketingstidendesidenummer"
@@ -427,36 +401,62 @@ ActiveRecord::Schema[8.0].define(version: 2024_06_28_122552) do
     t.integer "status_id"
     t.string "titel"
     t.integer "type_id"
-    t.index ["opdateringsdato"], name: "index_oda_sagstrins_on_opdateringsdato"
-    t.index ["sag_id"], name: "index_oda_sagstrins_on_sag_id"
-    t.index ["status_id"], name: "index_oda_sagstrins_on_status_id"
-    t.index ["type_id"], name: "index_oda_sagstrins_on_type_id"
+    t.index ["opdateringsdato"], name: "index_oda_sagstrin_on_opdateringsdato"
+    t.index ["sag_id"], name: "index_oda_sagstrin_on_sag_id"
+    t.index ["status_id"], name: "index_oda_sagstrin_on_status_id"
+    t.index ["type_id"], name: "index_oda_sagstrin_on_type_id"
   end
 
-  create_table "oda_sagstrinsstatuses", force: :cascade do |t|
+  create_table "oda_sagstrin_aktør_roller", force: :cascade do |t|
+    t.datetime "opdateringsdato"
+    t.string "rolle"
+    t.index ["opdateringsdato"], name: "index_oda_sagstrin_aktør_roller_on_opdateringsdato"
+  end
+
+  create_table "oda_sagstrin_aktører", force: :cascade do |t|
+    t.integer "aktør_id"
+    t.datetime "opdateringsdato"
+    t.integer "rolle_id"
+    t.integer "sagstrin_id"
+    t.index ["aktør_id"], name: "index_oda_sagstrin_aktører_on_aktør_id"
+    t.index ["opdateringsdato"], name: "index_oda_sagstrin_aktører_on_opdateringsdato"
+    t.index ["rolle_id"], name: "index_oda_sagstrin_aktører_on_rolle_id"
+    t.index ["sagstrin_id"], name: "index_oda_sagstrin_aktører_on_sagstrin_id"
+  end
+
+  create_table "oda_sagstrin_dokumenter", force: :cascade do |t|
+    t.integer "dokument_id"
+    t.datetime "opdateringsdato"
+    t.integer "sagstrin_id"
+    t.index ["dokument_id"], name: "index_oda_sagstrin_dokumenter_on_dokument_id"
+    t.index ["opdateringsdato"], name: "index_oda_sagstrin_dokumenter_on_opdateringsdato"
+    t.index ["sagstrin_id"], name: "index_oda_sagstrin_dokumenter_on_sagstrin_id"
+  end
+
+  create_table "oda_sagstrinsstatuser", force: :cascade do |t|
     t.datetime "opdateringsdato"
     t.string "status"
-    t.index ["opdateringsdato"], name: "index_oda_sagstrinsstatuses_on_opdateringsdato"
+    t.index ["opdateringsdato"], name: "index_oda_sagstrinsstatuser_on_opdateringsdato"
   end
 
-  create_table "oda_sagstrinstypes", force: :cascade do |t|
+  create_table "oda_sagstrinstyper", force: :cascade do |t|
     t.datetime "opdateringsdato"
     t.string "typenavn"
-    t.index ["opdateringsdato"], name: "index_oda_sagstrinstypes_on_opdateringsdato"
+    t.index ["opdateringsdato"], name: "index_oda_sagstrinstyper_on_opdateringsdato"
   end
 
-  create_table "oda_sagstypes", force: :cascade do |t|
+  create_table "oda_sagstyper", force: :cascade do |t|
     t.datetime "opdateringsdato"
     t.string "typenavn"
   end
 
-  create_table "oda_sambehandlingers", force: :cascade do |t|
+  create_table "oda_sambehandlinger", force: :cascade do |t|
     t.integer "andetsagstrin_id"
     t.integer "førstesagstrin_id"
     t.datetime "opdateringsdato"
-    t.index ["andetsagstrin_id"], name: "index_oda_sambehandlingers_on_andetsagstrin_id"
-    t.index ["førstesagstrin_id"], name: "index_oda_sambehandlingers_on_førstesagstrin_id"
-    t.index ["opdateringsdato"], name: "index_oda_sambehandlingers_on_opdateringsdato"
+    t.index ["andetsagstrin_id"], name: "index_oda_sambehandlinger_on_andetsagstrin_id"
+    t.index ["førstesagstrin_id"], name: "index_oda_sambehandlinger_on_førstesagstrin_id"
+    t.index ["opdateringsdato"], name: "index_oda_sambehandlinger_on_opdateringsdato"
   end
 
   create_table "oda_slettet_maps", force: :cascade do |t|
@@ -473,21 +473,21 @@ ActiveRecord::Schema[8.0].define(version: 2024_06_28_122552) do
     t.index ["slettetmap_id"], name: "index_oda_slettets_on_slettetmap_id"
   end
 
-  create_table "oda_stemmes", force: :cascade do |t|
+  create_table "oda_stemmer", force: :cascade do |t|
     t.integer "afstemning_id"
     t.integer "aktør_id"
     t.datetime "opdateringsdato"
     t.integer "type_id"
-    t.index ["afstemning_id"], name: "index_oda_stemmes_on_afstemning_id"
-    t.index ["aktør_id"], name: "index_oda_stemmes_on_aktør_id"
-    t.index ["opdateringsdato"], name: "index_oda_stemmes_on_opdateringsdato"
-    t.index ["type_id"], name: "index_oda_stemmes_on_type_id"
+    t.index ["afstemning_id"], name: "index_oda_stemmer_on_afstemning_id"
+    t.index ["aktør_id"], name: "index_oda_stemmer_on_aktør_id"
+    t.index ["opdateringsdato"], name: "index_oda_stemmer_on_opdateringsdato"
+    t.index ["type_id"], name: "index_oda_stemmer_on_type_id"
   end
 
-  create_table "oda_stemmetypes", force: :cascade do |t|
+  create_table "oda_stemmetyper", force: :cascade do |t|
     t.datetime "opdateringsdato"
     t.string "typenavn"
-    t.index ["opdateringsdato"], name: "index_oda_stemmetypes_on_opdateringsdato"
+    t.index ["opdateringsdato"], name: "index_oda_stemmetyper_on_opdateringsdato"
   end
 
   create_table "solid_queue_blocked_executions", force: :cascade do |t|

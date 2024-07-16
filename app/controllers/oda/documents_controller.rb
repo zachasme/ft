@@ -20,15 +20,15 @@ class Oda::DocumentsController < ApplicationController
   def show
     @dokument = Oda::Dokument
       .includes(
-        :sags,
+        :sager,
         :status,
         :type,
         :kategori,
-        :fils,
+        :filer,
         :sagstrin,
-        :emneords,
-        :omtryks,
-        dokument_aktørs: [ :aktør, :rolle ]
+        :emneord,
+        :omtryk,
+        dokument_aktører: [ :aktør, :rolle ]
       )
       .find(params[:id])
   end

@@ -5,8 +5,8 @@ class Oda::Møde < ApplicationRecord
   belongs_to :type, class_name: "Oda::Mødetype"
   belongs_to :status, class_name: "Oda::Mødestatus"
 
-  has_many :møde_aktørs
-  has_many :dagsordenspunkts
+  has_many :møde_aktører
+  has_many :dagsordenspunkter
 
   scope :chronological, -> { order(dato: :desc) }
 end

@@ -12,6 +12,6 @@ class Oda::DecisionsController < ApplicationController
   end
 
   def show
-    @afstemning = Oda::Afstemning.includes(:sag, møde: :type, stemmes: [ :aktør, :type ]).find(params[:id])
+    @afstemning = Oda::Afstemning.includes(:sag, møde: :type, stemmer: [ :aktør, :type ]).find(params[:id])
   end
 end

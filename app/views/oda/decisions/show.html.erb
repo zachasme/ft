@@ -19,7 +19,7 @@
     <p class="margin-top">(<%= @afstemning.kommentar %>)</p>
   <% end %>
 
-  <h2 class="margin-top-double">Stemmer <small>(<%= @afstemning.stemmes.count %>)</small></h2>
+  <h2 class="margin-top-double">Stemmer <small>(<%= @afstemning.stemmer.count %>)</small></h2>
 </div>
 
 <div class="margin-top overflow-x-auto">
@@ -31,7 +31,7 @@
       </tr>
     </thead>
     <tbody>
-      <% @afstemning.stemmes.each do |stemme| %>
+      <% @afstemning.stemmer.each do |stemme| %>
         <tr>
           <td style="color:<%= stemme.type.typenavn == "For" ? 'green' : 'red' %>"><%= stemme.type.typenavn %></td>
           <td><%= link_to stemme.aktør.navn, oda_actor_path(stemme.aktør) %></td>

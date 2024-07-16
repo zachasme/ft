@@ -15,14 +15,14 @@ class Oda::Sag < ApplicationRecord
   belongs_to :deltundersag, class_name: "Oda::Sag", optional: true
   belongs_to :fremsatundersag, class_name: "Oda::Sag", optional: true
 
-  has_many :emneord_sags
-  has_many :emneords, through: :emneord_sags, source: :emneord
+  has_many :emneord_sager
+  has_many :emneord, through: :emneord_sager, source: :emneord
 
   has_many :sagstrin
-  has_many :sag_dokuments
-  has_many :dokuments, through: :sag_dokuments, source: :dokument
+  has_many :sag_dokumenter
+  has_many :dokumenter, through: :sag_dokumenter, source: :dokument
 
   scope :chronological, -> { order(periode_id: :desc, nummernumerisk: :desc) }
-  scope :matches, ->(search) { where("oda_sags.titel LIKE ?", "%#{search}%") if search.present? }
+  scope :matches, ->(search) { where("oda_sager.titel LIKE ?", "%#{search}%") if search.present? }
   scope :casetype, ->(id) { joins(:type).where(type: { id: }) }
 end

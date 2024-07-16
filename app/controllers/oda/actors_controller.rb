@@ -12,10 +12,10 @@ class Oda::ActorsController < ApplicationController
 
   def show
     @aktør = Oda::Aktør
-      .includes(fra_aktør_aktørs: [ :rolle, :tilaktør ], til_aktør_aktørs: [ :rolle, :fraaktør ])
+      .includes(fra_aktør_aktører: [ :rolle, :tilaktør ], til_aktør_aktører: [ :rolle, :fraaktør ])
       .find(params[:id])
 
-    votes = @aktør.stemmes.includes(:type, afstemning: :sag).chronological
+    votes = @aktør.stemmer.includes(:type, afstemning: :sag).chronological
     set_page_and_extract_portion_from votes
   end
 end

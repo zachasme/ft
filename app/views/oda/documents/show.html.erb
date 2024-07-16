@@ -15,19 +15,19 @@
   <strong>Status:</strong> <%= @dokument.status.status %>
 </p>
 
-<% unless @dokument.omtryks.empty? %>
+<% unless @dokument.omtryk.empty? %>
   <h2 class="margin-top-double">Omtryk</h2>
   <ul class="margin-top">
-    <% @dokument.omtryks.each do |omtryk| %>
+    <% @dokument.omtryk.each do |omtryk| %>
       <li><%= l omtryk.dato, format: :long %>: <%= omtryk.begrundelse %></li>
     <% end %>
   </ul>
 <% end %>
 
-<% unless @dokument.dokument_aktørs.empty? %>
+<% unless @dokument.dokument_aktører.empty? %>
   <h2 class="margin-top-double">Aktører</h2>
   <ul class="margin-top">
-    <% @dokument.dokument_aktørs.each do |dokument_aktør| %>
+    <% @dokument.dokument_aktører.each do |dokument_aktør| %>
       <li>
         <%= dokument_aktør.rolle.rolle %>:
         <%= link_to oda_actor_path(dokument_aktør.aktør) do %>
@@ -40,7 +40,7 @@
 
 <h2 class="margin-top-double">Sager</h2>
 <ul class="margin-top">
-  <% @dokument.sags.each do |sag| %>
+  <% @dokument.sager.each do |sag| %>
     <li><%= link_to sag.titel, oda_case_path(sag) %></li>
   <% end %>
 </ul>
@@ -56,7 +56,7 @@
 
 <h2 class="margin-top-double">Filer</h2>
 <ul class="margin-top">
-  <% @dokument.fils.each do |fil| %>
+  <% @dokument.filer.each do |fil| %>
     <li>
       <%= link_to fil.filurl do %>
         <%= fil.titel %> (<%= fil.format %>)
@@ -65,10 +65,10 @@
   <% end %>
 </ul>
 
-<% unless @dokument.emneords.empty? %>
+<% unless @dokument.emneord.empty? %>
   <h2 class="margin-top-double">Emneord</h2>
   <ul class="margin-top">
-    <% @dokument.emneords.each do |emneord| %>
+    <% @dokument.emneord.each do |emneord| %>
       <li><%= link_to emneord.emneord, oda_subject_path(emneord) %></li>
     <% end %>
   </ul>
