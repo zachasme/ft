@@ -15,15 +15,15 @@ Rails.application.routes.draw do
   resources :updates
 
   namespace :oda do
-    resources :actors
+    resources :actors,       path: "aktører"
     resources :deletions
-    resources :documents
-    resources :cases
-    resources :decisions
-    resources :descriptions
-    resources :meetings
-    resources :periods
-    resources :subjects
+    resources :documents,    path: "dokumenter"
+    resources :cases,        path: "sager"
+    resources :decisions,    path: "afstemniger"
+    resources :descriptions, path: "beskrivelser"
+    resources :meetings,     path: "møder"
+    resources :periods,      path: "perioder"
+    resources :subjects,     path: "emneord"
   end
 
   mount MissionControl::Jobs::Engine, at: "/jobs"
