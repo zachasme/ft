@@ -1,6 +1,4 @@
 class DevicesController < ApplicationController
-  allow_unauthenticated_access only: [ :new, :create, :show ]
-
   def new
   end
 
@@ -17,7 +15,7 @@ class DevicesController < ApplicationController
     user = User.find_signed!(params[:sid], purpose: :login)
     user.update! verified: true
     start_new_session_for user
-    redirect_to root_path
+    redirect_after_authentication notice: "Du er logget ind!"
   end
 
   def destroy

@@ -2,8 +2,8 @@ class CreateSearchAgent < ActiveRecord::Migration[8.0]
   def change
     create_table :users do |t|
       t.string :email_address, null: false
-      t.boolean :verified,     null: false
-      t.boolean :admin,        null: false
+      t.boolean :verified,     null: false, default: false
+      t.boolean :admin,        null: false, default: false
 
       t.timestamps
     end

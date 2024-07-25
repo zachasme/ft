@@ -605,8 +605,8 @@ ActiveRecord::Schema[8.0].define(version: 2024_07_25_104535) do
 
   create_table "users", force: :cascade do |t|
     t.string "email_address", null: false
-    t.boolean "verified", null: false
-    t.boolean "admin", null: false
+    t.boolean "verified", default: false, null: false
+    t.boolean "admin", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

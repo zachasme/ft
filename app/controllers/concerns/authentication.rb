@@ -1,19 +1,8 @@
 module Authentication
   extend ActiveSupport::Concern
   included do
-    before_action :require_authentication
+    before_action :authenticate
     helper_method :signed_in?
-  end
-
-  class_methods do
-    def allow_unauthenticated_access(**options)
-      skip_before_action :require_authentication, **options
-    end
-
-    def require_unauthenticated_access(**options)
-      skip_before_action :require_authentication, **options
-      before_action :restore_authentication, :redirect_signed_in_user_to_root, **options
-    end
   end
 
   private
@@ -21,8 +10,8 @@ module Authentication
       Current.user.present?
     end
 
-    def require_authentication
-      restore_authentication || request_authentication
+    def authenticate
+      restore_authentication
     end
 
     def restore_authentication
@@ -51,6 +40,11 @@ module Authentication
     def authenticated_as(user)
       Current.user = user
       cookies.signed.permanent[:user_id] = user.id
+    end
+
+    def redirect_after_authentication(**options)
+      url = session.delete(:return_to_after_authenticating) || root_url
+      redirect_to url, **options
     end
 
     def reset_authentication

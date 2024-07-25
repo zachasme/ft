@@ -1,8 +1,10 @@
 class AdminController < ApplicationController
-  before_action :authenticate
+  before_action :require_admin
 
   private
-    def authenticate
-      http_basic_authenticate_or_request_with name: "admin", password: Rails.application.credentials.admin_password
+    def require_admin
+      unless Current.user.admin?
+        redirect_to "/"
+      end
     end
 end
