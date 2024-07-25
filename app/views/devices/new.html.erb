@@ -1,0 +1,17 @@
+<% content_for(:title) { "Log ind" } %>
+
+<header class="margin-top-double text-align-center">
+  <h1><%= content_for :title %></h1>
+</header>
+
+
+<div class="centered margin-top">
+  <%= form_with url: device_path do |form| %>
+    <div>
+      <%= form.label :email_address%>
+      <%= form.text_field :email_address%>
+    </div>
+
+    <%= form.submit "Log ind" %>
+  <% end %>
+</div>

@@ -1,0 +1,17 @@
+<% content_for(:title) { "Søgeagent" } %>
+
+<header class="margin-top-double text-align-center">
+  <%= link_to "← Søgeagenter", search_agents_path %>
+  <h1><%= content_for :title %></h1>
+  <%= link_to "Rediger", edit_search_agent_path(@search_agent) %>
+</header>
+
+<div class="centered margin-top">
+  <ul>
+  <% @afstemninger.each do |afstemning| %>
+    <li>
+      <%= highlight(excerpt(afstemning.sag&.titel, @search_agent.query, radius: 30), @search_agent.query) %>
+    </li>
+  <% end %>
+  </ul>
+</div>

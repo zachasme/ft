@@ -12,6 +12,11 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "oda/decisions#index"
 
+  scope path_names: { new: "ny" } do
+    resource  :device,        path: "enhed"
+    resources :search_agents, path: "søgeagenter"
+  end
+
   resources :updates
 
   namespace :oda do

@@ -69,6 +69,8 @@ group :development do
   gem "tiny_tds"
 end
 
+gem "mailpace-rails"
+
 gem "yabeda"
 gem "yabeda-rails"
 gem "yabeda-puma-plugin"

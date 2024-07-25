@@ -7,6 +7,10 @@ module Synchronizable
   SECOND_DECIMALS = 3
 
   class_methods do
+    def changed_since(after)
+      where(opdateringsdato: after..)
+    end
+
     def last_synchronization
       maximum(:opdateringsdato)
     end

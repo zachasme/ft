@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_07_16_094427) do
+ActiveRecord::Schema[8.0].define(version: 2024_07_25_104535) do
   create_table "oda_afstemninger", force: :cascade do |t|
     t.string "kommentar"
     t.string "konklusion"
@@ -490,6 +490,16 @@ ActiveRecord::Schema[8.0].define(version: 2024_07_16_094427) do
     t.index ["opdateringsdato"], name: "index_oda_stemmetyper_on_opdateringsdato"
   end
 
+  create_table "search_agents", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "name", null: false
+    t.string "query", null: false
+    t.datetime "executed_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_search_agents_on_user_id"
+  end
+
   create_table "solid_queue_blocked_executions", force: :cascade do |t|
     t.integer "job_id", null: false
     t.string "queue_name", null: false
@@ -593,6 +603,15 @@ ActiveRecord::Schema[8.0].define(version: 2024_07_16_094427) do
     t.index ["key"], name: "index_solid_queue_semaphores_on_key", unique: true
   end
 
+  create_table "users", force: :cascade do |t|
+    t.string "email_address", null: false
+    t.boolean "verified", null: false
+    t.boolean "admin", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_foreign_key "search_agents", "users"
   add_foreign_key "solid_queue_blocked_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_claimed_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_failed_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
