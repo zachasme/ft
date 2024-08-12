@@ -1,5 +1,3 @@
-require "active_support/core_ext/integer/time"
-
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
   config.action_mailer.delivery_method = :mailpace
@@ -43,7 +41,7 @@ Rails.application.configure do
 
   # Assume all access to the app is happening through a SSL-terminating reverse proxy.
   # Can be used together with config.force_ssl for Strict-Transport-Security and secure cookies.
-  config.assume_ssl = true
+  # config.assume_ssl = true
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   config.force_ssl = true
@@ -68,7 +66,7 @@ Rails.application.configure do
   # config.cache_store = :mem_cache_store
 
   # Use a real queuing backend for Active Job (and separate queues per environment).
-  config.active_job.queue_adapter = :solid_queue
+  # config.active_job.queue_adapter = :resque
   # config.active_job.queue_name_prefix = "folketinget_production"
 
   # Disable caching for Action Mailer templates even if Action Controller
@@ -78,6 +76,18 @@ Rails.application.configure do
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   # config.action_mailer.raise_delivery_errors = false
+
+  # Set host to be used by links generated in mailer templates.
+  config.action_mailer.default_url_options = { host: "example.com" }
+
+  # Specify outgoing SMTP server. Remember to add smtp/* credentials via rails credentials:edit.
+  # config.action_mailer.smtp_settings = {
+  #   user_name: Rails.application.credentials.dig(:smtp, :user_name),
+  #   password: Rails.application.credentials.dig(:smtp, :password),
+  #   address: "smtp.example.com",
+  #   port: 587,
+  #   authentication: :plain
+  # }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
