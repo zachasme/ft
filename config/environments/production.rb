@@ -4,6 +4,7 @@ Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
   config.action_mailer.delivery_method = :mailpace
   config.action_mailer.mailpace_settings = { api_token: Rails.application.credentials.mailpace_api_token }
+  config.action_mailer.default_url_options = { host: "ft.kfvs.dk" }
 
   # Code is not reloaded between requests.
   config.enable_reloading = false
