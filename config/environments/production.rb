@@ -1,8 +1,5 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
-  config.action_mailer.delivery_method = :mailpace
-  config.action_mailer.mailpace_settings = { api_token: Rails.application.credentials.mailpace_api_token }
-  config.action_mailer.default_url_options = { host: "ft.kfvs.dk" }
 
   # Code is not reloaded between requests.
   config.enable_reloading = false
@@ -106,4 +103,13 @@ Rails.application.configure do
   # ]
   # Skip DNS rebinding protection for the default health check endpoint.
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
+
+  # ====== CUSTOM BEGIN
+
+  config.assume_ssl = true
+
+  config.active_job.queue_adapter = :solid_queue
+  config.action_mailer.delivery_method = :mailpace
+  config.action_mailer.mailpace_settings = { api_token: Rails.application.credentials.mailpace_api_token }
+  config.action_mailer.default_url_options = { host: "ft.kfvs.dk" }
 end
