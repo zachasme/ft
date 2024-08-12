@@ -6,4 +6,8 @@ class SearchAgent < ApplicationRecord
   def afstemninger
     Oda::Afstemning.matches(query)
   end
+
+  def sager
+    Oda::Sag.matches(query)
+  end
 end

@@ -14,7 +14,7 @@ body, h1, h2, h3, p, ol, ul, menu, details {
 }
 
 body { 
-  padding: var(--space);
+  background: #f5f5f7;
   font-family: system-ui;
   min-height: 100vh;
   display: flex;
@@ -25,8 +25,15 @@ main {
   flex: 1;
 }
 
+nav {
+  position: sticky;
+  top: 0;
+  backdrop-filter: blur(10px);
+}
+
 nav a {
   display: flex;
+  color: inherit;
   flex-direction: column;
   font-size: min(calc(1vw + 0.5rem), 1rem)
 }
@@ -41,6 +48,8 @@ svg {
 .justify-center { justify-content: center }
 .align-center { align-items: center }
 .align-baseline { align-items: baseline }
+.margin { margin: var(--space) }
+.margin-inline { margin-inline: var(--space) }
 .margin-top { margin-top: var(--space) }
 .margin-top-double { margin-top: var(--space-double) }
 .pad { padding: var(--space) }

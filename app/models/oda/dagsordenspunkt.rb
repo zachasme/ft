@@ -4,7 +4,7 @@ class Oda::Dagsordenspunkt < ApplicationRecord
   belongs_to :møde
 
   # it looks like `super_id` is not used properly
-  belongs_to :super, class_name: "Oda::Dagsordenspunkt"
+  belongs_to :super, class_name: "Oda::Dagsordenspunkt", optional: true
   has_many :children, class_name: "Oda::Dagsordenspunkt", foreign_key: :super_id
   scope :roots, -> { where(super_id: nil) }
 end

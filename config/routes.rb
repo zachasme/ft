@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
 
   # Defines the root path route ("/")
-  root "oda/decisions#index"
+  root "welcome#show"
 
   scope path_names: { new: "ny" } do
     resource  :device,        path: "enhed"

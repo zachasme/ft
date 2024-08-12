@@ -7,6 +7,7 @@ class SearchAgentsController < ApplicationController
     @search_agent = Current.user.search_agents.find(params[:id])
 
     @afstemninger = @search_agent.afstemninger.changed_since(@search_agent.executed_at).chronological.limit(10)
+    @sager = @search_agent.sager.changed_since(@search_agent.executed_at).chronological
   end
 
   def new

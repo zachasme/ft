@@ -3,14 +3,16 @@
 <header class="margin-top-double text-align-center">
   <%= link_to "← Søgeagenter", search_agents_path %>
   <h1><%= content_for :title %></h1>
+  <p>Sidst opdateret <%= l @search_agent.executed_at, format: :short %></p>
   <%= link_to "Rediger", edit_search_agent_path(@search_agent) %>
 </header>
 
 <div class="centered margin-top">
+  <h2>Nye sager siden sidste email:</h2>
   <ul>
-  <% @afstemninger.each do |afstemning| %>
+  <% @sager.each do |sag| %>
     <li>
-      <%= highlight(excerpt(afstemning.sag&.titel, @search_agent.query, radius: 30), @search_agent.query) %>
+      <%= l sag.opdateringsdato, format: :short %>: <%= highlight(excerpt(sag.titel, @search_agent.query, radius: 30), @search_agent.query) %>
     </li>
   <% end %>
   </ul>
