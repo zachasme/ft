@@ -68,10 +68,6 @@ gem "geared_pagination"
 
 gem "progress_bar"
 
-group :development do
-  gem "tiny_tds"
-end
-
 gem "mailpace-rails"
 
 gem "yabeda"
@@ -80,3 +76,7 @@ gem "yabeda-puma-plugin"
 
 gem "newrelic_rpm"
 gem "yabeda-newrelic"
+
+group :tiny_tds, optional: true do
+  gem "tiny_tds"
+end

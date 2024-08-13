@@ -21,6 +21,9 @@ namespace :backup do
   end
 
   task export: :environment do
+    puts "You need to install TinyTDS and opt into install the bindings using"
+    puts "bundle config set --local with tiny_tds"
+
     download(BACKUP_URL, BACKUP_FILE, http_basic_authentication: [ BACKUP_USER, BACKUP_PASS ])
 
     FileUtils.rm_rf(EXPORT_DIR)
