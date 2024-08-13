@@ -68,10 +68,9 @@
     </nav>
 
     <% if signed_in? %>
-      Logget ind som: <%= Current.user.email_address %>
-      <%= button_to "Log ud", device_path, method: :delete %>
-
+      Logget ind som: <%= link_to Current.user.email_address, user_path %>
       <%= link_to "Søgeagenter", search_agents_path %>
+      <%= button_to "Log ud", device_path, method: :delete %>
     <% end %>
 
     <main class="margin-inline">

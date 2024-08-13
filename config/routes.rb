@@ -12,9 +12,12 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "welcome#show"
 
-  scope path_names: { new: "ny" } do
+  scope path_names: { new: "ny", edit: "rediger" } do
     resource  :device,        path: "enhed"
     resources :search_agents, path: "søgeagenter"
+    resource :user, path: "bruger" do
+      resources :email_addresses, param: :token, path: "email_adresser"
+    end
   end
 
   resources :updates

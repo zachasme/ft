@@ -1,0 +1,16 @@
+<div class="centered">
+  <%= form_with model: Current.user do |form| %>
+    <%= form.label :email_address %>
+    <%= form.email_field :email_address %>
+  <% end %>
+
+  <details class="margin-top-double">
+    <summary class="hide-when-open">
+      <span class="txt-negative">Slet min bruger…</span>
+    </summary>
+    <div class="txt-negative">
+      <p>Er du sikker på at du vil slette din bruger?</p>
+      <%= button_to "Slet min bruger", user_path, method: :delete, data: { turbo_confirm: "Er du *helt* sikker?" } %>
+    </div>
+  </details>
+</div>
