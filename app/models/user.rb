@@ -1,7 +1,9 @@
 class User < ApplicationRecord
   has_many :search_agents, dependent: :destroy
 
-  normalizes :email_address, with: -> { it.strip.downcase }
+  # -- email address changeable
+
+  normalizes :email_address, with: -> { _1.strip.downcase }
 
   validates :email_address, uniqueness: true
 
