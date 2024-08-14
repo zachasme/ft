@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     resource :user, path: "bruger" do
       resources :email_addresses, param: :token, path: "email_adresser"
     end
+    resource :search, path: "søg"
   end
 
   resources :updates

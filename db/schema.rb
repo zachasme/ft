@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_07_25_104535) do
+ActiveRecord::Schema[8.0].define(version: 2024_08_13_161008) do
   create_table "oda_afstemninger", force: :cascade do |t|
     t.string "kommentar"
     t.string "konklusion"
@@ -500,6 +500,14 @@ ActiveRecord::Schema[8.0].define(version: 2024_07_25_104535) do
     t.index ["user_id"], name: "index_search_agents_on_user_id"
   end
 
+  create_table "searches", force: :cascade do |t|
+    t.string "query"
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_searches_on_user_id"
+  end
+
   create_table "solid_queue_blocked_executions", force: :cascade do |t|
     t.integer "job_id", null: false
     t.string "queue_name", null: false
@@ -612,6 +620,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_07_25_104535) do
   end
 
   add_foreign_key "search_agents", "users"
+  add_foreign_key "searches", "users"
   add_foreign_key "solid_queue_blocked_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_claimed_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_failed_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade

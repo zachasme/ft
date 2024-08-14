@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   has_many :search_agents, dependent: :destroy
+  has_many :searches, dependent: :destroy
 
   # -- email address changeable
 

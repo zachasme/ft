@@ -6,6 +6,7 @@
 
 :root {
   --space: 1rem;
+  --space-half: calc(var(--space) / 2);
   --space-double: calc(var(--space) * 2);
 }
 
@@ -43,8 +44,10 @@ svg {
 }
 
 .flex { display: flex }
+.column { flex-direction: column }
 .flex-wrap { flex-wrap: wrap }
 .gap { gap: var(--space) }
+.gap-half { gap: var(--space-half) }
 .justify-space-between { justify-content: space-between }
 .justify-center { justify-content: center }
 .align-center { align-items: center }
@@ -89,4 +92,9 @@ table {
   td, th {
     border: 1px solid rgba(0,0,0,.5);
   }
+}
+
+ol:where([class]) {
+  list-style: none;
+  padding: 0;
 }
