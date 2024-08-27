@@ -8,10 +8,10 @@ image: zachasme/ft
 servers:
   web:
     - 135.181.250.10
-  # job:
-  #   hosts:
-  #     - 192.168.0.1
-  #   cmd: bin/solid_queue work
+  job:
+    hosts:
+      - 135.181.250.10
+    cmd: bundle exec rake solid_queue:start
 
 # Credentials for your image host.
 registry:
