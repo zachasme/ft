@@ -9,19 +9,35 @@ default: &default
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
 
-development:
+solid_queue: &solid_queue
   <<: *default
-  database: storage/development.sqlite3
+  migrations_paths: db/solid_queue_migrate
+
+development:
+  primary:
+    <<: *default
+    database: storage/development.sqlite3
+  solid_queue:
+    <<: *solid_queue
+    database: storage/development.solid_queue.sqlite3
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
-  <<: *default
-  database: storage/test.sqlite3
+  primary:
+    <<: *default
+    database: storage/test.sqlite3
+  solid_queue:
+    <<: *solid_queue
+    database: storage/test.solid_queue.sqlite3
 
 # Store production database in the storage/ directory, which by default
 # is mounted as a persistent Docker volume in config/deploy.yml.
 production:
-  <<: *default
-  database: storage/production.sqlite3
+  primary:
+    <<: *default
+    database: storage/production.sqlite3
+    database: storage/production.solid_queue.sqlite3
+  solid_queue:
+    <<: *solid_queue

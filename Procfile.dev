@@ -1,0 +1,2 @@
+web: bin/rails server
+job: bundle exec rake solid_queue:start

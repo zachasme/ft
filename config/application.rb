@@ -24,5 +24,9 @@ module Folketinget
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
     config.i18n.default_locale = :da
+
+    # ====== CUSTOM BEGIN
+
+    config.solid_queue.connects_to = { database: { writing: :solid_queue, reading: :solid_queue } }
   end
 end
