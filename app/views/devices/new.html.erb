@@ -1,16 +1,20 @@
-<% content_for(:title) { "Opret bruger (eller log ind)" } %>
+<% content_for(:title) { "Log ind" } %>
 
 <header class="margin-top-double text-align-center">
   <h1><%= content_for :title %></h1>
-  <p>Når du har oprettet dig kan du abonnere på søgeord via søgeagenter</p>
 </header>
 
 
 <div class="centered margin-top">
   <%= form_with url: device_path do |form| %>
     <div>
-      <%= form.label :email_address%>
-      <%= form.text_field :email_address%>
+      <%= form.label :email_address %>
+      <%= form.text_field :email_address %>
+    </div>
+
+    <div>
+      <%= form.label :password %>
+      <%= form.text_field :password %>
     </div>
 
     <%= form.submit "Log ind" %>

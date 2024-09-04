@@ -13,12 +13,11 @@ Rails.application.routes.draw do
   root "welcome#show"
 
   scope path_names: { new: "ny", edit: "rediger" } do
-    resource  :device,        path: "enhed"
-    resources :search_agents, path: "søgeagenter"
-    resource :user, path: "bruger" do
-      resources :email_addresses, param: :token, path: "email_adresser"
-    end
+    resource :device, path: "enhed"
+    resource :user,   path: "bruger"
     resource :search, path: "søg"
+
+    resources :search_agents, path: "søgeagenter"
   end
 
   resources :updates

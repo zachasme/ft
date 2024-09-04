@@ -1,8 +1,5 @@
 <div class="centered">
-  <%= form_with model: Current.user do |form| %>
-    <%= form.label :email_address %>
-    <%= form.email_field :email_address %>
-  <% end %>
+  <%= button_to "Log ud", device_path, method: :delete %>
 
   <details class="margin-top-double">
     <summary class="hide-when-open">

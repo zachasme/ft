@@ -514,6 +514,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_09_03_072900) do
     t.boolean "admin", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "password_digest"
     t.index ["email_address"], name: "index_users_on_email_address", unique: true
   end
 

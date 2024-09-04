@@ -1,0 +1,6 @@
+<% password_digest = BCrypt::Password.create("hunter2") %>
+
+zach:
+  email_address: z@chari.as
+  password_digest: <%= password_digest %>
+  verified: true

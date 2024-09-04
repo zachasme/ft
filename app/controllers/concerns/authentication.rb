@@ -1,8 +1,16 @@
 module Authentication
   extend ActiveSupport::Concern
   included do
-    before_action :authenticate
+    before_action :restore_authentication
+
     helper_method :signed_in?
+  end
+
+  class_methods do
+    def require_authentication(**options)
+      skip_before_action :restore_authentication, **options
+      before_action :require_authentication, **options
+    end
   end
 
   private
@@ -10,8 +18,8 @@ module Authentication
       Current.user.present?
     end
 
-    def authenticate
-      restore_authentication
+    def require_authentication
+      restore_authentication || request_authentication
     end
 
     def restore_authentication
@@ -22,7 +30,7 @@ module Authentication
 
     def request_authentication
       session[:return_to_after_authenticating] = request.url
-      redirect_to new_device_url
+      redirect_to new_user_url
     end
 
     def redirect_signed_in_user_to_root

@@ -1,0 +1,18 @@
+<% content_for(:title) { "Opret bruger" } %>
+
+<header class="margin-top-double text-align-center">
+  <h1><%= content_for :title %></h1>
+  <p>Når du har oprettet dig kan du abonnere på søgeord via søgeagenter</p>
+</header>
+
+<div class="centered margin-top">
+  <%= form_with model: @user, url: user_path do |form| %>
+    <%= form.label :email_address %>
+    <%= form.email_field :email_address, required: true %>
+
+    <%= form.label :password %>
+    <%= form.password_field :password, required: true %>
+
+    <%= form.submit %>
+  <% end %>
+</div>

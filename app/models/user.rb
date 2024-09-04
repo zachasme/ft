@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  has_secure_password
+
   has_many :search_agents, dependent: :destroy
   has_many :searches, dependent: :destroy
 

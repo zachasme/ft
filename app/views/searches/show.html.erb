@@ -41,6 +41,10 @@
     <%= form.submit "Søg" %>
   <% end %>
 
+  <p class="marign-top"> 
+    <%= link_to "Opret søgeagent", new_search_agent_path %>
+  </p>
+
   <ol class="flex column gap margin-top-double">
     <% @page.records.each do |sag| %>
       <li>

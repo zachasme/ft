@@ -60,6 +60,7 @@ svg {
 .translucent { opacity: .5 }
 .overflow-x-auto { overflow-x: auto }
 .text-align-center { text-align: center }
+.color-notice { color: green }
 
 .centered {
   max-width: 60ch;
