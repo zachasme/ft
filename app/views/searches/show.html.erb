@@ -1,20 +1,11 @@
-<div class="centered">
-  <h1>Søg</h1>
-  <% if Current.user.present? %>
-    <details>
-      <summary>Nylige søgninger</summary>
-        <ol>
-        <% @recent_searches.each do |search| %>
-          <li>
-            <%= link_to search_path(q: search.query) do %>
-              <span class="overflow-ellipsis">“<%= search.query %>”</span>
-            <% end %>
-          </li>
-        <% end %>
-      </ol>
-    </details>
-  <% end %>
+<% content_for(:title) { "Søgning: “#{params[:q]}”" } %>
 
+<header class="margin-top-double text-align-center">
+  <h1><%= content_for :title %></h1>
+</header>
+
+
+<div class="centered">
   <%= form_with url: search_path, method: :get do |form| %>
     <%= form.search_field :q, value: params[:q] %>
     
@@ -41,9 +32,11 @@
     <%= form.submit "Søg" %>
   <% end %>
 
+<!--
   <p class="marign-top"> 
     <%= link_to "Opret søgeagent", new_search_agent_path %>
   </p>
+-->
 
   <ol class="flex column gap margin-top-double">
     <% @page.records.each do |sag| %>

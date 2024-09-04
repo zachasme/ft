@@ -1,7 +1,12 @@
-<div class="centered">
-  <h1 class="margin-top">Søg i Folketingets Åbne Data</h1>
+<header class="margin-top-double text-align-center">
+  <h1>Søg i Folketingets Åbne Data</h1>
+</header>
 
+<div class="centered">
   <%= form_with url: search_path, method: :get, class: "margin-top" do |form| %>
+    <%= form.hidden_field "sagstyper[]", value: 3 %>
+    <%= form.hidden_field "sagstyper[]", value: 5 %>
+    <%= form.hidden_field "sagstyper[]", value: 9 %>
     <%= form.search_field :q, value: params[:q] %>
     <%= form.submit "Søg" %>
   <% end %>

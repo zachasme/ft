@@ -1,5 +1,11 @@
-<div class="centered">
+<% content_for(:title) { "Min bruger" } %>
+
+<header class="margin-top-double text-align-center">
+  <h1><%= content_for :title %></h1>
   <%= button_to "Log ud", device_path, method: :delete %>
+</header>
+
+<div class="centered">
 
   <details class="margin-top-double">
     <summary class="hide-when-open">
