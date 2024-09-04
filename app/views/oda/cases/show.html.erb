@@ -7,8 +7,9 @@
 </header>
 
 <div class="centered">
-  <h2 class="margin-top"><%= @sag.titel %></h2>
-  <p class="margin-top"><%= sanitize @sag.resume %></p>
+  <h2 class="margin-top"><%= @sag.titelkort %></h2>
+  <p class="margin-top"><%= @sag.titel %></p>
+  <p class="margin-top">Resume: <%= sanitize @sag.resume %></p>
   <p class="margin-top"><em><%= @sag.afstemningskonklusion %></em></p>
 
   <% if @sag.deltundersag %>
