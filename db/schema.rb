@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_09_03_072900) do
+ActiveRecord::Schema[8.0].define(version: 2024_09_05_084954) do
   create_table "oda_afstemninger", force: :cascade do |t|
     t.string "kommentar"
     t.string "konklusion"
@@ -520,4 +520,8 @@ ActiveRecord::Schema[8.0].define(version: 2024_09_03_072900) do
 
   add_foreign_key "search_agents", "users"
   add_foreign_key "searches", "users"
+
+  # Virtual tables defined in this database.
+  # Note that virtual tables may not work with other database engines. Be careful if changing database.
+  create_virtual_table "oda_sager_search_index", "fts5", ["titel", "titelkort", "resume", "content=oda_sager", "content_rowid=id"]
 end

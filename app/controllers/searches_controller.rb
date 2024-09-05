@@ -4,8 +4,16 @@ class SearchesController < ApplicationController
 
     records = Oda::Sag
       .includes(:periode, :kategori, :status, :type, :deltundersag, :fremsatundersag)
-      .chronological
-      .matches(query)
+      .search(query)
+      .with_snippets
+
+    if params[:order] == "chronological"
+      @order = :chronological
+      records = records.chronological
+    else
+      @order = :ranked
+      records = records.ranked
+    end
 
     @sagstyper = (params[:sagstyper]||[]).compact_blank.any? ? params[:sagstyper] : [ 3, 5, 9 ]
     records = records.casetype(@sagstyper) unless @sagstyper.empty?

@@ -1,5 +1,8 @@
 class Oda::Sag < ApplicationRecord
   include Synchronizable
+  include Searchable
+
+  has_searchables :titel, :titelkort, :resume
 
   # TODO: Whats up with
   #       - Aktstykke

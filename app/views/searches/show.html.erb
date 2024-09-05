@@ -10,6 +10,14 @@
     <%= form.search_field :q, value: params[:q] %>
     
     <fieldset>
+      <legend>Sorter efter</legend>
+      <%= form.radio_button :order, :ranked, checked: @order == :ranked %>
+      <%= form.label :order_ranked, "Relevans" %>
+      <%= form.radio_button :order, :chronological, checked: @order == :chronological %>
+      <%= form.label :order_chronological, "Kronologisk" %>
+    </fieldset>
+
+    <fieldset>
       <legend>Sagstyper</legend>
       <%= form.collection_check_boxes(:sagstyper, Oda::Sagstype.top, :id, :typenavn, checked: params[:sagstyper]) do |type| %>
         <p>
@@ -28,7 +36,6 @@
       </details>
     </fieldset>
 
-
     <%= form.submit "Søg" %>
   <% end %>
 
@@ -41,9 +48,11 @@
   <ol class="flex column gap margin-top-double">
     <% @page.records.each do |sag| %>
       <li>
-        <strong><%= sag.nummer %></strong>: <%= link_to highlight(sag.titelkort, params[:q]), oda_case_path(sag), title: sag.titel %>
-        <p><%= highlighted_excerpt(sag.titel, params[:q]) %></p>
+        <strong><%= sag.nummer %></strong>: <%= link_to sanitize(sag.titelkort_snippet, tags: ["mark"]), oda_case_path(sag), title: sag.titel %>
+        <p><em><%= sanitize sag.titel_snippet, tags: ["mark"] %></em></p>
+        <p><%= sanitize sag.resume_snippet, tags: ["mark"] %></p>
         <strong><%= sag.status.status %></strong>
+        <span>Opdateret: <%= l sag.opdateringsdato %></span>
       </li>
     <% end %>
   </ol>
