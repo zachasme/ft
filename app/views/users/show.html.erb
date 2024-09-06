@@ -1,4 +1,4 @@
-<% content_for(:title) { "Min bruger" } %>
+<% content_for(:title) { "Min bruger: #{Current.user.email_address}" } %>
 
 <header class="margin-top-double text-align-center">
   <h1><%= content_for :title %></h1>
