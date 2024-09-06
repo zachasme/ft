@@ -20,14 +20,14 @@ module Searchable
         select("#{table_name}.*", *snippets)
       }
     end
-    
+
     def rebuild_search_index
       index_table_name = table_name + "_search_index"
       connection.execute "INSERT INTO #{index_table_name}(#{index_table_name}) VALUES('rebuild');"
     end
 
     private
-      def select_snippet(column, i, tag: 'mark', omission: '…')
+      def select_snippet(column, i, tag: "mark", omission: "…")
         "snippet(#{table_name + "_search_index"}, #{i}, '<#{tag}>', '</#{tag}>', '#{omission}', 32) AS #{column}_snippet"
       end
   end

@@ -1,13 +1,13 @@
 <%= form_with model: search_agent do |form| %>
   <div>
-    <%= form.label :name, "Navn" %>
-    <%= form.text_field :name %>
+    <%= form.label :name %>
+    <%= form.text_field :name, class: "input" %>
   </div>
-  <div>
-    <%= form.label :query, "Søgning" %>
-    <%= form.text_field :query %>
+
+  <div class="margin-top">
+    <%= form.label :query %>
+    <%= form.text_field :query, class: "input" %>
   </div>
-  <div>
-    <%= form.submit %>
-  </div>
+
+  <%= form.submit class: "button margin-top" %>
 <% end %>

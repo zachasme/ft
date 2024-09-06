@@ -8,3 +8,7 @@
 <div class="centered margin-top">
   <%= render 'form', search_agent: @search_agent %>
 </div>
+
+<div class="margin-top">
+  <%= button_to "Slet søgeagent", search_agent_path(@search_agent), method: :delete, data: { turbo_confirm: "Er du *helt* sikker?" } %>
+</div>

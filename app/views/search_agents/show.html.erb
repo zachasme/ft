@@ -1,4 +1,4 @@
-<% content_for(:title) { "Søgeagent" } %>
+<% content_for(:title) { "Søgeagent “#{@search_agent.query}”" } %>
 
 <header class="margin-top-double text-align-center">
   <%= link_to "← Søgeagenter", search_agents_path %>
@@ -11,9 +11,13 @@
   <h2>Nye sager siden sidste email:</h2>
   <ul>
   <% @sager.each do |sag| %>
-    <li>
-      <%= l sag.opdateringsdato, format: :short %>: <%= highlight(excerpt(sag.titel, @search_agent.query, radius: 30), @search_agent.query) %>
-    </li>
+      <li>
+        <strong><%= sag.nummer %></strong>: <%= link_to sanitize(sag.titelkort_snippet, tags: ["mark"]), oda_case_path(sag), title: sag.titel %>
+        <p><em><%= sanitize sag.titel_snippet, tags: ["mark"] %></em></p>
+        <p><%= sanitize sag.resume_snippet, tags: ["mark"] %></p>
+        <strong><%= sag.status.status %></strong>
+        <span>Opdateret: <%= l sag.opdateringsdato %></span>
+      </li>
   <% end %>
   </ul>
 </div>

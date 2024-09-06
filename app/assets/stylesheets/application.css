@@ -54,6 +54,7 @@ svg {
 .align-baseline { align-items: baseline }
 .margin { margin: var(--space) }
 .margin-inline { margin-inline: var(--space) }
+.margin-inline { margin-inline: auto }
 .margin-top { margin-top: var(--space) }
 .margin-top-double { margin-top: var(--space-double) }
 .pad { padding: var(--space) }
@@ -98,4 +99,15 @@ table {
 ol:where([class]) {
   list-style: none;
   padding: 0;
+}
+
+.input {
+  display: block;
+  width: 100%;
+  padding: 1ch;
+  font-size: inherit;
+}
+.button {
+  font-size: inherit;
+  padding: 1ch;
 }

@@ -10,6 +10,7 @@ class DevicesController < ApplicationController
       start_new_session_for user
       redirect_to root_path, notice: "Velkommen tilbage!"
     else
+      flash.now[:alert] = "Forkert e-mailadresse eller kodeord"
       render :new, status: :unprocessable_entity
     end
   end

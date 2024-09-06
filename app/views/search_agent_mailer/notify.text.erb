@@ -1,0 +1,8 @@
+Nye sager matcher din søgeagent “<%= @search_agent.query %>”
+
+<% @cases.each do |sag| %>
+
+  --- <%= oda_case_url(sag) %>
+  <%= sag.nummer %>: <%= sag.titelkort_snippet %>
+
+<% end %>

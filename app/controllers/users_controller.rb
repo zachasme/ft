@@ -8,6 +8,7 @@ class UsersController < ApplicationController
     if User.find_by(email_address: user_params[:email_address])
       redirect_to new_device_url, notice: "Du har allerede en bruger"
     elsif @user.save
+      UserMailer.with(user: @user).verify_email_address.deliver_later
       start_new_session_for @user
       redirect_to root_url, notice: "Tjek din indbakke. Vi har sendt en mail til #{@user.email_address}"
     else

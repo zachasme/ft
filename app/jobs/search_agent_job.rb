@@ -1,8 +1,8 @@
 class SearchAgentJob < ApplicationJob
   def perform(search_agent)
     search_agent.transaction do
-      changed = search_agent.afstemninger.changed_since(search_agent.executed_at)
-      puts changed
+      cases = search_agent.search
+      SearchAgentMailer.with(search_agent).notify(*cases).deliver_later
 
       search_agent.update! executed_at: Time.current
     end

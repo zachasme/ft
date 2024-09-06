@@ -8,12 +8,11 @@ class SearchAgentsController < ApplicationController
   def show
     @search_agent = Current.user.search_agents.find(params[:id])
 
-    @afstemninger = @search_agent.afstemninger.changed_since(@search_agent.executed_at).chronological.limit(10)
-    @sager = @search_agent.sager.changed_since(@search_agent.executed_at).chronological
+    @sager = @search_agent.search
   end
 
   def new
-    @search_agent = Current.user.search_agents.new
+    @search_agent = Current.user.search_agents.new(query: params[:q])
   end
 
   def create
@@ -38,6 +37,11 @@ class SearchAgentsController < ApplicationController
       flash.now[:alert] = "Noget gik galt"
       render :edit, status: :unprocessable_entity
     end
+  end
+
+  def destroy
+    Current.user.search_agents.find(params[:id]).destroy
+    redirect_to search_agents_url, notice: "Søgeagent slettet"
   end
 
   private

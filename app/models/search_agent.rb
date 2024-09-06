@@ -3,11 +3,13 @@ class SearchAgent < ApplicationRecord
 
   belongs_to :user
 
-  def afstemninger
-    Oda::Afstemning.matches(query)
-  end
-
-  def sager
-    Oda::Sag.matches(query)
+  def search
+    Oda::Sag
+      .includes(:periode, :kategori, :status, :type, :deltundersag, :fremsatundersag)
+      .search(query)
+      .ranked
+      .with_snippets
+      .casetype([ 3, 5, 9 ])
+      .changed_since(executed_at)
   end
 end

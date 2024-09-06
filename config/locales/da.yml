@@ -1,6 +1,13 @@
 ---
 da:
   activerecord:
+    models:
+      search_agent: Søgeagent
+    attributes:
+      search_agent:
+        name: Navn
+        query: Søgning
+
     errors:
       messages:
         record_invalid: 'Godkendelse gik galt: %{errors}'

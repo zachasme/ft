@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     resource :search, path: "søg"
 
     resources :search_agents, path: "søgeagenter"
+    resources :email_address_verifications, path: "bekræftelser"
   end
 
   resources :updates

@@ -78,5 +78,11 @@ class SynchronizationJob < ApplicationJob
       puts entity
       entity.synchronize
     end
+
+    SearchAgent.all.each do |agent|
+      puts agent
+      SearchAgentJob.perform_later(agent)
+    end
+    puts "Done <3"
   end
 end

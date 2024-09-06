@@ -1,0 +1,11 @@
+<h1>Nye sager matcher din søgeagent “<%= @search_agent.query %>”</h1>
+
+<ol>
+  <% @cases.each do |sag| %>
+    <li>
+      <strong><%= sag.nummer %></strong>: <%= link_to sanitize(sag.titelkort_snippet, tags: ["mark"]), oda_case_url(sag), title: sag.titel %>
+      <p><em><%= sanitize sag.titel_snippet, tags: ["mark"] %></em></p>
+      <p><%= sanitize sag.resume_snippet, tags: ["mark"] %></p>
+    </li>
+  <% end %>
+</ol>

@@ -10,6 +10,7 @@
     <% @search_agents.each do |search_agent |%>
       <li>
         <%= link_to search_agent.name, search_agent %>
+        <p>Søgning: “<%= search_agent.query %>”</p>
       </li>
     <% end %>
   </ul>

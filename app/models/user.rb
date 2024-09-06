@@ -17,4 +17,8 @@ class User < ApplicationRecord
   def email_address_change_token
     generate_token_for :email_address_change
   end
+
+  def verify
+    update! verified: true
+  end
 end
