@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_09_05_084954) do
+ActiveRecord::Schema[8.0].define(version: 2024_09_09_112649) do
   create_table "oda_afstemninger", force: :cascade do |t|
     t.string "kommentar"
     t.string "konklusion"
@@ -56,7 +56,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_09_05_084954) do
     t.string "efternavn"
     t.string "fornavn"
     t.string "gruppenavnkort"
-    t.string "navn", collation: "nocase"
+    t.string "navn"
     t.datetime "opdateringsdato"
     t.integer "periode_id"
     t.datetime "slutdato"
@@ -143,7 +143,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_09_05_084954) do
     t.string "spørgsmålsordlyd"
     t.string "spørgsmålstitel"
     t.integer "status_id"
-    t.string "titel", collation: "nocase"
+    t.string "titel"
     t.integer "type_id"
     t.index ["dato"], name: "index_oda_dokumenter_on_dato"
     t.index ["kategori_id"], name: "index_oda_dokumenter_on_kategori_id"
@@ -173,7 +173,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_09_05_084954) do
   end
 
   create_table "oda_emneord", force: :cascade do |t|
-    t.string "emneord", collation: "nocase"
+    t.string "emneord"
     t.datetime "opdateringsdato"
     t.integer "type_id"
     t.integer "emneord_sager_count", default: 0
@@ -365,7 +365,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_09_05_084954) do
     t.datetime "rådsmødedato"
     t.boolean "statsbudgetsag"
     t.integer "status_id"
-    t.string "titel", collation: "nocase"
+    t.string "titel"
     t.string "titelkort"
     t.integer "type_id"
     t.index ["deltundersag_id"], name: "index_oda_sager_on_deltundersag_id"
@@ -491,10 +491,10 @@ ActiveRecord::Schema[8.0].define(version: 2024_09_05_084954) do
   end
 
   create_table "search_agents", force: :cascade do |t|
-    t.integer "user_id", null: false
     t.string "name", null: false
     t.string "query", null: false
     t.datetime "executed_at"
+    t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_search_agents_on_user_id"
@@ -510,11 +510,11 @@ ActiveRecord::Schema[8.0].define(version: 2024_09_05_084954) do
 
   create_table "users", force: :cascade do |t|
     t.string "email_address", null: false
+    t.string "password_digest"
     t.boolean "verified", default: false, null: false
     t.boolean "admin", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "password_digest"
     t.index ["email_address"], name: "index_users_on_email_address", unique: true
   end
 
