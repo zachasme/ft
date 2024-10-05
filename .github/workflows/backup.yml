@@ -8,31 +8,30 @@ on:
 jobs:
   export:
     runs-on: ubuntu-latest
-    container:
-      image: mcr.microsoft.com/mssql/server:2022-latest
-      env:
-        ACCEPT_EULA: Y
-        MSSQL_SA_PASSWORD: hunter2
-      ports:
-        - 1433:1433
-      volumes:
-        - /tmp/storage:/data
+
+    services:
+      mssql:
+        image: mcr.microsoft.com/mssql/server:2022-latest
+        env:
+          ACCEPT_EULA: Y
+          MSSQL_SA_PASSWORD: hunter2
+        ports:
+          - 1433:1433
+        volumes:
+          - /tmp/storage:/data
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: .ruby-version
+          bundler-cache: true
 
       - name: Download
         run: wget -O ./tmp/storage/oda.bak --user ODAwebpublish --password b56ff26a-c19b-4322-a3c4-614de155781d https://oda.ft.dk/odapublish/oda.bak
 
       - name: Restore
         run: /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P hunter2 -Q "RESTORE DATABASE oda FROM DISK = '/data/oda.bak' WITH MOVE 'ODA' TO '/var/opt/mssql/data/ODA.mdf', MOVE 'ODA_log' TO '/var/opt/mssql/data/ODA_log.ldf'
-
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: .ruby-version
-          bundler-cache: true
 
       - name: Convert ft export into zipped json
         run: bin/rails backup:export
