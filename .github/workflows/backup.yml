@@ -1,4 +1,4 @@
-name: CI
+name: Backup
 
 on:
   pull_request:
@@ -34,7 +34,7 @@ jobs:
         run: aria2c -x 5 https://ODAwebpublish:b56ff26a-c19b-4322-a3c4-614de155781d@oda.ft.dk/odapublish/oda.bak
 
       - name: Restore
-        run: /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P hunter2 -Q "RESTORE DATABASE oda FROM DISK = '/data/oda.bak' WITH MOVE 'ODA' TO '/var/opt/mssql/data/ODA.mdf', MOVE 'ODA_log' TO '/var/opt/mssql/data/ODA_log.ldf'"
+        run: /opt/mssql-tools/bin/sqlcmd -S mssql -U SA -P hunter2 -Q "RESTORE DATABASE oda FROM DISK = '/data/oda.bak' WITH MOVE 'ODA' TO '/var/opt/mssql/data/ODA.mdf', MOVE 'ODA_log' TO '/var/opt/mssql/data/ODA_log.ldf'"
 
       - name: Dependencies
         run: gem install tiny_tds
