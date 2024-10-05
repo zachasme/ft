@@ -25,15 +25,14 @@ jobs:
       - name: Install packages
         run: sudo apt-get update && sudo apt-get install --no-install-recommends -y freetds-dev tdsodbc
 
-
       - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: .ruby-version
-          bundler-cache: true
+
+      - name: Dependencies
+        run: gem install tiny_tds progress_bar
 
       - name: Download
         run: aria2c -x 5 https://ODAwebpublish:b56ff26a-c19b-4322-a3c4-614de155781d@oda.ft.dk/odapublish/oda.bak
@@ -41,11 +40,8 @@ jobs:
       - name: Restore
         run: /opt/mssql-tools/bin/sqlcmd -H mssql -U SA -P b56ff26a-c19b-4322-a3c4-614de155781d -Q "RESTORE DATABASE oda FROM DISK = '/data/oda.bak' WITH MOVE 'ODA' TO '/var/opt/mssql/data/ODA.mdf', MOVE 'ODA_log' TO '/var/opt/mssql/data/ODA_log.ldf'"
 
-      - name: Dependencies
-        run: gem install tiny_tds
-
       - name: Convert ft export into zipped json
-        run: bin/rails backup:export
+        run: ruby script/backup.rb
 
       - name: Create release on GitHub
         run: gh release create "v$(date +%Y.%m.%d)" './tmp/storage/export.tar.gz#Daily JSON export' --generate-notes
