@@ -21,6 +21,9 @@ jobs:
           - /tmp/storage:/data
 
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
@@ -32,6 +35,9 @@ jobs:
 
       - name: Restore
         run: /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P hunter2 -Q "RESTORE DATABASE oda FROM DISK = '/data/oda.bak' WITH MOVE 'ODA' TO '/var/opt/mssql/data/ODA.mdf', MOVE 'ODA_log' TO '/var/opt/mssql/data/ODA_log.ldf'
+
+      - name: Dependencies
+        run: gem install tiny_tds
 
       - name: Convert ft export into zipped json
         run: bin/rails backup:export
