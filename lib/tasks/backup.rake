@@ -1,4 +1,5 @@
 require "open-uri"
+require "tiny_tds"
 
 BACKUP_URL = "https://oda.ft.dk/odapublish/oda.bak"
 BACKUP_USER = "ODAwebpublish"
