@@ -14,7 +14,7 @@ jobs:
         image: mcr.microsoft.com/mssql/server:2022-latest
         env:
           ACCEPT_EULA: Y
-          MSSQL_SA_PASSWORD: ComplexPass123!
+          MSSQL_SA_PASSWORD: b56ff26a-c19b-4322-a3c4-614de155781d
           MSSQL_PID: Express
         ports:
           - 1433:1433
@@ -22,10 +22,6 @@ jobs:
           - /tmp/storage:/data
 
     steps:
-
-      - name: Restore
-        run: /opt/mssql-tools/bin/sqlcmd -H mssql -U SA -P ComplexPass123! -Q "RESTORE DATABASE oda FROM DISK = '/data/oda.bak' WITH MOVE 'ODA' TO '/var/opt/mssql/data/ODA.mdf', MOVE 'ODA_log' TO '/var/opt/mssql/data/ODA_log.ldf'"
-
       - name: Checkout code
         uses: actions/checkout@v4
 
@@ -39,7 +35,7 @@ jobs:
         run: aria2c -x 5 https://ODAwebpublish:b56ff26a-c19b-4322-a3c4-614de155781d@oda.ft.dk/odapublish/oda.bak
 
       - name: Restore
-        run: /opt/mssql-tools/bin/sqlcmd -S mssql -U SA -P hunter2 -Q "RESTORE DATABASE oda FROM DISK = '/data/oda.bak' WITH MOVE 'ODA' TO '/var/opt/mssql/data/ODA.mdf', MOVE 'ODA_log' TO '/var/opt/mssql/data/ODA_log.ldf'"
+        run: /opt/mssql-tools/bin/sqlcmd -H mssql -U SA -P b56ff26a-c19b-4322-a3c4-614de155781d -Q "RESTORE DATABASE oda FROM DISK = '/data/oda.bak' WITH MOVE 'ODA' TO '/var/opt/mssql/data/ODA.mdf', MOVE 'ODA_log' TO '/var/opt/mssql/data/ODA_log.ldf'"
 
       - name: Dependencies
         run: gem install tiny_tds
