@@ -22,6 +22,10 @@ jobs:
           - /tmp/storage:/data
 
     steps:
+      - name: Install packages
+        run: sudo apt-get update && sudo apt-get install --no-install-recommends -y freetds-dev tdsodbc
+
+
       - name: Checkout code
         uses: actions/checkout@v4
 
