@@ -6,7 +6,7 @@ require "rails/all"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-module Folketinget
+module Folketracker
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 8.0
@@ -23,10 +23,8 @@ module Folketinget
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    # Folketracker
     config.i18n.default_locale = :da
-
-    # ====== CUSTOM BEGIN
-
-    config.solid_queue.connects_to = { database: { writing: :solid_queue, reading: :solid_queue } }
   end
 end
