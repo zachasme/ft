@@ -21,6 +21,10 @@ jobs:
           - /tmp/storage:/data
 
     steps:
+
+      - name: Restore
+        run: /opt/mssql-tools/bin/sqlcmd -H mssql -U SA -P hunter2 -Q "RESTORE DATABASE oda FROM DISK = '/data/oda.bak' WITH MOVE 'ODA' TO '/var/opt/mssql/data/ODA.mdf', MOVE 'ODA_log' TO '/var/opt/mssql/data/ODA_log.ldf'"
+
       - name: Checkout code
         uses: actions/checkout@v4
 
