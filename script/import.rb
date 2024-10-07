@@ -27,26 +27,24 @@ files.each do |path, resource|
   resource.delete_all
 
   # write
-  rows = JSON.parse(File.open(path).read)
-  puts "... parsed"
-  inserts = rows.collect do |row|
-    row.transform_keys do |key|
-      case
-      when key == "id"
-          key
-      when key == "type"
-          "typenavn"
-      when key.end_with?("id")
-          key.delete_suffix("id") + "_id"
-      else
-          key
+  JSON.parse(File.open(path).read).each_slice(100_000).with_index do |slice, i|
+    puts "slice #{i}"
+    inserts = slice.collect do |row|
+      row.transform_keys do |key|
+        case
+        when key == "id"
+            key
+        when key == "type"
+            "typenavn"
+        when key.end_with?("id")
+            key.delete_suffix("id") + "_id"
+        else
+            key
+        end
       end
     end
-  end
 
-  inserts.each_slice(100_000).with_index do |slice, i|
-    puts "slice #{i}"
-    resource.insert_all(slice)
+    resource.insert_all(inserts)
   end
 end
 
