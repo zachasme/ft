@@ -67,8 +67,6 @@ end
 gem "mission_control-jobs"
 gem "geared_pagination"
 
-gem "progress_bar"
-
 gem "mailpace-rails"
 
 gem "yabeda"
@@ -77,7 +75,3 @@ gem "yabeda-puma-plugin"
 
 gem "newrelic_rpm"
 gem "yabeda-newrelic"
-
-group :tiny_tds, optional: true do
-  gem "tiny_tds"
-end
