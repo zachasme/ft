@@ -63,7 +63,8 @@ tables = [
 `mkdir -p tmp/storage/export`
 
 # download
-puts `aria2c -q -d /tmp -x 5 https://ODAwebpublish:b56ff26a-c19b-4322-a3c4-614de155781d@oda.ft.dk/odapublish/oda.bak`
+hardcoded = "b56ff26a-c19b-4322-a3c4-614de155781d"
+puts `aria2c -q -d /tmp -x 5 https://ODAwebpublish:#{hardcoded}@oda.ft.dk/odapublish/oda.bak`
 
 # container (not in gh action)
 unless ENV['GITHUB_WORKSPACE']
