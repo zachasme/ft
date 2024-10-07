@@ -96,10 +96,11 @@ tables.each do |table|
   ) > tmp/storage/export/#{table}.json`
 end
 
-# zip
+# pack
 `zip --junk-paths tmp/storage/daily.zip tmp/storage/export/*`
+`tar -czf tmp/storage/daily.tar.gz -C tmp/storage/export .`
 
 # release (not in gh action)
 unless ENV['GITHUB_WORKSPACE']
-  `gh release create "v$(date +%Y.%m.%d)" './tmp/storage/daily.zip#Daily JSON export' --generate-notes`
+  `gh release create "v$(date +%Y.%m.%d)" ./tmp/storage/daily.zip ./tmp/storage/daily.tar.gz --generate-notes`
 end

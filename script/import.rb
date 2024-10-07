@@ -50,17 +50,17 @@ puts("Emneord counters")
 Oda::Emneord.all.each do |emneord|
   Oda::Emneord.reset_counters(
     emneord.id,
-    :emneord_sags_count,
-    :emneord_dokuments_count
+    :emneord_sager_count,
+    :emneord_dokumenter_count
   )
 end
 puts("Periode counters")
 Oda::Periode.all.each do |periode|
   Oda::Periode.reset_counters(
     periode.id,
-    :aktørs_count,
-    :mødes_count,
-    :sags_count,
+    :aktører_count,
+    :møder_count,
+    :sager_count,
   )
 end
 
