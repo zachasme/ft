@@ -59,7 +59,7 @@ tables = [
 ]
 
 # download
-puts `aria2c -q -c -d tmp/storage -x 5 https://ODAwebpublish:b56ff26a-c19b-4322-a3c4-614de155781d@oda.ft.dk/odapublish/oda.bak`
+puts `aria2c -q -d tmp/storage -x 5 https://ODAwebpublish:b56ff26a-c19b-4322-a3c4-614de155781d@oda.ft.dk/odapublish/oda.bak`
 
 # container (not in gh action)
 unless ENV['GITHUB_WORKSPACE']
