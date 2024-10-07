@@ -1,7 +1,7 @@
 require_relative "../config/environment"
 
 # download
-puts `curl -o /tmp/daily.tar.gz https://github.com/zachasme/ft/releases/latest/download/daily.tar.gz`
+puts `curl -q -L -o /tmp/daily.tar.gz https://github.com/zachasme/ft/releases/latest/download/daily.tar.gz`
 
 # clean
 `rm -rf tmp/storage/import`
