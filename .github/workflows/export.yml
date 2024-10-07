@@ -40,6 +40,6 @@ jobs:
         run: ruby script/export.rb
 
       - name: Create release on GitHub
-        run: gh release create "v$(date +%Y.%m.%d)" './tmp/storage/daily.zip#Daily JSON export' --generate-notes
+        run: gh release create "v$(date +%Y.%m.%d)" ./tmp/storage/daily.zip ./tmp/storage/daily.tar.gz --generate-notes
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
