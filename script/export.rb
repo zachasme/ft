@@ -59,11 +59,11 @@ tables = [
 ]
 
 # clean
-`rm -rf tmp/storage/export tmp/storage/daily.zip tmp/storage/daily.tar.gz`
+`rm -rf tmp/storage/export /tmp/daily.zip /tmp/daily.tar.gz`
 `mkdir -p tmp/storage/export`
 
 # download
-puts `aria2c -q -d tmp/storage -x 5 https://ODAwebpublish:b56ff26a-c19b-4322-a3c4-614de155781d@oda.ft.dk/odapublish/oda.bak`
+puts `aria2c -q -d /tmp -x 5 https://ODAwebpublish:b56ff26a-c19b-4322-a3c4-614de155781d@oda.ft.dk/odapublish/oda.bak`
 
 # container (not in gh action)
 unless ENV['GITHUB_WORKSPACE']
@@ -72,7 +72,7 @@ unless ENV['GITHUB_WORKSPACE']
     -p 1433:1433 \
     --name #{dockername} \
     -e ACCEPT_EULA=Y -e MSSQL_SA_PASSWORD=#{plainpass} \
-    -v #{Rails.root.join("tmp/storage")}:/data \
+    -v /tmp:/tmp \
     -d mcr.microsoft.com/mssql/server:2022-latest`
 
   # health hack
@@ -81,7 +81,7 @@ end
 
 # restore
 puts `#{sqlcmd} \
-  -Q "RESTORE DATABASE oda FROM DISK = '/data/oda.bak'
+  -Q "RESTORE DATABASE oda FROM DISK = '/tmp/oda.bak'
       WITH MOVE 'ODA'     TO '/var/opt/mssql/data/ODA.mdf',
             MOVE 'ODA_log' TO '/var/opt/mssql/data/ODA_log.ldf'
   "`
