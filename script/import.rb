@@ -43,7 +43,11 @@ files.each do |path, resource|
       end
     end
   end
-  resource.insert_all(inserts)
+
+  inserts.each_slice(100_000).with_index do |slice, i|
+    puts "slice #{i}"
+    resource.insert_all(slice)
+  end
 end
 
 # update counts
