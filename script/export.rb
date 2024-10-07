@@ -63,7 +63,7 @@ tables = [
 `mkdir -p tmp/storage/export`
 
 # download
-# puts `aria2c -q -d tmp/storage -x 5 https://ODAwebpublish:b56ff26a-c19b-4322-a3c4-614de155781d@oda.ft.dk/odapublish/oda.bak`
+puts `aria2c -q -d tmp/storage -x 5 https://ODAwebpublish:b56ff26a-c19b-4322-a3c4-614de155781d@oda.ft.dk/odapublish/oda.bak`
 
 # container (not in gh action)
 unless ENV['GITHUB_WORKSPACE']
@@ -81,7 +81,7 @@ end
 
 # restore
 puts `#{sqlcmd} \
-  -Q "RESTORE DATABASE oda FROM URL = 'https://ODAwebpublish:b56ff26a-c19b-4322-a3c4-614de155781d@oda.ft.dk/odapublish/oda.bak'
+  -Q "RESTORE DATABASE oda FROM DISK = '/data/oda.bak'
       WITH MOVE 'ODA'     TO '/var/opt/mssql/data/ODA.mdf',
             MOVE 'ODA_log' TO '/var/opt/mssql/data/ODA_log.ldf'
   "`
