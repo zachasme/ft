@@ -1,14 +1,14 @@
 require_relative "../config/environment"
 
 # download
-puts `curl -o tmp/storage/daily.tar.gz https://github.com/zachasme/ft/releases/latest/download/daily.tar.gz`
+puts `curl -o /tmp/daily.tar.gz https://github.com/zachasme/ft/releases/latest/download/daily.tar.gz`
 
 # clean
 `rm -rf tmp/storage/import`
 `mkdir -p tmp/storage/import`
 
 # unpack
-`tar -xzf tmp/storage/daily.tar.gz -C tmp/storage/import`
+`tar -xzf /tmp/daily.tar.gz -C tmp/storage/import`
 
 # prepare
 files = Dir.foreach("tmp/storage/import").sort.filter_map do |filename|
