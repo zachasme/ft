@@ -98,10 +98,8 @@ tables.each do |table|
 end
 
 # pack
-`zip --junk-paths tmp/storage/daily.zip tmp/storage/export/*`
-`tar -czf tmp/storage/daily.tar.gz -C tmp/storage/export .`
+`zip --junk-paths /tmp/daily.zip tmp/storage/export/*`
+`tar -czf /tmp/daily.tar.gz -C tmp/storage/export .`
 
-# release (not in gh action)
-unless ENV['GITHUB_WORKSPACE']
-  `gh release create "v$(date +%Y.%m.%d)" ./tmp/storage/daily.zip ./tmp/storage/daily.tar.gz --generate-notes`
-end
+# release
+`gh release create "v$(date +%Y.%m.%d)" /tmp/daily.zip /tmp/daily.tar.gz --generate-notes`
