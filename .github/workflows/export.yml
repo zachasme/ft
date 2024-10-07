@@ -24,7 +24,7 @@ jobs:
         ports:
           - 1433:1433
         volumes:
-          - /tmp/storage:/data
+          - ${{ github.workspace }}/tmp/storage:/data
 
     steps:
       - name: Checkout code
@@ -35,6 +35,9 @@ jobs:
         with:
           ruby-version: .ruby-version
           bundler-cache: true
+
+      - name: Download daily bak
+        run: curl -o tmp/storage/daily.tar.gz https://github.com/zachasme/ft/releases/latest/download/daily.tar.gz
 
       - name: Download and re-export daily oda backup
         run: ruby script/export.rb
