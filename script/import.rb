@@ -28,6 +28,7 @@ files.each do |path, resource|
 
   # write
   rows = JSON.parse(File.open(path).read)
+  puts "... parsed"
   inserts = rows.collect do |row|
     row.transform_keys do |key|
       case
