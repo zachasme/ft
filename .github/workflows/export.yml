@@ -1,9 +1,11 @@
 name: Export
 
 on:
-  pull_request:
   schedule:
     - cron: "0 2 * * *" # daily @ 02:00
+
+permissions:
+   contents: write
 
 jobs:
   export:
@@ -19,7 +21,7 @@ jobs:
         ports:
           - 1433:1433
         volumes:
-          - /tmp/storage:/data
+          - /tmp:/tmp
 
     steps:
       - name: Checkout code
@@ -33,8 +35,5 @@ jobs:
 
       - name: Download and re-export daily oda backup
         run: ruby script/export.rb
-
-      - name: Create release on GitHub
-        run: gh release create "v$(date +%Y.%m.%d)" './tmp/storage/daily.zip#Daily JSON export' --generate-notes
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

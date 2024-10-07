@@ -1,14 +1,14 @@
 require_relative "../config/environment"
 
 # download
-puts `curl -o tmp/storage/daily.zip https://github.com/zachasme/ft/releases/latest/download/daily.zip`
+puts `curl -o /tmp/daily.tar.gz https://github.com/zachasme/ft/releases/latest/download/daily.tar.gz`
 
 # clean
 `rm -rf tmp/storage/import`
 `mkdir -p tmp/storage/import`
 
 # unpack
-`unzip tmp/storage/daily.zip -d tmp/storage/import`
+`tar -xzf /tmp/daily.tar.gz -C tmp/storage/import`
 
 # prepare
 files = Dir.foreach("tmp/storage/import").sort.filter_map do |filename|
@@ -50,17 +50,17 @@ puts("Emneord counters")
 Oda::Emneord.all.each do |emneord|
   Oda::Emneord.reset_counters(
     emneord.id,
-    :emneord_sags_count,
-    :emneord_dokuments_count
+    :emneord_sager_count,
+    :emneord_dokumenter_count
   )
 end
 puts("Periode counters")
 Oda::Periode.all.each do |periode|
   Oda::Periode.reset_counters(
     periode.id,
-    :aktørs_count,
-    :mødes_count,
-    :sags_count,
+    :aktører_count,
+    :møder_count,
+    :sager_count,
   )
 end
 
