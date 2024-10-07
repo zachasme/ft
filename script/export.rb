@@ -58,6 +58,10 @@ tables = [
   "Sag"
 ]
 
+# clean
+`rm -rf tmp/storage/export tmp/storage/daily.zip tmp/storage/daily.tar.gz`
+`mkdir -p tmp/storage/export`
+
 # download
 puts `aria2c -q -d tmp/storage -x 5 https://ODAwebpublish:b56ff26a-c19b-4322-a3c4-614de155781d@oda.ft.dk/odapublish/oda.bak`
 
@@ -81,10 +85,6 @@ puts `#{sqlcmd} \
       WITH MOVE 'ODA'     TO '/var/opt/mssql/data/ODA.mdf',
             MOVE 'ODA_log' TO '/var/opt/mssql/data/ODA_log.ldf'
   "`
-
-# clean
-`rm -rf tmp/storage/export`
-`mkdir -p tmp/storage/export`
 
 # format
 #   `head` removes trailing "rows affected" line
