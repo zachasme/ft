@@ -90,6 +90,7 @@ puts `#{sqlcmd} \
 #   `head` removes trailing "rows affected" line
 #   `paste` concats without newline
 tables.each do |table|
+  puts table
   `echo $( \
     #{sqlcmd} -y0 -Q "SELECT * FROM oda.dbo.#{table} FOR JSON AUTO, INCLUDE_NULL_VALUES;" \
     | head -n -1 | paste -d"\\0" -s \
