@@ -1,7 +1,7 @@
 require_relative "../config/environment"
 
 # download
-puts `aria2c -q -c -d tmp/storage -x 5 https://github.com/zachasme/ft/releases/latest/download/daily.zip`
+puts `wget -O tmp/storage/daily.zip https://github.com/zachasme/ft/releases/latest/download/daily.zip`
 
 # clean
 `rm -rf tmp/storage/import`
