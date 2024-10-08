@@ -17,7 +17,7 @@ servers:
 # Set ssl: false if using something like Cloudflare to terminate SSL (but keep host!).
 proxy:
   ssl: true
-  host: ft.kfvs.dk
+  host: ft.chari.as
 
 # Credentials for your image host.
 registry:
