@@ -27,7 +27,7 @@ files.each do |path, resource|
   resource.delete_all
 
   # write
-  JSON.parse(File.open(path).read).each_slice(100_000).with_index do |slice, i|
+  JSON.parse(File.open(path).read).each_slice(10_000).with_index do |slice, i|
     puts "slice #{i}"
     inserts = slice.collect do |row|
       row.transform_keys do |key|
