@@ -1,4 +1,4 @@
-class Oda::Sag < ApplicationRecord
+class Oda::Sag < Oda::OdaRecord
   include Synchronizable
   include Searchable
 

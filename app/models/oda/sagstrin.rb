@@ -1,4 +1,4 @@
-class Oda::Sagstrin < ApplicationRecord
+class Oda::Sagstrin < Oda::OdaRecord
   include Synchronizable
 
   belongs_to :sag

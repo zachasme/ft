@@ -1,4 +1,4 @@
-class Oda::AktørAktør < ApplicationRecord
+class Oda::AktørAktør < Oda::OdaRecord
   include Synchronizable
 
   belongs_to :rolle, class_name: "Oda::AktørAktørRolle"

@@ -1,4 +1,4 @@
-class Oda::Aktør < ApplicationRecord
+class Oda::Aktør < Oda::OdaRecord
   include Synchronizable
 
   has_many :stemmer

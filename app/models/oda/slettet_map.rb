@@ -1,3 +1,3 @@
-class Oda::SlettetMap < ApplicationRecord
+class Oda::SlettetMap < Oda::OdaRecord
   include Synchronizable
 end

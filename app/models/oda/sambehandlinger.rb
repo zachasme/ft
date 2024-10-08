@@ -1,4 +1,4 @@
-class Oda::Sambehandlinger < ApplicationRecord
+class Oda::Sambehandlinger < Oda::OdaRecord
   include Synchronizable
 
   belongs_to :førstesagstrin, class_name: "Oda::Sagstrin"

@@ -1,4 +1,4 @@
-class Oda::Dokumentkategori < ApplicationRecord
+class Oda::Dokumentkategori < Oda::OdaRecord
   include Synchronizable
 
   scope :alphabetical, -> { order(:kategori) }

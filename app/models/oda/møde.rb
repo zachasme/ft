@@ -1,4 +1,4 @@
-class Oda::Møde < ApplicationRecord
+class Oda::Møde < Oda::OdaRecord
   include Synchronizable
 
   belongs_to :periode, counter_cache: true

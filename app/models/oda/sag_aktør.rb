@@ -1,4 +1,4 @@
-class Oda::SagAktør < ApplicationRecord
+class Oda::SagAktør < Oda::OdaRecord
   include Synchronizable
 
   belongs_to :sag

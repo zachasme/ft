@@ -1,4 +1,4 @@
-class Oda::Periode < ApplicationRecord
+class Oda::Periode < Oda::OdaRecord
   include Synchronizable
 
   has_many :aktører

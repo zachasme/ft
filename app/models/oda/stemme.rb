@@ -1,4 +1,4 @@
-class Oda::Stemme < ApplicationRecord
+class Oda::Stemme < Oda::OdaRecord
   include Synchronizable
 
   belongs_to :aktør

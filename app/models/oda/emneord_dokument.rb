@@ -1,4 +1,4 @@
-class Oda::EmneordDokument < ApplicationRecord
+class Oda::EmneordDokument < Oda::OdaRecord
   include Synchronizable
 
   belongs_to :dokument, class_name: "Oda::Dokument"

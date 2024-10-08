@@ -1,4 +1,4 @@
-class Oda::EmneordSag < ApplicationRecord
+class Oda::EmneordSag < Oda::OdaRecord
   include Synchronizable
 
   belongs_to :sag, class_name: "Oda::Sag"

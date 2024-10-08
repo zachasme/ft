@@ -1,4 +1,4 @@
-class Oda::DokumentAktør < ApplicationRecord
+class Oda::DokumentAktør < Oda::OdaRecord
   include Synchronizable
 
   belongs_to :dokument

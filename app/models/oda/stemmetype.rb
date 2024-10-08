@@ -1,3 +1,3 @@
-class Oda::Stemmetype < ApplicationRecord
+class Oda::Stemmetype < Oda::OdaRecord
   include Synchronizable
 end

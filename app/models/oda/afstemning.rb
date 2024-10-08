@@ -1,4 +1,4 @@
-class Oda::Afstemning < ApplicationRecord
+class Oda::Afstemning < Oda::OdaRecord
   include Synchronizable
 
   has_many :stemmer

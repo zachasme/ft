@@ -1,4 +1,4 @@
-class Oda::MødeAktør < ApplicationRecord
+class Oda::MødeAktør < Oda::OdaRecord
   include Synchronizable
 
   belongs_to :møde, class_name: "Oda::Møde"

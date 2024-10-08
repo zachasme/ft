@@ -1,4 +1,4 @@
-class Oda::Dagsordenspunkt < ApplicationRecord
+class Oda::Dagsordenspunkt < Oda::OdaRecord
   include Synchronizable
 
   belongs_to :møde

@@ -1,3 +1,3 @@
-class Oda::SagstrinAktør < ApplicationRecord
+class Oda::SagstrinAktør < Oda::OdaRecord
   include Synchronizable
 end

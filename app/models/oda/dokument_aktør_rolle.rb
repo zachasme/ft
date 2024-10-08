@@ -1,3 +1,3 @@
-class Oda::DokumentAktørRolle < ApplicationRecord
+class Oda::DokumentAktørRolle < Oda::OdaRecord
   include Synchronizable
 end

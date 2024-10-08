@@ -1,4 +1,4 @@
-class Oda::Slettet < ApplicationRecord
+class Oda::Slettet < Oda::OdaRecord
   include Synchronizable
 
   belongs_to :slettetmap, class_name: "Oda::SlettetMap"

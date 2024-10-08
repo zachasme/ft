@@ -1,3 +1,3 @@
-class Oda::EntitetBeskrivelse < ApplicationRecord
+class Oda::EntitetBeskrivelse < Oda::OdaRecord
   include Synchronizable
 end

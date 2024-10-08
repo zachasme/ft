@@ -1,4 +1,4 @@
-class Oda::Dokument < ApplicationRecord
+class Oda::Dokument < Oda::OdaRecord
   include Synchronizable
 
   belongs_to :kategori, class_name: "Oda::Dokumentkategori"

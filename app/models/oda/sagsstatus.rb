@@ -1,3 +1,3 @@
-class Oda::Sagsstatus < ApplicationRecord
+class Oda::Sagsstatus < Oda::OdaRecord
   include Synchronizable
 end

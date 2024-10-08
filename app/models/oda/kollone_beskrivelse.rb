@@ -1,3 +1,3 @@
-class Oda::KolloneBeskrivelse < ApplicationRecord
+class Oda::KolloneBeskrivelse < Oda::OdaRecord
   include Synchronizable
 end
