@@ -94,7 +94,7 @@ tables.each do |table|
   puts table
 
   File.write(
-    'tmp/storage/export/#{table}.json',
+    "tmp/storage/export/#{table}.json",
     `#{sqlcmd} -y0 -Q "SELECT * FROM oda.dbo.Fil FOR JSON AUTO, INCLUDE_NULL_VALUES;" \
       | head -n -1`.lines(chomp: true).join
   )

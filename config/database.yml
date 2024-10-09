@@ -22,8 +22,14 @@ development:
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
-  <<: *default
-  database: storage/test.sqlite3
+  primary:
+    <<: *default
+    database: storage/test.sqlite3
+  oda:
+    <<: *default
+    database: storage/development_oda.sqlite3
+    migrations_paths: db/oda_migrate
+
 
 
 # Store production database in the storage/ directory, which by default
