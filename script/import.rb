@@ -74,7 +74,7 @@ if ENV["RESET"]
   files.each do |path, resource|
     puts "Restting #{path}"
 
-    resource.delete_all!
+    resource.delete_all
   end
 end
 
