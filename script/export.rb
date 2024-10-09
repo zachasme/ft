@@ -92,10 +92,12 @@ puts `#{sqlcmd} \
 #   `paste` concats without newline
 tables.each do |table|
   puts table
-  `echo $( \
-    #{sqlcmd} -y0 -Q "SELECT * FROM oda.dbo.#{table} FOR JSON AUTO, INCLUDE_NULL_VALUES;" \
-    | head -n -1 | paste -d"\\0" -s \
-  ) > tmp/storage/export/#{table}.json`
+
+  File.write(
+    'tmp/storage/export/#{table}.json',
+    `#{sqlcmd} -y0 -Q "SELECT * FROM oda.dbo.Fil FOR JSON AUTO, INCLUDE_NULL_VALUES;" \
+      | head -n -1`.lines(chomp: true).join
+  )
 end
 
 # pack
