@@ -14,3 +14,6 @@ production:
     class: SynchronizationJob
     args: []
     schedule: every 10 minutes
+  daily_backup:
+    class: DailyBackupJob
+    schedule: at 5am every day
