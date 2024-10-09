@@ -42,7 +42,7 @@ class SynchronizationJob < ApplicationJob
     Oda::Stemme,
     Oda::DokumentAktør,
     Oda::Periode,
-    Oda::SyncLogger,
+    # Oda::SyncLogger,
     Oda::Emneordstype,
     Oda::Møde,
     Oda::Emneord,
