@@ -25,7 +25,7 @@ files.each do |path, resource|
 
   unless resource.maximum(:opdateringsdato).nil?
     puts "already synced"
-    return
+    next
   end
 
   # reset
