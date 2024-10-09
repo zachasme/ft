@@ -69,6 +69,15 @@ files = tables.filter_map do |resource|
   [ path, Kernel.const_get("Oda::#{resource}") ]
 end
 
+# reset
+if ENV["RESET"]
+  files.each do |path, resource|
+    puts "Restting #{path}"
+
+    resource.delete_all!
+  end
+end
+
 # import
 files.each do |path, resource|
   puts "Importing #{path}"
