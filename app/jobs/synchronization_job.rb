@@ -65,6 +65,7 @@ class SynchronizationJob < ApplicationJob
       puts agent
       SearchAgentJob.perform_later(agent)
     end
+
     puts "Done <3"
   end
 end
