@@ -4,73 +4,55 @@ class SynchronizationJob < ApplicationJob
   limits_concurrency key: :synchronize
 
   RESOURCES = [
-    Oda::Periode,
-
-    Oda::Aktørtype,
-    Oda::Aktør,
-
-    Oda::Sagskategori,
-    Oda::Sagsstatus,
-    Oda::Sagstype,
-    Oda::Sag,
-
-    Oda::Sagstrinsstatus,
-    Oda::Sagstrinstype,
-    Oda::Sagstrin,
-
-    Oda::Mødestatus,
-    Oda::Mødetype,
-    Oda::Møde,
-
-    Oda::Dokumentkategori,
-    Oda::Dokumentstatus,
-    Oda::Dokumenttype,
-    Oda::Dokument,
-
-    Oda::Afstemningstype,
-    Oda::Afstemning,
-
-    Oda::Emneordstype,
-    Oda::Emneord,
-
-    Oda::AktørAktør,
-    Oda::AktørAktørRolle,
-    Oda::DagsordenspunktDokument,
-    Oda::Dagsordenspunkt,
-    Oda::DagsordenspunktSag,
-    Oda::DokumentAktør,
-    Oda::DokumentAktørRolle,
-    Oda::EmneordDokument,
-    Oda::EmneordSag,
-    Oda::EntitetBeskrivelse,
     Oda::Fil,
+    Oda::Sagstrinsstatus,
+    # Oda::IdMap,
+    Oda::Sagstrinstype,
     Oda::KolloneBeskrivelse,
+    Oda::Sagstrin,
     Oda::MødeAktør,
+    Oda::Afstemning,
     Oda::Omtryk,
-    Oda::SagAktør,
+    Oda::Aktørtype,
     Oda::SagAktørRolle,
-    Oda::SagDokument,
+    Oda::Aktør,
+    Oda::SagAktør,
+    Oda::AktørAktørRolle,
     Oda::SagDokumentRolle,
-    Oda::SagstrinAktør,
+    Oda::AktørAktør,
+    Oda::SagDokument,
+    Oda::Dagsordenspunkt,
     Oda::SagstrinAktørRolle,
+    Oda::Dokumentkategori,
+    Oda::SagstrinAktør,
+    Oda::Dokumentstatus,
     Oda::SagstrinDokument,
+    Oda::Dokumenttype,
+    # Oda::Sambehandlinger,
+    Oda::Dokument,
+    # Oda::SlettetMap,
+    Oda::DagsordenspunktDokument,
+    Oda::Afstemningstype,
+    # Oda::Slettet,
+    Oda::DagsordenspunktSag,
+    Oda::Mødestatus,
     Oda::Stemmetype,
-    Oda::Stemme
-
-    # TODO: Find out why these give 404:
-    #   Oda::Sambehandlinger
-    #   Oda::SlettetMap
-    #   Oda::Slettet
-
-    # TODO: Find out whats up with these:
-    #   Oda::Almdel,
-    #   Oda::Aktstykke,
-    #   Oda::Debat,
-    #   Oda::EUsag,
-    #   Oda::Forslag,
-
-    # does not have `opdateringsdato`:
-    #   Oda::IdMap,
+    Oda::DokumentAktørRolle,
+    Oda::Mødetype,
+    Oda::Stemme,
+    Oda::DokumentAktør,
+    Oda::Periode,
+    Oda::SyncLogger,
+    Oda::Emneordstype,
+    Oda::Møde,
+    Oda::Emneord,
+    Oda::Sagskategori,
+    Oda::EmneordDokument,
+    Oda::Sagsstatus,
+    Oda::EmneordSag,
+    Oda::Sagstype,
+    Oda::EntitetBeskrivelse,
+    Oda::Sag
   ]
 
   def perform
