@@ -74,15 +74,13 @@ class CreateInitialOdaSchema < ActiveRecord::Migration[8.0]
       t.boolean :statsbudgetsag
       t.string :titel, index: true
       t.string :titelkort
-      t.references :deltundersag,    null: true   # self-referential
-      t.references :fremsatundersag, null: true   # self-referential
+      t.references :deltundersag,    null: true,  foreign_key: { to_table: :oda_sager, deferrable: :deferred }
+      t.references :fremsatundersag, null: true,  foreign_key: { to_table: :oda_sager, deferrable: :deferred }
       t.references :kategori,        null: true,  foreign_key: { to_table: :oda_sagskategorier }
       t.references :periode,         null: false, foreign_key: { to_table: :oda_perioder }
       t.references :status,          null: false, foreign_key: { to_table: :oda_sagsstatuser }
       t.references :type,            null: false, foreign_key: { to_table: :oda_sagstyper }
     end
-    add_foreign_key :oda_sager, :oda_sager, column: :deltundersag_id, deferrable: :deferred
-    add_foreign_key :oda_sager, :oda_sager, column: :fremsatundersag_id, deferrable: :deferred
 
     create_table :oda_sagstrinstyper do |t|
       t.string :typenavn
@@ -183,12 +181,11 @@ class CreateInitialOdaSchema < ActiveRecord::Migration[8.0]
       t.string :spørgsmålstitel
       t.string :titel, index: true
       t.references :kategori,  null: false, foreign_key: { to_table: :oda_dokumentkategorier }
-      t.references :spørgsmål, null: true   # self-referential
+      t.references :spørgsmål, null: true   # TODO: why doesn't deferred work for special char column?
       t.references :status,    null: false, foreign_key: { to_table: :oda_dokumentstatuser }
       t.references :type,      null: false, foreign_key: { to_table: :oda_dokumenttyper }
       t.datetime :opdateringsdato, index: true
     end
-    add_foreign_key :oda_dokumenter, :oda_dokumenter, column: :spørgsmål_id, deferrable: :deferred
 
     create_table :oda_dagsordenspunkter do |t|
       t.string :forhandling
@@ -200,10 +197,9 @@ class CreateInitialOdaSchema < ActiveRecord::Migration[8.0]
       t.string :titel
       t.references :møde,     null: false, foreign_key: { to_table: :oda_møder }
       t.references :sagstrin, null: true,  foreign_key: { to_table: :oda_sagstrin }
-      t.references :super,    null: true   # self-referential
+      t.references :super,    null: true,  foreign_key: { to_table: :oda_dagsordenspunkter, deferrable: :deferred }
       t.datetime :opdateringsdato, index: true
     end
-    add_foreign_key :oda_dagsordenspunkter, :oda_dagsordenspunkter, column: :super_id, deferrable: :deferred
 
     create_table :oda_dagsordenspunkt_dokumenter do |t|
       t.string :note
