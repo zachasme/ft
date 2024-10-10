@@ -2,7 +2,7 @@ class Oda::Afstemning < Oda::OdaRecord
   include Synchronizable
 
   has_many :stemmer
-  belongs_to :sagstrin
+  belongs_to :sagstrin, optional: true
   belongs_to :møde
   belongs_to :type, class_name: "Oda::Afstemningstype"
   has_one :sag,     through: :sagstrin
