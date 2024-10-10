@@ -507,6 +507,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_10_08_104947) do
   add_foreign_key "oda_dokument_aktører", "oda_aktører", column: "aktør_id"
   add_foreign_key "oda_dokument_aktører", "oda_dokument_aktør_roller", column: "rolle_id"
   add_foreign_key "oda_dokument_aktører", "oda_dokumenter", column: "dokument_id"
+  add_foreign_key "oda_dokumenter", "oda_dokumenter", column: "spørgsmål_id"
   add_foreign_key "oda_dokumenter", "oda_dokumentkategorier", column: "kategori_id"
   add_foreign_key "oda_dokumenter", "oda_dokumentstatuser", column: "status_id"
   add_foreign_key "oda_dokumenter", "oda_dokumenttyper", column: "type_id"
