@@ -1,9 +1,10 @@
 class Oda::Dokument < Oda::OdaRecord
   include Synchronizable
 
-  belongs_to :kategori, class_name: "Oda::Dokumentkategori"
-  belongs_to :status, class_name: "Oda::Dokumentstatus"
-  belongs_to :type, class_name: "Oda::Dokumenttype"
+  belongs_to :kategori,  class_name: "Oda::Dokumentkategori"
+  belongs_to :spørgsmål, class_name: "Oda::Dokument", optional: true
+  belongs_to :status,    class_name: "Oda::Dokumentstatus"
+  belongs_to :type,      class_name: "Oda::Dokumenttype"
 
   has_many :filer
   has_many :omtryk

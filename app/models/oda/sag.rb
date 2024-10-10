@@ -11,11 +11,11 @@ class Oda::Sag < Oda::OdaRecord
   #       - EUsag
   #       - Forslag
 
-  belongs_to :periode, counter_cache: true
-  belongs_to :kategori, class_name: "Oda::Sagskategori", optional: true
-  belongs_to :status, class_name: "Oda::Sagsstatus"
-  belongs_to :type, class_name: "Oda::Sagstype"
-  belongs_to :deltundersag, class_name: "Oda::Sag", optional: true
+  belongs_to :periode,         counter_cache: true
+  belongs_to :kategori,        class_name: "Oda::Sagskategori", optional: true
+  belongs_to :status,          class_name: "Oda::Sagsstatus"
+  belongs_to :type,            class_name: "Oda::Sagstype"
+  belongs_to :deltundersag,    class_name: "Oda::Sag", optional: true
   belongs_to :fremsatundersag, class_name: "Oda::Sag", optional: true
 
   has_many :emneord_sager

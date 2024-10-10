@@ -27,7 +27,7 @@ test:
     database: storage/test.sqlite3
   oda:
     <<: *default
-    database: storage/development_oda.sqlite3
+    database: storage/test_oda.sqlite3
     migrations_paths: db/oda_migrate
 
 

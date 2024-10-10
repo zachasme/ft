@@ -1,5 +1,6 @@
 require_relative "../config/environment"
 
+batch_size = 100_000
 dockername = "folketracker-backup"
 plainpass = ENV["MSSQL_SA_PASSWORD"] || "Hunter2!"
 sqlcmd = "sqlcmd -C -H localhost -U SA -P #{plainpass}"
@@ -93,11 +94,15 @@ puts `#{sqlcmd} \
 tables.each do |table|
   puts table
 
-  File.write(
-    "tmp/storage/export/#{table}.json",
-    `#{sqlcmd} -y0 -Q "SELECT * FROM oda.dbo.#{table} FOR JSON AUTO, INCLUDE_NULL_VALUES;" \
-      | head -n -1`.lines(chomp: true).join
-  )
+  0.step do |batch|
+    puts "… batch #{batch}"
+    path = "tmp/storage/export/#{table}.#{batch.to_s.rjust(2, '0')}.json"
+    offset = batch * batch_size
+    output = `#{sqlcmd} -y0 -Q "SELECT * FROM oda.dbo.#{table} ORDER BY id OFFSET #{offset} ROWS FETCH NEXT #{batch_size} ROWS ONLY FOR JSON AUTO, INCLUDE_NULL_VALUES;" | head -n -1`.lines(chomp: true).join
+    break if output.empty?
+    rows = JSON.parse(output)
+    File.write(path, JSON.pretty_generate(rows))
+  end
 end
 
 # pack
