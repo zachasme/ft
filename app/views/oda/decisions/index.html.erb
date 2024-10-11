@@ -15,35 +15,6 @@
   <%= form.submit "Søg" %>
 <% end %>
 
-<div class="overflow-x-auto">
-  <table class="margin-top">
-    <thead>
-      <tr>
-        <th>Samling</th>
-        <th>Nr</th>
-        <th>Vedtaget</th>
-        <th>Type</th>
-        <th>Sag</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @page.records.each do |afstemning| %>
-        <tr>
-          <td><%= afstemning.periode.titel %></td>
-          <td><%= afstemning.nummer %></td>
-          <td style="color:<%= afstemning.vedtaget ? 'green' : 'red' %>"><%= afstemning.vedtaget ? 'Vedtaget' : 'Forkastet' %></td>
-          <td><%= link_to afstemning.type.typenavn, oda_decision_path(afstemning) %></td>
-          <td>
-              <% if params[:search] %>
-                <%= highlight(excerpt(afstemning.sag&.titel, params[:search], radius: 30), params[:search]) %>
-              <% else %>
-                <%= truncate(afstemning.sag&.titel, length: 60) %>
-              <% end %>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-</div>
+<%= render partial: "decision", collection: @page.records %>
 
 <%= render partial: 'oda/pagination' %>
