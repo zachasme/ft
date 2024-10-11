@@ -7,6 +7,12 @@
 </header>
 
 <div class="centered">
+  (
+  <%= l @aktør.startdato.to_date, format: :short if @aktør.startdato %>
+  -
+  <%= l @aktør.slutdato.to_date, format: :short if @aktør.slutdato %>
+  )
+
   <% if @aktør.picture %>
     <div class="margin-top">
       <%= link_to "Link til foto", image_path(@aktør.picture) %>
@@ -19,38 +25,16 @@
   <p><%= @aktør.member_data %></p>
 
   <h2 class="margin-top-double">Relationer</h2>
-  <ul class="margin-top">
-    <% @aktør.fra_aktør_aktører.each do |aktøraktør| %>
-      <li>
-        <%= link_to aktøraktør.tilaktør.navn, oda_actor_path(aktøraktør.tilaktør) %>
-        <%= aktøraktør.rolle.rolle %> 
-        <% if aktøraktør.startdato && aktøraktør.slutdato %>
-          fra <%= l aktøraktør.startdato.to_date, format: :short %> til <%= l aktøraktør.slutdato.to_date, format: :short %>
-        <% elsif aktøraktør.startdato %>
-          siden <%= l aktøraktør.startdato.to_date, format: :short %>
-        <% elsif aktøraktør.slutdato %>
-          indtil <%= l aktøraktør.slutdato.to_date, format: :short %>
-        <% end %>
-      </li>
+  <% Oda::AktørAktørRolle.all.each do |rolle| %>
+    <% if @aktør.relationer(rolle).present? %>
+      <h3><%= rolle.rolle %></h3>
+      <% @aktør.relationer(rolle).each do |relation| %>
+        <li>
+          <%= link_to relation.navn, oda_actor_path(relation) %>
+        </li>
+      <% end %>
     <% end %>
-  </ul>
-
-  <h2 class="margin-top-double">Relationer (anden retning)</h2>    
-  <ul class="margin-top">
-    <% @aktør.til_aktør_aktører.each do |aktøraktør| %>
-      <li>
-        <%= link_to aktøraktør.fraaktør.navn, oda_actor_path(aktøraktør.fraaktør) %>
-        <%= aktøraktør.rolle.rolle %> 
-        <% if aktøraktør.startdato && aktøraktør.slutdato %>
-          fra <%= l aktøraktør.startdato.to_date, format: :short %> til <%= l aktøraktør.slutdato.to_date, format: :short %>
-        <% elsif aktøraktør.startdato %>
-          siden <%= l aktøraktør.startdato.to_date, format: :short %>
-        <% elsif aktøraktør.slutdato %>
-          indtil <%= l aktøraktør.slutdato.to_date, format: :short %>
-        <% end %>
-      </li>
-    <% end %>
-  </ul>
+  <% end %>
 
   <% unless @page.recordset.records_count.zero? %>
     <h2 class="margin-top-double">Stemmer</h2>
