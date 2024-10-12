@@ -3,12 +3,18 @@
 </header>
 
 <div class="centered">
-  <%= form_with url: search_path, method: :get, class: "margin-top" do |form| %>
+  <%= form_with url: search_path, method: :get, class: "margin-top flex gap" do |form| %>
     <%= form.hidden_field "sagstyper[]", value: 3 %>
     <%= form.hidden_field "sagstyper[]", value: 5 %>
     <%= form.hidden_field "sagstyper[]", value: 9 %>
-    <%= form.search_field :q, value: params[:q] %>
-    <%= form.submit "Søg" %>
+    <label class="input flex gap align-center">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+        <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+      </svg>
+      <%= form.search_field :q, value: params[:q], placeholder: "Søg i folketingets data…", required: true %>
+    </label>
+
+    <%= form.submit "Søg", class: "button" %>
   <% end %>
 
   <h2 class="margin-top-double">Seneste afstemninger</h2>

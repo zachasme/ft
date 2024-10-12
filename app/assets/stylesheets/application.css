@@ -17,14 +17,15 @@
   --space: 1rem;
   --space-half: calc(var(--space) / 2);
   --space-double: calc(var(--space) * 2);
+
+  color-scheme: light dark;
 }
 
 body, h1, h2, h3, p, ol, ul, menu, details {
   margin: 0;
 }
 
-body { 
-  background: #f5f5f7;
+body {
   font-family: system-ui;
   min-height: 100vh;
   display: flex;
@@ -51,26 +52,6 @@ nav a {
 svg {
   height: 1.5cap
 }
-
-.flex { display: flex }
-.column { flex-direction: column }
-.flex-wrap { flex-wrap: wrap }
-.gap { gap: var(--space) }
-.gap-half { gap: var(--space-half) }
-.justify-space-between { justify-content: space-between }
-.justify-center { justify-content: center }
-.align-center { align-items: center }
-.align-baseline { align-items: baseline }
-.margin { margin: var(--space) }
-.margin-inline { margin-inline: var(--space) }
-.margin-inline { margin-inline: auto }
-.margin-top { margin-top: var(--space) }
-.margin-top-double { margin-top: var(--space-double) }
-.pad { padding: var(--space) }
-.translucent { opacity: .5 }
-.overflow-x-auto { overflow-x: auto }
-.text-align-center { text-align: center }
-.color-notice { color: green }
 
 .centered {
   max-width: 60ch;
@@ -110,13 +91,54 @@ ol:where([class]) {
   padding: 0;
 }
 
+/* inputs */
 .input {
   display: block;
   width: 100%;
   padding: 1ch;
   font-size: inherit;
+  border-radius: 8px;
+  border: none;
+  background: rgba(127, 127, 127, .2);
+  color: inherit;
+
+  &:focus-within {
+    outline: solid rgb(94, 158, 255);
+  }
+
+  & input {
+    color: inherit;
+    font-size: inherit;
+    padding: 0;
+    border: none;
+    background: transparent;
+    outline: none;
+  }
 }
+
+/* buttons */
 .button {
   font-size: inherit;
   padding: 1ch;
 }
+
+/* utilities */
+.flex { display: flex }
+.column { flex-direction: column }
+.flex-wrap { flex-wrap: wrap }
+.gap { gap: var(--space) }
+.gap-half { gap: var(--space-half) }
+.justify-space-between { justify-content: space-between }
+.justify-center { justify-content: center }
+.align-center { align-items: center }
+.align-baseline { align-items: baseline }
+.margin { margin: var(--space) }
+.margin-inline { margin-inline: var(--space) }
+.margin-inline { margin-inline: auto }
+.margin-top { margin-top: var(--space) }
+.margin-top-double { margin-top: var(--space-double) }
+.pad { padding: var(--space) }
+.translucent { opacity: .5 }
+.overflow-x-auto { overflow-x: auto }
+.text-align-center { text-align: center }
+.color-notice { color: green }
