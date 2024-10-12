@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  require_authentication only: :show
+
   def new
     @user = User.new
   end
