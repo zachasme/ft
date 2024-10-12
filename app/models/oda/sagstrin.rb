@@ -31,6 +31,8 @@ class Oda::Sagstrin < Oda::OdaRecord
 
   scope :chronological, -> { order dato: :desc }
 
+  delegate :typenavn, to: :type
+
   def sambehandlinger
     sambehandlinger_a_sager + sambehandlinger_b_sager
   end

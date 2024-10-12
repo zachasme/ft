@@ -28,4 +28,6 @@ class Oda::Sag < Oda::OdaRecord
   scope :chronological, -> { order(periode_id: :desc, nummernumerisk: :desc) }
   scope :matches, ->(search) { where("oda_sager.titel LIKE ?", "%#{search}%") if search.present? }
   scope :casetype, ->(id) { joins(:type).where(type: { id: }) }
+
+  delegate :typenavn, to: :type
 end

@@ -4,7 +4,7 @@
     <p style="color:<%= decision.vedtaget ? 'green' : 'red' %>"><%= decision.vedtaget ? 'Vedtaget' : 'Forkastet' %></p>
   </div>
   <div>
-    <small><%= decision.sagstrin.type.typenavn %> af <%= decision.sag.type.typenavn %> (<%= time_ago_in_words decision.sagstrin.dato %> siden)</small>
+    <small><%= decision.sagstrin.typenavn %> af <%= decision.sag.typenavn %> (<%= time_ago_in_words decision.sagstrin.dato %> siden)</small>
     <p><strong><%= decision.sag.nummer %></strong> <%= link_to highlighted_excerpt(decision.sag.titelkort, params[:search]), oda_decision_path(decision) %></p>
   </div>
 </div>
