@@ -11,11 +11,16 @@ class DailyBackupJob < ApplicationJob
       secret_access_key:
     }
 
-    system "sqlite3 storage/production.sqlite3 '.backup #{filepath}'" or raise "backup failed"
-    system "gzip --force #{filepath}" or raise "gzip failed"
-    system "gpg --yes --batch --passphrase='#{passphrase}' --output '#{filepath}.gz.gpg' -c '#{filepath}.gz'" or raise "gpg failed"
-    system "curl --aws-sigv4 'aws:amz:auto:s3' --user '#{access_key_id}:#{secret_access_key}' --upload-file #{filepath}.gz.gpg #{bucket}/#{filename}.gz.gpg" or raise "curl failed"
+    system! "sqlite3 storage/production.sqlite3 '.backup #{filepath}'"
+    system! "gzip --force #{filepath}"
+    system! "xgpg --yes --batch --passphrase='#{passphrase}' --output '#{filepath}.gz.gpg' -c '#{filepath}.gz'"
+    system! "curl --aws-sigv4 'aws:amz:auto:s3' --user '#{access_key_id}:#{secret_access_key}' --upload-file #{filepath}.gz.gpg #{bucket}/#{filename}.gz.gpg"
 
     filepath
   end
+
+  private
+    def system!(*args)
+      system(*args, exception: true)
+    end
 end
