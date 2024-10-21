@@ -17,3 +17,6 @@ production:
   daily_backup:
     class: DailyBackupJob
     schedule: at 5am every day
+  clear_finished_jobs:
+    Command: "SolidQueue::Job.clear_finished_in_batches"
+    schedule: at 3 am every day
