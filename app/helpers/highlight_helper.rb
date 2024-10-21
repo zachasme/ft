@@ -5,7 +5,7 @@ module HighlightHelper
     else
       truncate(haystack, length: 60)
     end
-    
+
     if highlighted.empty?
       truncate(haystack, length: 60)
     else

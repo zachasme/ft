@@ -22,7 +22,6 @@ class Oda::Aktør < Oda::OdaRecord
     to   = tilaktører.where(oda_aktør_aktører: { rolle_id: rolle.id })
     (from + to).uniq
   end
-  
 
   def picture
     nokogiri.css("pictureMiRes").first.content
