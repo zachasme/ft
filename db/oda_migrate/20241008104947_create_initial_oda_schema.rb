@@ -115,22 +115,8 @@ class CreateInitialOdaSchema < ActiveRecord::Migration[8.0]
       t.integer :nummer
       t.boolean :vedtaget
       t.references :møde,     null: false, foreign_key: { to_table: :oda_møder }
-      t.references :sagstrin, null: true, foreign_key: { to_table: :oda_sagstrin }
+      t.references :sagstrin, null: true,  foreign_key: { to_table: :oda_sagstrin }
       t.references :type,     null: false, foreign_key: { to_table: :oda_afstemningstyper }
-      t.datetime :opdateringsdato, index: true
-    end
-
-    create_table :oda_aktør_aktør_roller do |t|
-      t.string :rolle
-      t.datetime :opdateringsdato, index: true
-    end
-
-    create_table :oda_aktør_aktører do |t|
-      t.datetime :slutdato
-      t.datetime :startdato
-      t.references :fraaktør
-      t.references :rolle, null: false, foreign_key: { to_table: :oda_aktør_aktør_roller }
-      t.references :tilaktør
       t.datetime :opdateringsdato, index: true
     end
 
@@ -149,6 +135,20 @@ class CreateInitialOdaSchema < ActiveRecord::Migration[8.0]
       t.datetime :startdato
       t.references :periode, null: true,  foreign_key: { to_table: :oda_perioder }
       t.references :type,    null: false, foreign_key: { to_table: :oda_aktørtyper }
+      t.datetime :opdateringsdato, index: true
+    end
+
+    create_table :oda_aktør_aktør_roller do |t|
+      t.string :rolle
+      t.datetime :opdateringsdato, index: true
+    end
+
+    create_table :oda_aktør_aktører do |t|
+      t.datetime :slutdato
+      t.datetime :startdato
+      t.references :fraaktør, null: false # TODO: why doesn't deferred work for special char column?
+      t.references :rolle,    null: false, foreign_key: { to_table: :oda_aktør_aktør_roller }
+      t.references :tilaktør, null: false # TODO: why doesn't deferred work for special char column?
       t.datetime :opdateringsdato, index: true
     end
 
