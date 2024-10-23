@@ -1,7 +1,9 @@
-<li>
-  <strong><%= poll.sag.nummer %></strong>: <%= link_to sanitize(poll.titelkort_snippet, tags: ["mark"]), oda_case_path(poll.sag), title: poll.sag.titel %>
-  <p><em><%= sanitize poll.titel_snippet, tags: ["mark"] %></em></p>
-  <p><%= sanitize poll.resume_snippet, tags: ["mark"] %></p>
-  <strong><%= poll.sag.status.status %></strong>
-  <span>Opdateret: <%= l poll.sag.opdateringsdato %></span>
-</li>
+<% cache poll do %>
+  <div class="mt-6">
+    <span class="tag">V<%= poll.nummer %></span>
+    <%= link_to sanitize(poll.titelkort_snippet, tags: ["mark"]), poll_path(poll), title: poll.sag.titel %>
+    <span class="tag has-text-weight-bold is-<%= poll.vedtaget ? 'success' : 'danger' %>"><%= poll.sag.status.status %></span>
+    <p><em><%= sanitize poll.titel_snippet, tags: ["mark"] %></em></p>
+    <p><%= sanitize poll.resume_snippet, tags: ["mark"] %></p>
+  </div>
+<% end %>

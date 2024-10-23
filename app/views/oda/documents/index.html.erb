@@ -1,11 +1,11 @@
 <% content_for(:title) { "Dokumenter" } %>
 
-<header class="centered margin-top-double text-align-center">
+<header>
   <h1><%= content_for :title %></h1>
   <%= render partial: 'oda/synchronization', locals: { model: Oda::Dokument } %>
 </header>
 
-<%= form_with method: :get, class: "centered margin-top-double text-align-center" do |form| %>
+<%= form_with method: :get do |form| %>
   <div>
     <%= form.label :category_id, "Kategori" %>
     <%= form.collection_select :category_id, Oda::Dokumentkategori.alphabetical, :id, :kategori, include_blank: "Alle kategorier", selected: @category_id %>
@@ -32,8 +32,8 @@
   </div>
 <% end %>
 
-<div class="margin-top overflow-x-auto">
-  <table>
+<div>
+  <table class="table">
     <thead>
       <tr>
         <th>Opdateringsdato</th>

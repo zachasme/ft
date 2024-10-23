@@ -1,29 +1,38 @@
-<% content_for(:title) { "Afstemninger" } %>
+<% content_for(:title) { "Afstemninger i Folketingets åbne data" } %>
 
-<header class="margin-top-double text-align-center">
-  <h1><%= content_for :title %></h1>
-</header>
+<h1 class="title"><%= content_for :title %></h1>
 
-<div class="centered">
-  <%= form_with url: polls_path, method: :get do |form| %>
-    <%= form.search_field :q, placeholder: "Søg i afstemninger...", value: params[:q], class: "input" %>
-    
-    <%= form.submit "Søg", name: nil %>
+<div>
+  <%= form_with url: polls_path, method: :get, class: "block" do |form| %>
+    <div class="field has-addons">
+      <p class="control is-expanded has-icons-left">
+        <%= form.search_field :q, placeholder: "Søg i afstemninger...", value: params[:q], class: "input" %>
+        <span class="icon is-small is-left">
+          <i class="fas fa-lock"></i>
+        </span>
+      </p>
+
+      <p class="control">
+        <%= form.submit "Søg", name: nil, class: "button is-success" %>
+      </p>
+    </div>
   <% end %>
 
-  <p class="marign-top"> 
-    <%= link_to "Opret søgeagent", new_search_agent_path(q: params[:q]) %>
-  </p>
+  <%- if params[:q].present? %>
+    <div class="block">
+      <%= link_to "Opret søgeagent", new_search_agent_path(q: params[:q]), class: "button" %>
+    </div>
+  <%- end %>
 
-  <p>
-    Sorter
-    <%= link_to "Kronologisk", polls_path(q: params[:q], order: :chronological) %>
-    <%= link_to "Relevans", polls_path(q: params[:q], order: :ranked) %>
-  </p>
+  <div class="block">
+    <p>
+      Sorter
+      <%= link_to "Kronologisk", polls_path(q: params[:q], order: :chronological) %>
+      <%= link_to "Relevans", polls_path(q: params[:q], order: :ranked) %>
+    </p>
+  </div>
 
-  <ol class="flex column gap margin-top-double">
-    <%= render partial: "polls/poll", collection: @page.records.each %>
-  </ol>
+  <%= render partial: "polls/poll", collection: @page.records %>
 </div>
 
 <%= render partial: 'oda/pagination' %>

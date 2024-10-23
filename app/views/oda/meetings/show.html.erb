@@ -1,45 +1,41 @@
 <% content_for(:title) { @møde.titel } %>
 
-<header class="margin-top-double text-align-center">
-  <%= link_to "← Møder", oda_meetings_path %>
-  <h1><%= content_for :title %></h1>
-  <p>Sidst opdateret for <%= time_ago_in_words @møde.opdateringsdato %> siden</p>
-</header>
+<span class="tag"><%= link_to @møde.periode.titel, oda_period_path(@møde.periode) %></span>
+<span class="tag is-primary"><%= @møde.type.typenavn %></span>
+<span class="tag is-secondary"><%= @møde.status.status %></span>
+<h1 class="title"><%= content_for :title %></h1>
 
-<div class="centered">
-  <dl class="margin-top">
-    <dt>Periode</dt>
-    <dd><%= link_to @møde.periode.titel, oda_period_path(@møde.periode) %></dd>
-
-    <dt>Type</dt>
-    <dd><%= @møde.type.typenavn %></dd>
-
-    <dt>Status</dt>
-    <dd><%= @møde.status.status %></dd>
-  </dl>
-
-  <% unless @dagsordenspunkter.empty? %>
-    <h2 class="margin-top-double">Dagsorden</h2>
-    <ul class="margin-top">
-      <% @dagsordenspunkter.each do |punkt| %>
-        <li>
-          <%= punkt.nummer %>: <%= punkt.titel %> <%= "(#{punkt.kommentar})" if punkt.kommentar.present? %>
-        </li>
+<% unless @møde.afstemninger.empty? %>
+  <h2 class="is-size-3">Afstemninger</h2>
+  <% @møde.afstemninger.each do |afstemning| %>
+    <div>
+      <%= link_to poll_path(afstemning) do %>
+        <%= afstemning.sag.titelkort %>
+        <span class="tag has-text-weight-bold is-<%= afstemning.vedtaget ? 'success' : 'danger' %>"><%= afstemning.sag.status.status %></span>
       <% end %>
-    </ul>
+    </div>
+  <% end %>
+<% end %>
+
+<div>
+  <% unless @dagsordenspunkter.empty? %>
+    <h2 class="is-size-3">Dagsorden</h2>
+    <% @dagsordenspunkter.each do |punkt| %>
+      <div>
+        <%= punkt.nummer %>: <%= punkt.titel %> <%= "(#{punkt.kommentar})" if punkt.kommentar.present? %>
+      </div>
+    <% end %>
   <% end %>
 
   <% unless @møde.møde_aktører.empty? %>
-    <h2 class="margin-top-double">Aktører</h2>
-    <ul class="margin-top">
-      <% @møde.møde_aktører.each do |møde_aktør| %>
-        <li>
-          <%= link_to oda_actor_path(møde_aktør.aktør) do %>
-            <%= møde_aktør.aktør.navn %>
-          <% end %>
-        </li>
-      <% end %>
-    </ul>
+    <h2 class="is-size-3">Aktører</h2>
+    <% @møde.møde_aktører.each do |møde_aktør| %>
+      <div>
+        <%= link_to oda_actor_path(møde_aktør.aktør) do %>
+          <%= møde_aktør.aktør.navn %>
+        <% end %>
+      </div>
+    <% end %>
   <% end %>
 </div>
 

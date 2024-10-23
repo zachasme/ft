@@ -1,12 +1,12 @@
 <% content_for(:title) { @aktør.navn } %>
 
-<header class="margin-top-double text-align-center">
+<header>
   <%= link_to "← Aktører", oda_actors_path %>
   <h1><%= content_for :title %></h1>
   <p>Sidst opdateret for <%= time_ago_in_words @aktør.opdateringsdato %> siden</p>
 </header>
 
-<div class="centered">
+<div>
   (
   <%= l @aktør.startdato.to_date, format: :short if @aktør.startdato %>
   -
@@ -14,7 +14,7 @@
   )
 
   <% if @aktør.picture %>
-    <div class="margin-top">
+    <div>
       <%= link_to "Link til foto", image_path(@aktør.picture) %>
     </div>
   <% end %>
@@ -24,7 +24,7 @@
    
   <p><%= @aktør.member_data %></p>
 
-  <h2 class="margin-top-double">Relationer</h2>
+  <h2>Relationer</h2>
   <% Oda::AktørAktørRolle.all.each do |rolle| %>
     <% if @aktør.relationer(rolle).present? %>
       <h3><%= rolle.rolle %></h3>
@@ -37,7 +37,7 @@
   <% end %>
 
   <% unless @page.recordset.records_count.zero? %>
-    <h2 class="margin-top-double">Stemmer</h2>
+    <h2>Stemmer</h2>
 
     <ul>
       <% @page.records.each do |stemme| %>

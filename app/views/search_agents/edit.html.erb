@@ -1,14 +1,14 @@
 <% content_for(:title) { "Rediger søgeagent" } %>
 
-<header class="margin-top-double text-align-center">
+<header>
   <%= link_to "← Søgeagent", @search_agent %>
   <h1><%= content_for :title %></h1>
 </header>
 
-<div class="centered margin-top">
+<div>
   <%= render 'form', search_agent: @search_agent %>
 </div>
 
-<div class="margin-top">
+<div>
   <%= button_to "Slet søgeagent", search_agent_path(@search_agent), method: :delete, data: { turbo_confirm: "Er du *helt* sikker?" } %>
 </div>

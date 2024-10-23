@@ -1,29 +1,26 @@
 <% content_for(:title) { "Afstemning ##{@afstemning.nummer}" } %>
 
-<header class="margin-top-double text-align-center">
-  <%= link_to "← Afstemninger", oda_decisions_path %>
-  <h1><%= content_for :title %></h1>
-  <p>Sidst opdateret for <%= time_ago_in_words @afstemning.opdateringsdato %> siden</p>
-</header>
+<h1 class="title"><%= content_for :title %></h1>
+<p class="subtitle">Sidst opdateret for <%= time_ago_in_words @afstemning.opdateringsdato %> siden</p>
 
-<div class="centered">
+<div>
   <% if @afstemning.sag %>
-    <p class="margin-top">Sag: <%= link_to @afstemning.sag.titel, oda_case_path(@afstemning.sag) if @afstemning.sag %></p>
+    <p>Sag: <%= link_to @afstemning.sag.titel, oda_case_path(@afstemning.sag) if @afstemning.sag %></p>
   <% end %>
 
-  <p class="margin-top">Møde: <%= link_to @afstemning.møde.titel, oda_meeting_path(@afstemning.møde) if @afstemning.møde %></p>
+  <p>Møde: <%= link_to @afstemning.møde.titel, oda_meeting_path(@afstemning.møde) if @afstemning.møde %></p>
 
-  <p class="margin-top"><strong><%= @afstemning.konklusion %></strong></p>
+  <p><strong><%= @afstemning.konklusion %></strong></p>
 
   <% if @afstemning.kommentar.present? %>
-    <p class="margin-top">(<%= @afstemning.kommentar %>)</p>
+    <p>(<%= @afstemning.kommentar %>)</p>
   <% end %>
 
-  <h2 class="margin-top-double">Stemmer <small>(<%= @afstemning.stemmer.count %>)</small></h2>
+  <h2>Stemmer <small>(<%= @afstemning.stemmer.count %>)</small></h2>
 </div>
 
-<div class="margin-top overflow-x-auto">
-  <table>
+<div>
+  <table class="table">
     <thead>
       <tr>
         <th>Stemme</th>

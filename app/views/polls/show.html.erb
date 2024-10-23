@@ -1,0 +1,49 @@
+<% content_for(:title) { @poll.sag.titelkort } %>
+
+<div class="columns">
+
+  <div class="column">
+    <% @poll.sag.emneord.each do |emneord| %>
+      <span class="tag"><%= link_to emneord.emneord, oda_subject_path(emneord) %></span>
+    <% end %>
+    <h1 class="title"><%= content_for :title %></h1>
+    <p class="subtitle"><%= @poll.sag.titel %></p>
+
+    <div class="block">
+      <% if @poll.sag %>
+        <p>Sag: <%= link_to @poll.sag.titel, oda_case_path(@poll.sag) if @poll.sag %></p>
+      <% end %>
+
+      <p>Møde: <%= link_to @poll.møde.titel, oda_meeting_path(@poll.møde) if @poll.møde %></p>
+
+      <p><strong class="has-text-weight-bold"><%= @poll.konklusion %></strong></p>
+
+      <% if @poll.kommentar.present? %>
+        <p>(<%= @poll.kommentar %>)</p>
+      <% end %>
+
+      <p>Stemmer <small>(<%= @poll.stemmer.count %>)</small></p>
+    </div>
+  </div>
+
+  <div class="column">
+    <table class="table is-fullwidth">
+      <thead>
+        <tr>
+          <th>Stemme</th>
+          <th>Aktør</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @poll.stemmer.each do |stemme| %>
+          <tr>
+            <td style="color:<%= stemme.type.typenavn == "For" ? 'green' : 'red' %>"><%= stemme.type.typenavn %></td>
+            <td><%= link_to stemme.aktør.navn, oda_actor_path(stemme.aktør) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<%= json_details @poll %>

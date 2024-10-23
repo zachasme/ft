@@ -1,13 +1,13 @@
 <% content_for(:title) { "Søgeagent “#{@search_agent.query}”" } %>
 
-<header class="margin-top-double text-align-center">
+<header>
   <%= link_to "← Søgeagenter", search_agents_path %>
   <h1><%= content_for :title %></h1>
   <p>Sidst opdateret <%= l @search_agent.executed_at, format: :short %></p>
   <%= link_to "Rediger", edit_search_agent_path(@search_agent) %>
 </header>
 
-<div class="centered margin-top">
+<div>
   <h2>Nye sager siden sidste email:</h2>
   <ul>
   <% @sager.each do |sag| %>

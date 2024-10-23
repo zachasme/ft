@@ -1,10 +1,8 @@
 <% content_for(:title) { "Opret søgeagent" } %>
 
-<header class="margin-top-double text-align-center">
+<header>
   <%= link_to "← Søgeagenter", search_agents_path %>
-  <h1><%= content_for :title %></h1>
+  <h1 class="title"><%= content_for :title %></h1>
 </header>
 
-<div class="centered margin-top">
-  <%= render 'form', search_agent: @search_agent %>
-</div>
+<%= render 'form', search_agent: @search_agent %>

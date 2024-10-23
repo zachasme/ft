@@ -26,7 +26,7 @@ Rails.application.routes.draw do
     resources :deletions
     resources :documents,    path: "dokumenter"
     resources :cases,        path: "sager"
-    resources :decisions,    path: "afstemniger"
+    resources :decisions,    path: "afstemninger"
     resources :descriptions, path: "beskrivelser"
     resources :meetings,     path: "møder"
     resources :periods,      path: "perioder"

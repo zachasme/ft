@@ -1,20 +1,20 @@
 <% content_for(:title) { "Entitet- & kollone-beskrivelser" } %>
 
-<header class="margin-top-double text-align-center">
+<header>
   <h1><%= content_for :title %></h1>
   <%= render partial: 'oda/synchronization', locals: { model: Oda::EntitetBeskrivelse } %>
 </header>
 
-<div clasS="centered">
-  <ul class="margin-top">
+<div>
+  <ul>
     <% @entities.each do |entity| %>
       <li><%= entity.entitetnavn %>: <%= entity.beskrivelse %></li>
     <% end %>
   </ul>
 </div>
 
-<div class="overflow-x-auto">
-  <table class="margin-top">
+<div>
+  <table class="table">
     <thead>
       <tr>
         <th>Entitet</th>

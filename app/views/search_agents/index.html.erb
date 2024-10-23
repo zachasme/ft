@@ -1,14 +1,12 @@
 <% content_for(:title) { "Søgeagenter" } %>
 
-<header class="margin-top-double text-align-center">
-  <h1><%= content_for :title %></h1>
-  <%= link_to "Opret søgeagent", new_search_agent_path %>
-</header>
+<h1 class="title"><%= content_for :title %></h1>
+<%= link_to "Ny søgeagent", new_search_agent_path, class: "button is-link" %>
 
-<div class="centered margin-top">
+<div>
   <ul>
     <% @search_agents.each do |search_agent |%>
-      <li>
+      <li class="mt-6">
         <%= link_to search_agent.name, search_agent %>
         <p>Søgning: “<%= search_agent.query %>”</p>
       </li>

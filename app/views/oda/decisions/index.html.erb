@@ -1,11 +1,11 @@
 <% content_for(:title) { "Afstemninger" } %>
 
-<header class="centered margin-top-double text-align-center">
+<header>
   <h1><%= content_for :title %></h1>
   <%= render partial: 'oda/synchronization', locals: { model: Oda::Afstemning } %>
 </header>
 
-<%= form_with method: :get, class: "centered margin-top" do |form| %>
+<%= form_with method: :get do |form| %>
   <%= form.label :search, "Sag" %>
   <%= form.search_field :search, value: params[:search] %>
 

@@ -23,48 +23,62 @@
   </head>
 
   <body>
-    <nav class="pad flex flex-wrap gap justify-center">
-      <%= link_to root_path do %>
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-          <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
-        </svg>
-        Forside
-      <% end %>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+         <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
 
-      <%= link_to search_agents_path do %>
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" />
-        </svg>
-        Søgeagenter
-      <% end %>
+      <div id="navbarBasicExample" class="navbar-menu">
+        <div class="navbar-start">
+          <%= link_to "Afstemninger", root_path, class:"navbar-item" %>
 
-      <%= link_to user_path  do %>
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-        </svg>
-        Bruger
-      <% end %>
+          <%= link_to "Søgeagenter", search_agents_path, class:"navbar-item" %>
+        </div>
+
+        <div class="navbar-end">
+          <% if signed_in? %>
+            <%= link_to Current.user.email_address, user_path, class: "navbar-item" %>
+          <%- else %>
+            <div class="navbar-item">
+              <div class="buttons">
+                <%= link_to "Ny bruger", new_user_path, class: "button is-primary" %>
+                <%= link_to "Log ind", new_device_path, class: "button is-light" %>
+              </div>
+            </div>
+          <%- end %>
+        </div>
+      </div>
     </nav>
 
     <% if signed_in? %>
       <% unless Current.user.verified? %>
-        <p class="centered color-notice">Du skal verificere din email-adresse for at modtage notifikationer fra dine søgeagenter</p>
+        <div class="notification">Du skal verificere din email-adresse for at modtage notifikationer fra dine søgeagenter</div>
       <% end %>
     <% end %>
 
-    <main class="margin-inline">
-      <p class="centered color-notice"><%= flash[:notice] %></p>
-      <%= flash[:alert] %>
+    <p><%= flash[:notice] %></p>
+    <%= flash[:alert] %>
 
-      <%= yield %>
-    </main>
+    <section class="section">
+      <div class="container">
+        <%= yield %>
+      </div>
+    </section>
 
-    <footer class="translucent flex justify-space-between margin">
-      <p>
-        Baseret på <%= link_to "Folketingets åbne data", "https://oda.ft.dk" %>,
-        <%= link_to "kildekoden", "https://github.com/zachasme/ft" %> er frit tilgængelig
-      </p>
-      <p>2024 <%= link_to "z@chari.as", "mailto:z@chari.as" %></p>
+    <footer class="footer">
+      <div class="content has-text-centered">
+        <p>
+          Baseret på <%= link_to "Folketingets åbne data", "https://oda.ft.dk" %>.
+          Kildekoden er <%= link_to "frit tilgængelig", "https://github.com/zachasme/ft" %>.
+          Kontakt mig på <%= link_to "z@chari.as", "mailto:z@chari.as" %>.
+        </p>
+      </div>
     </footer>
+
   </body>
 </html>

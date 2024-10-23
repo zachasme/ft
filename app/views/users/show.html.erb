@@ -1,17 +1,17 @@
 <% content_for(:title) { "Min bruger: #{Current.user.email_address}" } %>
 
-<header class="margin-top-double text-align-center">
+<header>
   <h1><%= content_for :title %></h1>
   <%= button_to "Log ud", device_path, method: :delete %>
 </header>
 
-<div class="centered">
+<div>
 
-  <details class="margin-top-double">
-    <summary class="hide-when-open">
-      <span class="txt-negative">Slet min bruger…</span>
+  <details>
+    <summary>
+      <span>Slet min bruger…</span>
     </summary>
-    <div class="txt-negative">
+    <div>
       <p>Er du sikker på at du vil slette din bruger?</p>
       <%= button_to "Slet min bruger", user_path, method: :delete, data: { turbo_confirm: "Er du *helt* sikker?" } %>
     </div>

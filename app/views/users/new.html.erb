@@ -1,23 +1,35 @@
 <% content_for(:title) { "Opret bruger" } %>
 
-<header class="margin-top-double text-align-center">
-  <h1><%= content_for :title %></h1>
-  <p>Når du har oprettet en bruger og bekræftet din e-mailadresse, kan du abonnere på søgninger via søgeagenter</p>
-</header>
+<h1 class="title"><%= content_for :title %></h1>
+<h2 class="subtitle">Når du har oprettet en bruger og bekræftet din e-mailadresse, kan du abonnere på søgninger via søgeagenter</h2>
 
-<div class="centered margin-top">
-  <%= form_with model: @user, url: user_path do |form| %>
-    <div>
-      <%= form.label :email_address, "E-mailadresse" %>
-      <%= form.email_field :email_address, required: true, class: "input" %>
+<%= form_with model: @user, url: user_path do |form| %>
+  <div class="field">
+    <%= form.label :email_address, "E-mailadresse", class: "label" %>
+    <div class="control has-icons-left">
+      <%= form.email_field :email_address, placeholder: "mette@ft.dk", required: true, class: "input" %>
+      <span class="icon is-small is-left">
+        <i class="fas fa-lock"></i>
+      </span>
     </div>
+  </div>
 
-    <div class="margin-top">
-      <%= form.label :password, "Kodeord" %>
-      <%= form.password_field :password, required: true, class: "input" %>
+  <div class="field">
+    <%= form.label :password, "Kodeord", class: "label" %>
+    <p class="control has-icons-left">
+      <%= form.password_field :password, placeholder: "hunter2", required: true, class: "input" %>
+      <span class="icon is-small is-left">
+        <i class="fas fa-lock"></i>
+      </span>
+    </p>
+  </div>
+
+  <div class="field">
+    <div class="control">
+      <%= form.submit "Send mig en bekræftelses-mail", class: "button is-link" %>
     </div>
+  </div>
 
-    <%= form.submit "Send mig en bekræftelses-mail", class: "button margin-top" %>
-    eller <%= link_to "har du allerede en bruger?", new_device_path %>
-  <% end %>
-</div>
+  <p>eller <%= link_to "har du allerede en bruger?", new_device_path %></p>
+<% end %>
+

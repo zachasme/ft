@@ -7,6 +7,7 @@ class Oda::Møde < Oda::OdaRecord
 
   has_many :møde_aktører
   has_many :dagsordenspunkter
+  has_many :afstemninger
 
   scope :chronological, -> { order(dato: :desc) }
 end

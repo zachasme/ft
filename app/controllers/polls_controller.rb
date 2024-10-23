@@ -3,7 +3,7 @@ class PollsController < ApplicationController
     @recent_searches = Current.user&.searches&.chronological || []
 
     records = Oda::Afstemning
-      .select("*")
+      .select("oda_afstemninger.*")
       .joins(:sag)
       .merge(Oda::Sag.search(query).select_snippets)
 
@@ -18,10 +18,8 @@ class PollsController < ApplicationController
     set_page_and_extract_portion_from records
   end
 
-  def create
-    Current.user.searches.record(query)
-  ensure
-    redirect_to search_url(q: query)
+  def show
+    @poll = Oda::Afstemning.find(params[:id])
   end
 
   private

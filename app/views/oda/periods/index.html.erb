@@ -1,12 +1,12 @@
 <% content_for(:title) { "Perioder" } %>
 
-<header class="margin-top-double text-align-center">
+<header>
   <h1><%= content_for :title %></h1>
   <%= render partial: 'oda/synchronization', locals: { model: Oda::Periode } %>
 </header>
 
-<div class="overflow-x-auto">
-  <table class="margin-top">
+<div>
+  <table class="table">
     <thead>
       <tr>
         <th>Kode</th>

@@ -1,16 +1,16 @@
 <% content_for(:title) { "#{@periode.typenavn} #{@periode.titel}" } %>
 
-<header class="margin-top-double text-align-center">
+<header>
   <%= link_to "← Perioder", oda_periods_path %>
   <h1><%= content_for :title %></h1>
   <p>Sidst opdateret for <%= time_ago_in_words @periode.opdateringsdato %> siden</p>
 </header>
 
-<div class="flex flex-wrap gap margin-top justify-center">
+<div>
   <% unless @aktører.empty? %>
     <div>
       <h2>Aktører (<%= @aktører.size%>)</h2>
-      <ul class="margin-top">
+      <ul>
         <% @aktører.each do |aktør| %>
           <li><%= link_to truncate(aktør.navn), oda_actor_path(aktør), title: aktør.navn %></li>
         <% end %>
@@ -21,7 +21,7 @@
   <% unless @sager.empty? %>
     <div>
       <h2>Sager (<%= @sager.size%>)</h2>
-      <ul class="margin-top">
+      <ul>
         <% @sager.each do |sag| %>
           <li><%= link_to truncate(sag.titelkort), oda_case_path(sag), title: sag.titel %></li>
         <% end %>
@@ -32,7 +32,7 @@
   <% unless @møder.empty? %>
     <div>
       <h2>Møder (<%= @møder.size%>)</h2>
-      <ul class="margin-top">
+      <ul>
         <% @møder.each do |møde| %>
           <li><%= link_to truncate(møde.titel), oda_meeting_path(møde), title: møde.titel %></li>
         <% end %>

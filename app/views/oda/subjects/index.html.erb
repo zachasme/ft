@@ -1,11 +1,11 @@
 <% content_for(:title) { "Emneord" } %>
 
-<header class="margin-top-double text-align-center">
+<header>
   <h1><%= content_for :title %></h1>
   <%= render partial: 'oda/synchronization', locals: { model: Oda::Emneord } %>
 </header>
 
-<%= form_with method: :get, class: "centered margin-top text-align-center" do |form| %>
+<%= form_with method: :get do |form| %>
   <%= form.search_field :search, value: params[:search] %>
 
   <%= form.collection_select :subjecttype_id, Oda::Emneordstype.all, :id, :typenavn, include_blank: "Alle emneordstyper", selected: @subjecttype_id %>
@@ -13,8 +13,8 @@
   <%= form.submit "Søg" %>
 <% end %>
 
-<div class="overflow-x-auto">
-  <table class="margin-top">
+<div>
+  <table class="table">
     <thead>
       <tr>
         <th>Emneordstype</th>

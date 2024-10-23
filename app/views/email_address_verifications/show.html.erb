@@ -1,9 +1,9 @@
 <% content_for(:title) { "E-mail bekræftelse" } %>
 
-<header class="margin-top-double text-align-center">
+<header>
   <h1><%= content_for :title %></h1>
 </header>
 
-<div class="centered margin-top">
+<div>
   <%= button_to "Bekræft e-mailadressen #{@user.email_address}", email_address_verification_path(params[:id]), method: :patch %>
 </div>
