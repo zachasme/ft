@@ -3,8 +3,9 @@ module Searchable
 
   included do
     scope :search, ->(query) do
-      joins("join #{table_name + "_search_index"} idx on #{table_name}.id = idx.rowid")
-      .where("#{table_name + "_search_index"} match ?", query)
+      x = joins("join #{table_name + "_search_index"} idx on #{table_name}.id = idx.rowid")
+      x = x.where("#{table_name + "_search_index"} match ?", query) if query.present?
+      x
     end
     scope :ranked, -> { order(:rank) }
 
@@ -16,8 +17,8 @@ module Searchable
   class_methods do
     def has_searchables(*columns, **options)
       snippets = columns.map.with_index { |col, i| select_snippet(col, i, **options) }
-      scope :with_snippets, -> {
-        select("#{table_name}.*", *snippets)
+      scope :select_snippets, -> {
+        select(*snippets)
       }
     end
 

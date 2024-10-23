@@ -1,0 +1,7 @@
+<li>
+  <strong><%= poll.sag.nummer %></strong>: <%= link_to sanitize(poll.titelkort_snippet, tags: ["mark"]), oda_case_path(poll.sag), title: poll.sag.titel %>
+  <p><em><%= sanitize poll.titel_snippet, tags: ["mark"] %></em></p>
+  <p><%= sanitize poll.resume_snippet, tags: ["mark"] %></p>
+  <strong><%= poll.sag.status.status %></strong>
+  <span>Opdateret: <%= l poll.sag.opdateringsdato %></span>
+</li>

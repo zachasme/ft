@@ -10,18 +10,16 @@ Rails.application.routes.draw do
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
   # Defines the root path route ("/")
-  root "welcome#show"
+  root "polls#index"
 
   scope path_names: { new: "ny", edit: "rediger" } do
+    resources :polls,  path: "afstemninger"
     resource :device, path: "enhed"
     resource :user,   path: "bruger"
-    resource :search, path: "søg"
 
     resources :search_agents, path: "søgeagenter"
     resources :email_address_verifications, path: "bekræftelser"
   end
-
-  resources :updates
 
   namespace :oda do
     resources :actors,       path: "aktører"

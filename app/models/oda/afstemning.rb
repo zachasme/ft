@@ -9,6 +9,5 @@ class Oda::Afstemning < Oda::OdaRecord
   has_one :periode, through: :møde
 
   scope :with_period, ->(period_id) { where(periode: { id: period_id }) }
-  scope :chronological, -> { includes(:møde).order(oda_møder: { periode_id: :desc }, nummer: :desc) }
-  scope :matches, ->(search) { joins(:sag).where("oda_sager.titel LIKE ?", "%#{search}%") if search.present? }
+  scope :chronological, -> { joins(:møde).order(oda_møder: { periode_id: :desc }, nummer: :desc) }
 end

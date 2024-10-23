@@ -8,7 +8,7 @@ class SearchAgent < ApplicationRecord
       .includes(:periode, :kategori, :status, :type, :deltundersag, :fremsatundersag)
       .search(query)
       .ranked
-      .with_snippets
+      .select_snippets
       .casetype([ 3, 5, 9 ])
       .changed_since(executed_at)
   end
