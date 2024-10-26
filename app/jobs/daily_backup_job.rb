@@ -1,26 +1,44 @@
 class DailyBackupJob < ApplicationJob
-  def perform
-    filename = "production-#{Date.current}.sqlite3"
-    filepath = "tmp/storage/#{filename}"
-
-    # add these to your rails credentials file nested in `daily_backup`
-    Rails.application.credentials.daily_backup => {
-      passphrase:,
-      bucket:,
-      access_key_id:,
-      secret_access_key:
-    }
-
-    system! "sqlite3 storage/production.sqlite3 '.backup #{filepath}'"
-    system! "gzip --force #{filepath}"
-    system! "xgpg --yes --batch --passphrase='#{passphrase}' --output '#{filepath}.gz.gpg' -c '#{filepath}.gz'"
-    system! "curl --aws-sigv4 'aws:amz:auto:s3' --user '#{access_key_id}:#{secret_access_key}' --upload-file #{filepath}.gz.gpg #{bucket}/#{filename}.gz.gpg"
-
-    filepath
+  def perform(dbname)
+    filename = "#{dbname}-#{Date.current}.sqlite3.gz.enc"
+    upload(encrypt(compress(backup(dbname))), filename)
+    filename
   end
 
   private
-    def system!(*args)
-      system(*args, exception: true)
+    def backup(dbname)
+      dbfile = Rails.configuration.database_configuration[Rails.env][dbname]["database"]
+      Tempfile.new.tap do |destination|
+        pull = SQLite3::Database.new(dbfile)
+        push = SQLite3::Database.new(destination)
+        backup = SQLite3::Backup.new(push, "main", pull, "main")
+        backup.step(-1)
+        backup.finish
+
+        puts push.execute("SELECT COUNT(*) FROM oda_stemmer")
+      end
+    end
+
+    def compress(contents)
+      ActiveSupport::Gzip.compress(contents)
+    end
+
+    def encrypt(contents)
+      file = Tempfile.new
+      Rails.application.encrypted(file).write(contents)
+      file.path
+    end
+
+    def upload(file, as)
+      Rails.application.credentials.daily_backup => {
+        bucket:, access_key_id:, secret_access_key:
+      }
+      system(
+        "curl --aws-sigv4 'aws:amz:auto:s3' \
+              --user '#{access_key_id}:#{secret_access_key}' \
+              --upload-file #{file} \
+              #{bucket}/#{as}",
+        exception: true
+      )
     end
 end

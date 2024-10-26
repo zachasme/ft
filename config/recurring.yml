@@ -16,6 +16,7 @@ production:
     schedule: every 10 minutes
   daily_backup:
     class: DailyBackupJob
+    args: [ "oda" ]
     schedule: at 5am every day
   clear_finished_jobs:
     Command: "SolidQueue::Job.clear_finished_in_batches"
