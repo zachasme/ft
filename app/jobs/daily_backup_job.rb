@@ -14,8 +14,6 @@ class DailyBackupJob < ApplicationJob
         backup = SQLite3::Backup.new(push, "main", pull, "main")
         backup.step(-1)
         backup.finish
-
-        puts push.execute("SELECT COUNT(*) FROM oda_stemmer")
       end
     end
 
