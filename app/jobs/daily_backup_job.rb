@@ -7,13 +7,13 @@ class DailyBackupJob < ApplicationJob
 
   private
     def backup(dbname)
-      dbfile = Rails.configuration.database_configuration[Rails.env][dbname]["database"]
-      Tempfile.new.tap do |destination|
-        pull = SQLite3::Database.new(dbfile)
-        push = SQLite3::Database.new(destination)
-        backup = SQLite3::Backup.new(push, "main", pull, "main")
-        backup.step(-1)
-        backup.finish
+      source_file = Rails.configuration.database_configuration.dig(Rails.env, dbname, "database")
+      source_db = SQLite3::Database.new(source_file)
+      Tempfile.new.tap do |destination_file|
+        destination_db = SQLite3::Database.new(destination_file)
+        execution = SQLite3::Backup.new(destination_db, "main", source_db, "main")
+        execution.step(-1)
+        execution.finish
       end
     end
 
@@ -28,9 +28,7 @@ class DailyBackupJob < ApplicationJob
     end
 
     def upload(file, as)
-      Rails.application.credentials.daily_backup => {
-        bucket:, access_key_id:, secret_access_key:
-      }
+      Rails.application.credentials.daily_backup => { bucket:, access_key_id:, secret_access_key: }
       system(
         "curl --aws-sigv4 'aws:amz:auto:s3' \
               --user '#{access_key_id}:#{secret_access_key}' \
