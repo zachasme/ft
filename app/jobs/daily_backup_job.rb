@@ -1,5 +1,5 @@
 class DailyBackupJob < ApplicationJob
-  def perform(dbname)
+  def perform(dbname = "primary")
     filename = "#{dbname}-#{Date.current}.sqlite3.gz.enc"
     upload(encrypt(compress(backup(dbname))), filename)
     filename
