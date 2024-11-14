@@ -111,3 +111,7 @@ end
 
 # release
 `gh release create "v$(date +%Y.%m.%d)" /tmp/daily.zip /tmp/daily.tar.gz --generate-notes`
+
+# only keep 7 releases
+tags = `gh release ls --json tagName -q '.[].tagName'`.lines(chomp: true)
+tags.drop(7).each { |tag| `gh release delete -y --cleanup-tag #{tag}` }
