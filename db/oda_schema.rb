@@ -41,9 +41,9 @@ ActiveRecord::Schema[8.0].define(version: 2024_10_08_104947) do
   create_table "oda_aktør_aktører", force: :cascade do |t|
     t.datetime "slutdato"
     t.datetime "startdato"
-    t.integer "fraaktør_id"
+    t.integer "fraaktør_id", null: false
     t.integer "rolle_id", null: false
-    t.integer "tilaktør_id"
+    t.integer "tilaktør_id", null: false
     t.datetime "opdateringsdato"
     t.index ["fraaktør_id"], name: "index_oda_aktør_aktører_on_fraaktør_id"
     t.index ["opdateringsdato"], name: "index_oda_aktør_aktører_on_opdateringsdato"
@@ -495,6 +495,8 @@ ActiveRecord::Schema[8.0].define(version: 2024_10_08_104947) do
   add_foreign_key "oda_afstemninger", "oda_møder", column: "møde_id"
   add_foreign_key "oda_afstemninger", "oda_sagstrin", column: "sagstrin_id"
   add_foreign_key "oda_aktør_aktører", "oda_aktør_aktør_roller", column: "rolle_id"
+  add_foreign_key "oda_aktør_aktører", "oda_aktører", column: "fraaktør_id"
+  add_foreign_key "oda_aktør_aktører", "oda_aktører", column: "tilaktør_id"
   add_foreign_key "oda_aktører", "oda_aktørtyper", column: "type_id"
   add_foreign_key "oda_aktører", "oda_perioder", column: "periode_id"
   add_foreign_key "oda_dagsordenspunkt_dokumenter", "oda_dagsordenspunkter", column: "dagsordenspunkt_id"
