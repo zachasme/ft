@@ -35,5 +35,8 @@ Rails.application.routes.draw do
     resources :subjects,     path: "emneord"
   end
 
-  mount MissionControl::Jobs::Engine, at: "/jobs"
+  namespace :admin do
+    root "dashboards#show"
+    mount MissionControl::Jobs::Engine, at: "/jobs"
+  end
 end

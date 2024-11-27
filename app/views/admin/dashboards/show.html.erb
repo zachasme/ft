@@ -1,0 +1,12 @@
+<% content_for(:title) { "Admin" } %>
+
+<h1><%= content_for :title %></h1>
+
+<menu>
+  <li><%= link_to "Jobs", "/admin/jobs" %></li>
+</menu>
+
+<h2>Brugere</h2>
+<% User.ordered.each do |user| %>
+  <%= user.email_address %>
+<% end %>

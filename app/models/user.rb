@@ -7,6 +7,8 @@ class User < ApplicationRecord
 
   normalizes :email_address, with: ->(e) { e.strip.downcase }
 
+  scope :ordered, -> { order(:email_address) }
+
   def verify
     update! verified: true
   end
