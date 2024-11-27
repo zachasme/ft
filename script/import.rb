@@ -119,6 +119,8 @@ Oda::Sag.rebuild_search_index
 # update counts
 puts("Emneord counters")
 Oda::Emneord.transaction do
+  # https://github.com/rails/rails/pull/44971
+  # Oda::Emneord.reset_counters(Oda::Emneord.pluck(:id), :emneord_sager_count, :emneord_dokumenter_count)
   Oda::Emneord.all.each do |emneord|
     Oda::Emneord.reset_counters(
       emneord.id,
@@ -130,6 +132,8 @@ end
 
 puts("Periode counters")
 Oda::Periode.transaction do
+  # https://github.com/rails/rails/pull/44971
+  # Oda::Periode.reset_counters(Oda::Periode.pluck(:id), :aktører_count, :møder_count, :sager_count)
   Oda::Periode.all.each do |periode|
     Oda::Periode.reset_counters(
       periode.id,
