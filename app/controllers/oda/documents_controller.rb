@@ -1,4 +1,4 @@
-class Oda::DocumentsController < ApplicationController
+class Oda::DocumentsController < Oda::ApplicationController
   def index
     records = Oda::Dokument
       .chronological

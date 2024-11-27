@@ -1,4 +1,4 @@
-class Oda::ActorsController < ApplicationController
+class Oda::ActorsController < Oda::ApplicationController
   def index
     records = Oda::Aktør
       .includes(:type, :periode)

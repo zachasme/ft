@@ -1,6 +1,4 @@
 class SearchAgentsController < ApplicationController
-  require_authentication
-
   def index
     @search_agents = Current.user.search_agents
   end

@@ -12,10 +12,12 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "polls#index"
 
+  resource :session
+  resources :passwords, param: :token
+
   scope path_names: { new: "ny", edit: "rediger" } do
-    resources :polls,  path: "afstemninger"
-    resource :device, path: "enhed"
-    resource :user,   path: "bruger"
+    resources :polls, path: "afstemninger"
+    resource  :user,  path: "bruger"
 
     resources :search_agents, path: "søgeagenter"
     resources :email_address_verifications, path: "bekræftelser"

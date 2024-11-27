@@ -1,4 +1,4 @@
-class Oda::PeriodsController < ApplicationController
+class Oda::PeriodsController < Oda::ApplicationController
   def index
     records = Oda::Periode
       .chronological

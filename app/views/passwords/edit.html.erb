@@ -1,0 +1,30 @@
+<% content_for(:title) { "Ændr dit kodeord" } %>
+
+<h1 class="title"><%= content_for :title %></h1>
+
+<%= tag.div(flash[:alert], style: "color:red") if flash[:alert] %>
+
+<%= form_with url: password_path(params[:token]), method: :put do |form| %>
+  <div class="field">
+    <%= form.label :password, "Nyt Kodeord", class: "label" %>
+    <p class="control has-icons-left">
+      <%= form.password_field :password, required: true, autocomplete: "new-password", placeholder: "Indtast nyt kodeord", maxlength: 72, class: "input" %><br>
+      <span class="icon is-small is-left">
+        <i class="fas fa-lock"></i>
+      </span>
+    </p>
+  </div>
+
+  <div class="field">
+    <%= form.label :password, "Gentag nyt kodeord", class: "label" %>
+    <p class="control has-icons-left">
+      <%= form.password_field :password_confirmation, required: true, autocomplete: "new-password", placeholder: "Gentag nyt kodeord", maxlength: 72, class: "input" %><br>
+
+      <span class="icon is-small is-left">
+        <i class="fas fa-lock"></i>
+      </span>
+    </p>
+  </div>
+
+  <%= form.submit "Gem", class: "button is-link" %>
+<% end %>

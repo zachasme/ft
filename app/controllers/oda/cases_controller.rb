@@ -1,4 +1,4 @@
-class Oda::CasesController < ApplicationController
+class Oda::CasesController < Oda::ApplicationController
   def index
     records = Oda::Sag
       .includes(:periode, :kategori, :status, :type, :deltundersag, :fremsatundersag)

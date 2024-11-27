@@ -1,4 +1,4 @@
-class Oda::SubjectsController < ApplicationController
+class Oda::SubjectsController < Oda::ApplicationController
   def index
     records = Oda::Emneord
       .by_emneord_sager_count

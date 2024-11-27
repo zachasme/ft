@@ -1,4 +1,4 @@
-class Oda::DecisionsController < ApplicationController
+class Oda::DecisionsController < Oda::ApplicationController
   def index
     records = Oda::Afstemning
       .includes(:sagstrin, :sag, :type, :periode)

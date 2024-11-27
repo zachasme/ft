@@ -41,13 +41,13 @@
         </div>
 
         <div class="navbar-end">
-          <% if signed_in? %>
+          <% if authenticated? %>
             <%= link_to Current.user.email_address, user_path, class: "navbar-item" %>
           <%- else %>
             <div class="navbar-item">
               <div class="buttons">
                 <%= link_to "Ny bruger", new_user_path, class: "button is-primary" %>
-                <%= link_to "Log ind", new_device_path, class: "button is-light" %>
+                <%= link_to "Log ind", new_session_path, class: "button is-light" %>
               </div>
             </div>
           <%- end %>
@@ -55,7 +55,7 @@
       </div>
     </nav>
 
-    <% if signed_in? %>
+    <% if authenticated? %>
       <% unless Current.user.verified? %>
         <div class="notification">Du skal verificere din email-adresse for at modtage notifikationer fra dine søgeagenter</div>
       <% end %>

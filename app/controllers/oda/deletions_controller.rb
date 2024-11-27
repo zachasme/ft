@@ -1,4 +1,4 @@
-class Oda::DeletionsController < ApplicationController
+class Oda::DeletionsController < Oda::ApplicationController
   def index
     records = Oda::Slettet
       .includes(:slettetmap)

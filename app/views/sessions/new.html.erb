@@ -2,11 +2,14 @@
 
 <h1 class="title"><%= content_for :title %></h1>
 
-<%= form_with url: device_path do |form| %>
+<%= tag.div(flash[:alert], style: "color:red") if flash[:alert] %>
+<%= tag.div(flash[:notice], style: "color:green") if flash[:notice] %>
+
+<%= form_with url: session_path do |form| %>
   <div class="field">
     <%= form.label :email_address, "E-mailadresse", class: "label" %>
     <div class="control has-icons-left">
-      <%= form.email_field :email_address, placeholder: "mette@ft.dk", required: true, class: "input" %>
+      <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username", placeholder: "mette@ft.dk", value: params[:email_address], class: "input" %><br>
       <span class="icon is-small is-left">
         <i class="fas fa-lock"></i>
       </span>
@@ -14,13 +17,14 @@
   </div>
 
   <div class="field">
-    <%= form.label :password, "Kodeord", class: "label" %>
+    <%= form.label :password, "Kodeord", class: "label" %> 
     <p class="control has-icons-left">
-      <%= form.password_field :password, placeholder: "hunter2", required: true, class: "input" %>
+      <%= form.password_field :password, required: true, autocomplete: "current-password", placeholder: "hunter2", maxlength: 72, class: "input" %><br>
       <span class="icon is-small is-left">
         <i class="fas fa-lock"></i>
       </span>
     </p>
+    <%= link_to "Glemt kodeord?", new_password_path %>
   </div>
 
   <div class="field">

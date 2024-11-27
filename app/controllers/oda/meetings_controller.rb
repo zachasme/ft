@@ -1,4 +1,4 @@
-class Oda::MeetingsController < ApplicationController
+class Oda::MeetingsController < Oda::ApplicationController
   def index
     records = Oda::Møde
       .includes(:status, :type)

@@ -1,0 +1,19 @@
+<% content_for(:title) { "Glemt dit kodeord?" } %>
+
+<h1 class="title"><%= content_for :title %></h1>
+
+<%= tag.div(flash[:alert], style: "color:red") if flash[:alert] %>
+
+<%= form_with url: passwords_path do |form| %>
+  <div class="field">
+    <%= form.label :email_address, "E-mailadresse", class: "label" %>
+    <div class="control has-icons-left">
+      <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username", placeholder: "mette@ft.dk", value: params[:email_address], class: "input" %><br>
+      <span class="icon is-small is-left">
+        <i class="fas fa-lock"></i>
+      </span>
+    </div>
+  </div>
+
+  <%= form.submit "Email nulstillings-instruktioner", class: "button is-link" %>
+<% end %>

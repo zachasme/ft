@@ -1,4 +1,6 @@
 class PollsController < ApplicationController
+  allow_unauthenticated_access
+
   def index
     @recent_searches = Current.user&.searches&.chronological || []
 
