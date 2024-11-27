@@ -10,7 +10,7 @@ class UsersController < ApplicationController
     if User.find_by(email_address: user_params[:email_address])
       redirect_to new_session_url, notice: "Du har allerede en bruger"
     elsif @user.save
-      UserMailer.verify_email_address(@user).deliver_later
+      UsersMailer.verify_email_address(@user).deliver_later
       start_new_session_for @user
       redirect_to root_url, notice: "Tjek din indbakke. Vi har sendt en mail til #{@user.email_address}"
     else
